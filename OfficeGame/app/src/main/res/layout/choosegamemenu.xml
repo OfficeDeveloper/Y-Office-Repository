@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ChooseGameMenu">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="backToMainMenu"
+        android:id="@+id/comeBack"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="goTo1game"
+        android:id="@+id/goToFirstGame"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="108dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="goTo2game"
+        android:id="@+id/goToSecondGame"
+        android:layout_below="@+id/goToFirstGame"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="goTo3game"
+        android:id="@+id/goToThirdGame"
+        android:layout_below="@+id/goToSecondGame"
+        android:layout_alignLeft="@+id/goToSecondGame"
+        android:layout_marginTop="42dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="goTo4game"
+        android:id="@+id/goToFirthGame"
+        android:layout_below="@+id/goToThirdGame"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:singleLine="false" />
+</RelativeLayout>

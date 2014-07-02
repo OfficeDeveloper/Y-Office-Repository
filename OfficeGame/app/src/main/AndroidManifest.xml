@@ -16,6 +16,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ChooseGameMenu"
+            android:label="label1">
+
+            </activity>
+
+        <activity android:name=".FirstGame"
+            android:label="label2">
+
+        </activity>
+
+
+
+
     </application>
 
 </manifest>

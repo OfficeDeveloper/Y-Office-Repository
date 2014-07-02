@@ -1,36 +1,49 @@
 package com.office.officegame;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
-public class MyActivity extends Activity {
+public class MyActivity extends Activity implements View.OnClickListener {
+
+    Button chooseButton;
+    Button exitButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+
+        chooseButton = (Button) findViewById(R.id.chooseButton);
+        exitButton = (Button) findViewById(R.id.exitButton);
+
+        chooseButton.setOnClickListener(this);
+        exitButton.setOnClickListener(this);
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.my, menu);
-        return true;
-    }
+    public void onClick(View first) {
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (first.getId()) {
+            case R.id.chooseButton:
+                Intent intent = new Intent(this, ChooseGameMenu.class);
+                startActivity(intent);
+                break;
+            //case R.id.exitButton:
+                //Intent exit = new Intent(this, ChooseGameMenu.class);
+                //startActivity(exit);
+               // break;
+
+
+
+            default:
+                throw new RuntimeException("error: ");
+
+
         }
-        return super.onOptionsItemSelected(item);
     }
 }
