@@ -34,6 +34,7 @@ public class ChooseGameMenu extends MyActivity implements View.OnClickListener {
  //       goToThirdGame.setOnClickListener(this);
  //       goToFirthGame.setOnClickListener(this);
    //     comeBack.setOnClickListener(this);
+        //паскудатварь
     }
 
     @Override
@@ -45,10 +46,10 @@ public class ChooseGameMenu extends MyActivity implements View.OnClickListener {
                 Intent begin = new Intent(this, FirstGame.class);
                 startActivity(begin);
                 break;
-            //case R.id.comeBack:
-                //Intent goHome = new Intent(this, MyActivity.class);
-                //startActivity(goHome);
-                //break;
+            case R.id.comeBack:
+                Intent goHome = new Intent(this, MyActivity.class);
+                startActivity(goHome);
+                break;
 
 
             default:
