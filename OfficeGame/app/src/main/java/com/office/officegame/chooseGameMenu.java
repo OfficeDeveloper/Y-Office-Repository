@@ -45,6 +45,10 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
                 Intent begin = new Intent(this, FirstGame.class);
                 startActivity(begin);
                 break;
+            case R.id.comeBack:
+                Intent goHome = new Intent(this, MyActivity.class);
+                startActivity(goHome);
+                break;
 
 
             default:
