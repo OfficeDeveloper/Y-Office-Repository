@@ -35,10 +35,9 @@ public class MyActivity extends Activity implements View.OnClickListener {
                 Intent intent = new Intent(this, ChooseGameMenu.class);
                 startActivity(intent);
                 break;
-            //case R.id.exitButton:
-                //Intent exit = new Intent(this, ChooseGameMenu.class);
-                //startActivity(exit);
-               // break;
+            case R.id.exitButton:
+                System.exit(0);
+                break;
 
 
 
