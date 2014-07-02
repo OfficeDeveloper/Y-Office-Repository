@@ -9,13 +9,13 @@ import android.widget.Button;
 /**
  * Created by Андрей on 02.07.2014.
  */
-public class ChooseGameMenu extends Activity implements View.OnClickListener {
+public class ChooseGameMenu extends MyActivity implements View.OnClickListener {
 
     Button goToFirstGame;
-    Button goToSecondGame;
-    Button goToThirdGame;
-    Button goToFirthGame;
-    Button comeBack;
+   // Button goToSecondGame;
+    //Button goToThirdGame;
+    //Button goToFirthGame;
+    //Button comeBack;
 
 
     @Override
@@ -24,16 +24,16 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_my);
 
         goToFirstGame = (Button) findViewById(R.id.goToFirstGame);
-        goToSecondGame = (Button) findViewById(R.id.goToSecondGame);
-        goToThirdGame = (Button) findViewById(R.id.goToThirdGame);
-        goToFirthGame = (Button) findViewById(R.id.goToFirthGame);
-        comeBack = (Button) findViewById(R.id.comeBack);
+        //goToSecondGame = (Button) findViewById(R.id.goToSecondGame);
+        //goToThirdGame = (Button) findViewById(R.id.goToThirdGame);
+        //goToFirthGame = (Button) findViewById(R.id.goToFirthGame);
+        //comeBack = (Button) findViewById(R.id.comeBack);
 
-        goToFirstGame.setOnClickListener(this);
-        goToSecondGame.setOnClickListener(this);
-        goToThirdGame.setOnClickListener(this);
-        goToFirthGame.setOnClickListener(this);
-        comeBack.setOnClickListener(this);
+//        goToFirstGame.setOnClickListener(this);
+//        goToSecondGame.setOnClickListener(this);
+ //       goToThirdGame.setOnClickListener(this);
+ //       goToFirthGame.setOnClickListener(this);
+   //     comeBack.setOnClickListener(this);
     }
 
     @Override
@@ -45,10 +45,10 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
                 Intent begin = new Intent(this, FirstGame.class);
                 startActivity(begin);
                 break;
-            case R.id.comeBack:
-                Intent goHome = new Intent(this, MyActivity.class);
-                startActivity(goHome);
-                break;
+            //case R.id.comeBack:
+                //Intent goHome = new Intent(this, MyActivity.class);
+                //startActivity(goHome);
+                //break;
 
 
             default:
