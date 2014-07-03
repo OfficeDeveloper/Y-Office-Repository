@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Time: "
+            android:text="Fauls: "
             android:id="@+id/textView"
             android:layout_weight="1" />
 
@@ -26,7 +26,7 @@
 
             android:textAlignment="center"
             android:layout_weight="1"
-            android:text="0:00" />
+            android:text="20" />
 
         <Space
             android:layout_width="0dp"

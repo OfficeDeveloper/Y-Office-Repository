@@ -46,23 +46,25 @@ public class FirstGame extends Activity implements View.OnClickListener {
 
             changeColor(tileArray);
 
-            handler1.postDelayed(this, delay);
             if ((score%30==0)&&(score>0)){
                 delay=(int)(delay*0.9);
             }
+
+            handler1.postDelayed(this, delay);
+
         }
     };
 
-    public void changeColor(TextView[] tv) {
+    public void changeColor(TextView[] tiles) {
         for (int i=0;i<16;i++){
-            tv[i].setBackgroundColor(Color.WHITE);
+            tiles[i].setBackgroundColor(Color.WHITE);
         }
 
         for (int i=0;i<5;i++) {
             int k = 0 + (int) (Math.random() * ((15 - 0) + 1));
             random = 0 + (int) (Math.random() * ((1 - 0) + 1));
             if (0 == 0) {
-                tv[k].setBackgroundColor(Color.BLACK);
+                tiles[k].setBackgroundColor(Color.BLACK);
 
             } /*else {
                 tv[k].setBackgroundColor(Color.WHITE);
@@ -70,11 +72,20 @@ public class FirstGame extends Activity implements View.OnClickListener {
         }
     }
 
-    public void upScore(TextView tv) {
-        ColorDrawable drawable = (ColorDrawable) tv.getBackground();
+    public void upScore(TextView tiv) {
+        ColorDrawable drawable = (ColorDrawable) tiv.getBackground();
         if ((drawable.getColor() == Color.BLACK)&&(bool)) {
             score = score + 1;
             point.setText(String.valueOf(score));
+        }
+        if ((drawable.getColor() == Color.WHITE)&&(bool)) {
+            fouls = fouls - 1;
+            tv.setText(String.valueOf(fouls));
+            if (fouls==0) {
+                handler1.removeCallbacks(task1);
+                startButton.setText("start");
+                bool=false;
+            }
         }
     }
 
@@ -89,7 +100,7 @@ public class FirstGame extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firstgame);
         tv = (TextView) findViewById(R.id.timer);
-        tv.setText("0:00");
+        tv.setText("20");
         point = (TextView) findViewById(R.id.point);
         point.setText(String.valueOf(score));
 
@@ -169,7 +180,7 @@ public class FirstGame extends Activity implements View.OnClickListener {
                     score = 0;
                     bool=true;
                     delay=700;
-                    fouls=0;
+                    fouls=20;
                 }
                 break;
 
