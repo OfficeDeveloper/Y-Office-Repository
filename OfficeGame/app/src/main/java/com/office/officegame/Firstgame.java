@@ -3,16 +3,15 @@ package com.office.officegame;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.view.View.OnTouchListener;
 
 
 /**
@@ -46,7 +45,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
             changeColor(tileArray);
 
             //if ((score % 30 == 0) && (score > 0)) {
-                delay = (int) (delay * 0.997);
+            delay = (int) (delay * 0.997);
             //}
 
             handler1.postDelayed(this, delay);
@@ -85,7 +84,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
                 bool = false;
                 AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
                 looseAlert.setTitle("GAME OVER")
-                        .setMessage("You finished with score is: "+score)
+                        .setMessage("You finished with score: " + score)
                         .setIcon(R.drawable.ic_launcher)
                         .setCancelable(false)
                         .setNegativeButton("Okay!",
@@ -120,9 +119,9 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
         point.setText(String.valueOf(score));
 
         backToMainMenu = (Button) findViewById(R.id.backToMainMenu);
-        backToMainMenu.setOnTouchListener(this);
+        backToMainMenu.setOnClickListener(this);
         startButton = (Button) findViewById(R.id.startButton);
-        startButton.setOnTouchListener(this);
+        startButton.setOnClickListener(this);
 
         tileArray = new TextView[16];
 
@@ -177,48 +176,11 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if (event.getAction()==MotionEvent.ACTION_DOWN) switch (v.getId()) {
-            case R.id.backToMainMenu:
-                System.exit(0);
-                break;
-
-            case R.id.startButton:
-                //startButton tasks
-                if (startButton.getText().equals("stop")) {
-                    handler1.removeCallbacks(task1);
-                    startButton.setText("start");
-                    bool = false;
-                    AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
-                    looseAlert.setTitle("GAME OVER")
-                            .setMessage("You finished with score is: " + score)
-                            .setIcon(R.drawable.ic_launcher)
-                            .setCancelable(false)
-                            .setNegativeButton("Okay!",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    }
-                            );
-                    AlertDialog alert = looseAlert.create();
-                    for (int i = 0; i < 16; i++) {
-                        tileArray[i].setBackgroundColor(Color.WHITE);
-                    }
-                    alert.show();
-                } else {
-                    startTime = System.currentTimeMillis();
-                    handler1.postDelayed(task1, 0);
-                    startButton.setText("stop");
-                    score = 0;
-                    bool = true;
-                    delay = 700;
-                    fouls = 20;
-                }
-                break;
+        if (event.getAction() == MotionEvent.ACTION_DOWN) switch (v.getId()) {
 
             case R.id.tile1:
-                    stile = (TextView) findViewById(R.id.tile1);
-                    upScore(stile);
+                stile = (TextView) findViewById(R.id.tile1);
+                upScore(stile);
                 break;
 
             case R.id.tile2:
@@ -306,6 +268,49 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.backToMainMenu:
+                System.exit(0);
+                break;
+
+            case R.id.startButton:
+                //startButton tasks
+                if (startButton.getText().equals("stop")) {
+                    handler1.removeCallbacks(task1);
+                    startButton.setText("start");
+                    bool = false;
+                    AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
+                    looseAlert.setTitle("GAME OVER")
+                            .setMessage("You finished with score: " + score)
+                            .setIcon(R.drawable.ic_launcher)
+                            .setCancelable(false)
+                            .setNegativeButton("Okay!",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    }
+                            );
+                    AlertDialog alert = looseAlert.create();
+                    for (int i = 0; i < 16; i++) {
+                        tileArray[i].setBackgroundColor(Color.WHITE);
+                    }
+                    alert.show();
+                } else {
+                    startTime = System.currentTimeMillis();
+                    handler1.postDelayed(task1, 0);
+                    startButton.setText("stop");
+                    score = 0;
+                    bool = true;
+                    delay = 700;
+                    fouls = 20;
+                }
+                break;
+
+            default:
+                throw new RuntimeException("error: ");
+
+        }
 
     }
 }
