@@ -46,7 +46,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
             changeColor(tileArray);
 
             //if ((score % 30 == 0) && (score > 0)) {
-                delay = (int) (delay * 0.999);
+                delay = (int) (delay * 0.997);
             //}
 
             handler1.postDelayed(this, delay);
