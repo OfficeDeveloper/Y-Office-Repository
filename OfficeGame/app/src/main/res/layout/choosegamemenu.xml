@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:text="goTo1game"
         android:id="@+id/goToFirstGame"
+        android:background="@drawable/buttonstile"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="108dp" />
