@@ -21,7 +21,6 @@ public class FirstGame extends Activity implements View.OnClickListener {
     TextView tv;
     TextView point;
     long startTime = 0;
-    TextView tile;
     int random;
     int score = 0;
     TextView stile;
@@ -36,10 +35,6 @@ public class FirstGame extends Activity implements View.OnClickListener {
 
         @Override
         public void run() {
-            long millis = System.currentTimeMillis() - startTime;
-            int seconds = (int) (millis / 1000);
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
 
             point.setText(String.valueOf(score));
             tv.setText(String.valueOf(fouls));
@@ -61,14 +56,9 @@ public class FirstGame extends Activity implements View.OnClickListener {
         }
 
         for (int i=0;i<5;i++) {
-            int k = 0 + (int) (Math.random() * ((15 - 0) + 1));
-            random = 0 + (int) (Math.random() * ((1 - 0) + 1));
-            if (0 == 0) {
-                tiles[k].setBackgroundColor(Color.BLACK);
-
-            } /*else {
-                tv[k].setBackgroundColor(Color.WHITE);
-            }*/
+            int k = (int) (Math.random() * 16);
+            random = (int) (Math.random() * 1);
+            tiles[k].setBackgroundColor(Color.BLACK);
         }
     }
 
