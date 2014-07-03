@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 /**
- * Created by Андрей on 02.07.2014.
+ * Created by Андрей on 02.07.2014 at 4:10.
+ * Паскудатварь
  */
 public class ChooseGameMenu extends Activity implements View.OnClickListener {
 
@@ -38,23 +39,22 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View SecondView) {
+    public void onClick(View button) {
 
-        switch (SecondView.getId()) {
+        switch (button.getId()) {
 
             case R.id.goToFirstGame:
                 Intent begin = new Intent(ChooseGameMenu.this, FirstGame.class);
                 startActivity(begin);
                 break;
+
             case R.id.comeBack:
                 Intent goHome = new Intent(ChooseGameMenu.this, MyActivity.class);
                 startActivity(goHome);
                 break;
 
-
             default:
                 throw new RuntimeException("error: ");
-
 
         }
 

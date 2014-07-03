@@ -24,12 +24,13 @@
 
         <activity
             android:name=".ChooseGameMenu"
-            android:label="label1">
+            android:label="ChooseGameMenu">
 
             </activity>
 
-        <activity android:name=".FirstGame"
-            android:label="label2">
+        <activity
+            android:name=".FirstGame"
+            android:label="FirstGame">
 
         </activity>
 
