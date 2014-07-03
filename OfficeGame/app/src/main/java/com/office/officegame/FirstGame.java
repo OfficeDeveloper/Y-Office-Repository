@@ -89,7 +89,6 @@ public class FirstGame extends Activity implements View.OnClickListener {
                                 }         );
                 AlertDialog alert = looseAlert.create();
                 alert.show();
-                //gt
             }
         }
     }
@@ -102,8 +101,6 @@ public class FirstGame extends Activity implements View.OnClickListener {
     }
 
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firstgame);
         tv = (TextView) findViewById(R.id.timer);
