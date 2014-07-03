@@ -297,6 +297,7 @@
             android:layout_height="match_parent"
             android:text="старт"
             android:id="@+id/startButton"
+            android:background="@drawable/buttonstile"
             android:layout_weight="1" />
 
         <Button
@@ -304,6 +305,7 @@
             android:layout_height="wrap_content"
             android:text="возврат в главное"
             android:id="@+id/backToMainMenu"
+            android:background="@drawable/buttonstile"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
