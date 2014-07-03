@@ -9,15 +9,22 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/top" >
+        android:layout_height="44dp"
+        android:id="@+id/top"
+        android:minHeight="20dp"
+        android:background="#ffdfdfdf"
+        android:baselineAligned="false">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Fauls: "
             android:id="@+id/textView"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:textSize="20dp"
+            android:textIsSelectable="false"
+            android:paddingLeft="10dp" />
 
         <TextView
             android:layout_width="0dp"
@@ -26,19 +33,20 @@
 
             android:textAlignment="center"
             android:layout_weight="1"
-            android:text="20" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="20px"
-            android:layout_weight="1" />
+            android:text="20"
+            android:layout_gravity="center_vertical"
+            android:textSize="20dp"
+            android:textIsSelectable="false" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Score: "
             android:id="@+id/textView3"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:textSize="20dp"
+            android:textIsSelectable="false" />
 
         <TextView
             android:layout_width="0dp"
@@ -46,7 +54,10 @@
             android:id="@+id/point"
             android:textAlignment="center"
             android:text="0"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:textSize="20dp"
+            android:textIsSelectable="false" />
 
     </LinearLayout>
 
@@ -75,7 +86,8 @@
             android:singleLine="false"
             android:enabled="true"
             android:focusable="true"
-            android:layout_margin="0.5dp" />
+            android:layout_margin="0.5dp"
+            android:paddingTop="1dp" />
 
 
 
@@ -88,7 +100,8 @@
             android:clickable="true"
             android:enabled="true"
             android:focusable="true"
-            android:layout_margin="0.5dp" />
+            android:layout_margin="0.5dp"
+            android:paddingTop="1dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -99,7 +112,8 @@
             android:clickable="true"
             android:enabled="true"
             android:focusable="true"
-            android:layout_margin="0.5dp" />
+            android:layout_margin="0.5dp"
+            android:paddingTop="1dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -110,7 +124,8 @@
             android:clickable="true"
             android:enabled="true"
             android:focusable="true"
-            android:layout_margin="0.5dp" />
+            android:layout_margin="0.5dp"
+            android:paddingTop="1dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -249,7 +264,8 @@
             android:clickable="true"
             android:enabled="true"
             android:focusable="true"
-            android:layout_margin="0.5dp" />
+            android:layout_margin="0.5dp"
+            android:paddingBottom="1dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -260,7 +276,8 @@
             android:clickable="true"
             android:enabled="true"
             android:focusable="true"
-            android:layout_margin="0.5dp" />
+            android:layout_margin="0.5dp"
+            android:paddingBottom="1dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -271,7 +288,8 @@
             android:clickable="true"
             android:enabled="true"
             android:focusable="true"
-            android:layout_margin="0.5dp" />
+            android:layout_margin="0.5dp"
+            android:paddingBottom="1dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -282,7 +300,8 @@
             android:clickable="true"
             android:enabled="true"
             android:focusable="true"
-            android:layout_margin="0.5dp" />
+            android:layout_margin="0.5dp"
+            android:paddingBottom="1dp" />
 
     </LinearLayout>
 
@@ -295,14 +314,14 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="старт"
+            android:text="Start"
             android:id="@+id/startButton"
             android:layout_weight="1" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="возврат в главное"
+            android:text="Go back"
             android:id="@+id/backToMainMenu"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -311,7 +330,8 @@
             android:layout_alignParentEnd="true"
             android:maxHeight="60dp"
             android:minHeight="60dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:singleLine="false" />
 
     </LinearLayout>
 
