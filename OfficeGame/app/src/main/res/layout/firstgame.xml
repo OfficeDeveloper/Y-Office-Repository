@@ -282,6 +282,7 @@
             android:layout_height="wrap_content"
             android:text="возврат в главное"
             android:id="@+id/backToMainMenu"
+            android:background="@drawable/buttonfirstgame"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
