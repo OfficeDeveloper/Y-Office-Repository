@@ -61,19 +61,21 @@
         android:layout_above="@+id/backToMainMenu"
         android:layout_weight="1"
         android:baselineAligned="false"
-        android:divider="#ff000000">
+        android:divider="#ff000000"
+        android:background="#ffdfdfdf">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile1"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
 
             android:clickable="true"
             android:singleLine="false"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
 
 
@@ -81,31 +83,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile2"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile3"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile4"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -117,47 +122,52 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/backToMainMenu"
         android:id="@+id/line2"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:background="#ffdfdfdf">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile5"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile6"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile7"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile8"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
     </LinearLayout>
 
@@ -170,47 +180,52 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/backToMainMenu"
         android:id="@+id/line3"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:background="#ffdfdfdf">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile9"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile10"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile11"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile12"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -222,47 +237,52 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/backToMainMenu"
         android:id="@+id/line4"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:background="#ffdfdfdf">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile13"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile14"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile15"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tile16"
-            android:background="@drawable/textviewborder"
+            android:background="#ffffff"
             android:layout_weight="1"
             android:clickable="true"
             android:enabled="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_margin="0.5dp" />
 
     </LinearLayout>
 
@@ -284,7 +304,6 @@
             android:layout_height="wrap_content"
             android:text="возврат в главное"
             android:id="@+id/backToMainMenu"
-            android:background="@drawable/buttonfirstgame"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"

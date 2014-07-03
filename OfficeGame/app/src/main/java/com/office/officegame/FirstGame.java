@@ -16,17 +16,20 @@ import android.widget.TextView;
  */
 public class FirstGame extends Activity implements View.OnClickListener {
 
-   Button backToMainMenu;
-   Button startButton;
-   TextView tv;
-   TextView point;
-   long startTime = 0;
-   TextView tile;
-   int Min = 0;
-   int Max = 1;
-   int random;
-   int score = 0;
-   TextView stile;
+    Button backToMainMenu;
+    Button startButton;
+    TextView tv;
+    TextView point;
+    long startTime = 0;
+    TextView tile;
+    int random;
+    int score = 0;
+    TextView stile;
+    boolean bool=false;
+    int delay=0;
+    int fouls;
+    TextView tileArray[];
+
 
     Handler handler1 = new Handler();
     Runnable task1 = new Runnable() {
@@ -39,42 +42,37 @@ public class FirstGame extends Activity implements View.OnClickListener {
             seconds = seconds % 60;
 
             point.setText(String.valueOf(score));
-            tv.setText(String.format("%d:%02d", minutes, seconds));
+            tv.setText(String.valueOf(fouls));
 
-            tile = (TextView)findViewById(R.id.tile1); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile2); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile3); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile4); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile5); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile6); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile7); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile8); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile9); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile10); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile11); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile12); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile13); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile14); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile15); changeColor(tile);
-            tile = (TextView)findViewById(R.id.tile16); changeColor(tile);
+            changeColor(tileArray);
 
-            handler1.postDelayed(this, 333);
+            handler1.postDelayed(this, delay);
+            if ((score%30==0)&&(score>0)){
+                delay=(int)(delay*0.9);
+            }
         }
     };
 
-    public void changeColor(TextView tv){
-        random = Min + (int)(Math.random() * ((Max - Min) + 1));
-        if(random==Min){
-            tv.setBackgroundColor(Color.BLACK);
+    public void changeColor(TextView[] tv) {
+        for (int i=0;i<16;i++){
+            tv[i].setBackgroundColor(Color.WHITE);
         }
-        else {
-            tv.setBackgroundColor(Color.WHITE);
+
+        for (int i=0;i<5;i++) {
+            int k = 0 + (int) (Math.random() * ((15 - 0) + 1));
+            random = 0 + (int) (Math.random() * ((1 - 0) + 1));
+            if (0 == 0) {
+                tv[k].setBackgroundColor(Color.BLACK);
+
+            } /*else {
+                tv[k].setBackgroundColor(Color.WHITE);
+            }*/
         }
     }
 
-    public void upScore(TextView tv){
+    public void upScore(TextView tv) {
         ColorDrawable drawable = (ColorDrawable) tv.getBackground();
-        if (drawable.getColor()==Color.BLACK) {
+        if ((drawable.getColor() == Color.BLACK)&&(bool)) {
             score = score + 1;
             point.setText(String.valueOf(score));
         }
@@ -83,11 +81,11 @@ public class FirstGame extends Activity implements View.OnClickListener {
     public void onPause() {
         super.onPause();
         handler1.removeCallbacks(task1);
-        Button b = (Button)findViewById(R.id.startButton);
+        Button b = (Button) findViewById(R.id.startButton);
         b.setText("start");
     }
 
-      protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firstgame);
         tv = (TextView) findViewById(R.id.timer);
@@ -95,28 +93,60 @@ public class FirstGame extends Activity implements View.OnClickListener {
         point = (TextView) findViewById(R.id.point);
         point.setText(String.valueOf(score));
 
-
         backToMainMenu = (Button) findViewById(R.id.backToMainMenu);
         backToMainMenu.setOnClickListener(this);
         startButton = (Button) findViewById(R.id.startButton);
         startButton.setOnClickListener(this);
 
-          tile = (TextView)findViewById(R.id.tile1); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile2); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile3); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile4); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile5); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile6); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile7); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile8); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile9); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile10); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile11); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile12); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile13); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile14); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile15); tile.setOnClickListener(this);
-          tile = (TextView)findViewById(R.id.tile16); tile.setOnClickListener(this);
+        tileArray = new TextView[16];
+
+        tileArray[0] = (TextView) findViewById(R.id.tile1);
+        tileArray[0].setOnClickListener(this);
+
+        tileArray[1] = (TextView) findViewById(R.id.tile2);
+        tileArray[1].setOnClickListener(this);
+
+        tileArray[2] = (TextView) findViewById(R.id.tile3);
+        tileArray[2].setOnClickListener(this);
+
+        tileArray[3] = (TextView) findViewById(R.id.tile4);
+        tileArray[3].setOnClickListener(this);
+
+        tileArray[4] = (TextView) findViewById(R.id.tile5);
+        tileArray[4].setOnClickListener(this);
+
+        tileArray[5] = (TextView) findViewById(R.id.tile6);
+        tileArray[5].setOnClickListener(this);
+
+        tileArray[6] = (TextView) findViewById(R.id.tile7);
+        tileArray[6].setOnClickListener(this);
+
+        tileArray[7] = (TextView) findViewById(R.id.tile8);
+        tileArray[7].setOnClickListener(this);
+
+        tileArray[8] = (TextView) findViewById(R.id.tile9);
+        tileArray[8].setOnClickListener(this);
+
+        tileArray[9] = (TextView) findViewById(R.id.tile10);
+        tileArray[9].setOnClickListener(this);
+
+        tileArray[10] = (TextView) findViewById(R.id.tile11);
+        tileArray[10].setOnClickListener(this);
+
+        tileArray[11] = (TextView) findViewById(R.id.tile12);
+        tileArray[11].setOnClickListener(this);
+
+        tileArray[12] = (TextView) findViewById(R.id.tile13);
+        tileArray[12].setOnClickListener(this);
+
+        tileArray[13] = (TextView) findViewById(R.id.tile14);
+        tileArray[13].setOnClickListener(this);
+
+        tileArray[14] = (TextView) findViewById(R.id.tile15);
+        tileArray[14].setOnClickListener(this);
+
+        tileArray[15] = (TextView) findViewById(R.id.tile16);
+        tileArray[15].setOnClickListener(this);
     }
 
     public void onClick(View button) {
@@ -131,91 +161,97 @@ public class FirstGame extends Activity implements View.OnClickListener {
                 if (startButton.getText().equals("stop")) {
                     handler1.removeCallbacks(task1);
                     startButton.setText("start");
+                    bool=false;
                 } else {
                     startTime = System.currentTimeMillis();
                     handler1.postDelayed(task1, 0);
                     startButton.setText("stop");
                     score = 0;
+                    bool=true;
+                    delay=700;
+                    fouls=0;
                 }
                 break;
 
             case R.id.tile1:
-                stile = (TextView)findViewById(R.id.tile1);
-                upScore(stile);
+                if (bool) {
+                    stile = (TextView) findViewById(R.id.tile1);
+                    upScore(stile);
+                }
                 break;
 
             case R.id.tile2:
-                stile = (TextView)findViewById(R.id.tile2);
+                stile = (TextView) findViewById(R.id.tile2);
                 upScore(stile);
                 break;
 
             case R.id.tile3:
-                stile = (TextView)findViewById(R.id.tile3);
+                stile = (TextView) findViewById(R.id.tile3);
                 upScore(stile);
                 break;
 
             case R.id.tile4:
-                stile = (TextView)findViewById(R.id.tile4);
+                stile = (TextView) findViewById(R.id.tile4);
                 upScore(stile);
                 break;
 
             case R.id.tile5:
-                stile = (TextView)findViewById(R.id.tile5);
+                stile = (TextView) findViewById(R.id.tile5);
                 upScore(stile);
                 break;
 
             case R.id.tile6:
-                stile = (TextView)findViewById(R.id.tile6);
+                stile = (TextView) findViewById(R.id.tile6);
                 upScore(stile);
                 break;
 
             case R.id.tile7:
-                stile = (TextView)findViewById(R.id.tile7);
+                stile = (TextView) findViewById(R.id.tile7);
                 upScore(stile);
                 break;
 
             case R.id.tile8:
-                stile = (TextView)findViewById(R.id.tile8);
+                stile = (TextView) findViewById(R.id.tile8);
                 upScore(stile);
                 break;
 
             case R.id.tile9:
-                stile = (TextView)findViewById(R.id.tile9);
+                stile = (TextView) findViewById(R.id.tile9);
                 upScore(stile);
                 break;
 
             case R.id.tile10:
-                stile = (TextView)findViewById(R.id.tile10);
+                stile = (TextView) findViewById(R.id.tile10);
                 upScore(stile);
                 break;
 
             case R.id.tile11:
-                stile = (TextView)findViewById(R.id.tile11);
+                stile = (TextView) findViewById(R.id.tile11);
                 upScore(stile);
                 break;
 
             case R.id.tile12:
-                stile = (TextView)findViewById(R.id.tile12);
+                stile = (TextView) findViewById(R.id.tile12);
                 upScore(stile);
                 break;
 
             case R.id.tile13:
-                stile = (TextView)findViewById(R.id.tile13);
+                stile = (TextView) findViewById(R.id.tile13);
                 upScore(stile);
                 break;
 
             case R.id.tile14:
-                stile = (TextView)findViewById(R.id.tile14);
+                stile = (TextView) findViewById(R.id.tile14);
                 upScore(stile);
                 break;
 
             case R.id.tile15:
-                stile = (TextView)findViewById(R.id.tile15);
+                stile = (TextView) findViewById(R.id.tile15);
                 upScore(stile);
                 break;
 
             case R.id.tile16:
-                stile = (TextView)findViewById(R.id.tile16);
+                stile = (TextView) findViewById(R.id.tile16);
                 upScore(stile);
                 break;
 
