@@ -25,8 +25,6 @@ public class MyActivity extends Activity implements View.OnClickListener {
         exitButton.setOnClickListener(this);
     }
 
-
-
     public void onClick(View first) {
 
         switch (first.getId()) {

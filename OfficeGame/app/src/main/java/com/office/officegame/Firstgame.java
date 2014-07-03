@@ -179,8 +179,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
     public boolean onTouch(View v, MotionEvent event) {
         if (event.getAction()==MotionEvent.ACTION_DOWN) switch (v.getId()) {
             case R.id.backToMainMenu:
-                Intent goHome = new Intent(FirstGame.this, ChooseGameMenu.class);
-                startActivity(goHome);
+                System.exit(0);
                 break;
 
             case R.id.startButton:
@@ -218,10 +217,8 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
                 break;
 
             case R.id.tile1:
-                if (bool) {
                     stile = (TextView) findViewById(R.id.tile1);
                     upScore(stile);
-                }
                 break;
 
             case R.id.tile2:
