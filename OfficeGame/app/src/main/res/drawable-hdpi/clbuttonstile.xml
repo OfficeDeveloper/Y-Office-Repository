@@ -17,8 +17,8 @@
                 android:height="25dp"
                 android:width="100dp" />
             <gradient
-                android:startColor="#C0C0C0"
-                android:endColor="#ffdfdfdf"
+                android:startColor="#ffdfdfdf"
+                android:endColor="#C0C0C0"
                 android:angle="90"
 
                 />

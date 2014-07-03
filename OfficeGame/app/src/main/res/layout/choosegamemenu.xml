@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:text="backToMainMenu"
         android:id="@+id/comeBack"
+        android:background="@drawable/button_custom"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -19,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="goTo1game"
         android:id="@+id/goToFirstGame"
-        android:background="@drawable/buttonstile"
+        android:background="@drawable/button_custom"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="108dp" />
@@ -31,7 +32,8 @@
         android:id="@+id/goToSecondGame"
         android:layout_below="@+id/goToFirstGame"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp" />
+        android:layout_marginTop="41dp"
+        android:background="@drawable/button_custom" />
 
     <Button
         android:layout_width="wrap_content"
@@ -40,7 +42,8 @@
         android:id="@+id/goToThirdGame"
         android:layout_below="@+id/goToSecondGame"
         android:layout_alignLeft="@+id/goToSecondGame"
-        android:layout_marginTop="42dp" />
+        android:layout_marginTop="42dp"
+        android:background="@drawable/button_custom" />
 
     <Button
         android:layout_width="wrap_content"
@@ -50,5 +53,6 @@
         android:layout_below="@+id/goToThirdGame"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"
-        android:singleLine="false" />
+        android:singleLine="false"
+        android:background="@drawable/button_custom" />
 </RelativeLayout>

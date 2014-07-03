@@ -314,9 +314,17 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:text="Rules"
+            android:id="@+id/rules"
+            android:background="@drawable/button_custom"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:text="Start"
             android:id="@+id/startButton"
-            android:background="@drawable/buttonstile"
+            android:background="@drawable/button_custom"
             android:layout_weight="1" />
 
         <Button
@@ -324,7 +332,7 @@
             android:layout_height="wrap_content"
             android:text="Go back"
             android:id="@+id/backToMainMenu"
-            android:background="@drawable/buttonstile"
+            android:background="@drawable/button_custom"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"

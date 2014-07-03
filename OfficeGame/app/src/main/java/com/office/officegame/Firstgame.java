@@ -6,17 +6,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.view.View.OnTouchListener;
+
 
 /**
  * Created by Андрей on 03.07.2014 at 4:10.
  * Паскудатварь
  */
-public class FirstGame extends Activity implements View.OnClickListener {
+public class FirstGame extends Activity implements View.OnClickListener, OnTouchListener {
 
     Button backToMainMenu;
     Button startButton;
@@ -42,9 +46,9 @@ public class FirstGame extends Activity implements View.OnClickListener {
 
             changeColor(tileArray);
 
-            if ((score % 30 == 0) && (score > 0)) {
-                delay = (int) (delay * 0.9);
-            }
+            //if ((score % 30 == 0) && (score > 0)) {
+                delay = (int) (delay * 0.999);
+            //}
 
             handler1.postDelayed(this, delay);
 
@@ -68,20 +72,24 @@ public class FirstGame extends Activity implements View.OnClickListener {
         if ((drawable.getColor() == Color.BLACK) && (bool)) {
             score = score + 1;
             point.setText(String.valueOf(score));
+            tiv.setBackgroundColor(Color.DKGRAY);
         }
+
+
         if ((drawable.getColor() == Color.WHITE) && (bool)) {
             fouls = fouls - 1;
             tv.setText(String.valueOf(fouls));
+            tiv.setBackgroundColor(Color.RED);
             if (fouls == 0) {
                 handler1.removeCallbacks(task1);
                 startButton.setText("start");
                 bool = false;
                 AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
-                looseAlert.setTitle("WARNING!")
-                        .setMessage("You Loose, try again:)")
+                looseAlert.setTitle("GAME OVER")
+                        .setMessage("You finished with score is: "+score)
                         .setIcon(R.drawable.ic_launcher)
                         .setCancelable(false)
-                        .setNegativeButton("okay!",
+                        .setNegativeButton("Okay!",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         dialog.cancel();
@@ -89,8 +97,10 @@ public class FirstGame extends Activity implements View.OnClickListener {
                                 }
                         );
                 AlertDialog alert = looseAlert.create();
+                for (int i = 0; i < 16; i++) {
+                    tileArray[i].setBackgroundColor(Color.WHITE);
+                }
                 alert.show();
-                //gt
             }
         }
     }
@@ -103,8 +113,6 @@ public class FirstGame extends Activity implements View.OnClickListener {
     }
 
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firstgame);
         tv = (TextView) findViewById(R.id.timer);
@@ -113,63 +121,64 @@ public class FirstGame extends Activity implements View.OnClickListener {
         point.setText(String.valueOf(score));
 
         backToMainMenu = (Button) findViewById(R.id.backToMainMenu);
-        backToMainMenu.setOnClickListener(this);
+        backToMainMenu.setOnTouchListener(this);
         startButton = (Button) findViewById(R.id.startButton);
-        startButton.setOnClickListener(this);
+        startButton.setOnTouchListener(this);
 
         tileArray = new TextView[16];
 
         tileArray[0] = (TextView) findViewById(R.id.tile1);
-        tileArray[0].setOnClickListener(this);
+        tileArray[0].setOnTouchListener(this);
 
         tileArray[1] = (TextView) findViewById(R.id.tile2);
-        tileArray[1].setOnClickListener(this);
+        tileArray[1].setOnTouchListener(this);
 
         tileArray[2] = (TextView) findViewById(R.id.tile3);
-        tileArray[2].setOnClickListener(this);
+        tileArray[2].setOnTouchListener(this);
 
         tileArray[3] = (TextView) findViewById(R.id.tile4);
-        tileArray[3].setOnClickListener(this);
+        tileArray[3].setOnTouchListener(this);
 
         tileArray[4] = (TextView) findViewById(R.id.tile5);
-        tileArray[4].setOnClickListener(this);
+        tileArray[4].setOnTouchListener(this);
 
         tileArray[5] = (TextView) findViewById(R.id.tile6);
-        tileArray[5].setOnClickListener(this);
+        tileArray[5].setOnTouchListener(this);
 
         tileArray[6] = (TextView) findViewById(R.id.tile7);
-        tileArray[6].setOnClickListener(this);
+        tileArray[6].setOnTouchListener(this);
 
         tileArray[7] = (TextView) findViewById(R.id.tile8);
-        tileArray[7].setOnClickListener(this);
+        tileArray[7].setOnTouchListener(this);
 
         tileArray[8] = (TextView) findViewById(R.id.tile9);
-        tileArray[8].setOnClickListener(this);
+        tileArray[8].setOnTouchListener(this);
 
         tileArray[9] = (TextView) findViewById(R.id.tile10);
-        tileArray[9].setOnClickListener(this);
+        tileArray[9].setOnTouchListener(this);
 
         tileArray[10] = (TextView) findViewById(R.id.tile11);
-        tileArray[10].setOnClickListener(this);
+        tileArray[10].setOnTouchListener(this);
 
         tileArray[11] = (TextView) findViewById(R.id.tile12);
-        tileArray[11].setOnClickListener(this);
+        tileArray[11].setOnTouchListener(this);
 
         tileArray[12] = (TextView) findViewById(R.id.tile13);
-        tileArray[12].setOnClickListener(this);
+        tileArray[12].setOnTouchListener(this);
 
         tileArray[13] = (TextView) findViewById(R.id.tile14);
-        tileArray[13].setOnClickListener(this);
+        tileArray[13].setOnTouchListener(this);
 
         tileArray[14] = (TextView) findViewById(R.id.tile15);
-        tileArray[14].setOnClickListener(this);
+        tileArray[14].setOnTouchListener(this);
 
         tileArray[15] = (TextView) findViewById(R.id.tile16);
-        tileArray[15].setOnClickListener(this);
+        tileArray[15].setOnTouchListener(this);
     }
 
-    public void onClick(View button) {
-        switch (button.getId()) {
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (event.getAction()==MotionEvent.ACTION_DOWN) switch (v.getId()) {
             case R.id.backToMainMenu:
                 Intent goHome = new Intent(FirstGame.this, ChooseGameMenu.class);
                 startActivity(goHome);
@@ -181,6 +190,23 @@ public class FirstGame extends Activity implements View.OnClickListener {
                     handler1.removeCallbacks(task1);
                     startButton.setText("start");
                     bool = false;
+                    AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
+                    looseAlert.setTitle("GAME OVER")
+                            .setMessage("You finished with score is: " + score)
+                            .setIcon(R.drawable.ic_launcher)
+                            .setCancelable(false)
+                            .setNegativeButton("Okay!",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    }
+                            );
+                    AlertDialog alert = looseAlert.create();
+                    for (int i = 0; i < 16; i++) {
+                        tileArray[i].setBackgroundColor(Color.WHITE);
+                    }
+                    alert.show();
                 } else {
                     startTime = System.currentTimeMillis();
                     handler1.postDelayed(task1, 0);
@@ -279,5 +305,11 @@ public class FirstGame extends Activity implements View.OnClickListener {
                 throw new RuntimeException("error: ");
 
         }
+        return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
