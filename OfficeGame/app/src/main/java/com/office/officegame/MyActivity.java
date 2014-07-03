@@ -32,7 +32,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
         switch (first.getId()) {
             case R.id.chooseButton:
-                Intent intent = new Intent(this, ChooseGameMenu.class);
+                Intent intent = new Intent(MyActivity.this, ChooseGameMenu.class);
                 startActivity(intent);
                 break;
             case R.id.exitButton:

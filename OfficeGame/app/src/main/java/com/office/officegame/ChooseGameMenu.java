@@ -43,11 +43,11 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
         switch (SecondView.getId()) {
 
             case R.id.goToFirstGame:
-                Intent begin = new Intent(this, FirstGame.class);
+                Intent begin = new Intent(ChooseGameMenu.this, FirstGame.class);
                 startActivity(begin);
                 break;
             case R.id.comeBack:
-                Intent goHome = new Intent(this, MyActivity.class);
+                Intent goHome = new Intent(ChooseGameMenu.this, MyActivity.class);
                 startActivity(goHome);
                 break;
 

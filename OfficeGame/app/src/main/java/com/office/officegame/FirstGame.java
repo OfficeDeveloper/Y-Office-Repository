@@ -18,14 +18,12 @@ public class FirstGame extends Activity implements View.OnClickListener {
         setContentView(R.layout.firstgame);
 
         backToMainMenu = (Button) findViewById(R.id.backToMainMenu);
-
-        backToMainMenu.setOnClickListener(this);
     }
 
     public void onClick(View third) {
         switch (third.getId()) {
             case R.id.backToMainMenu:
-                Intent goHome = new Intent(this, ChooseGameMenu.class);
+                Intent goHome = new Intent(FirstGame.this, ChooseGameMenu.class);
                 startActivity(goHome);
                 break;
 
