@@ -18,6 +18,8 @@ public class FirstGame extends Activity implements View.OnClickListener {
         setContentView(R.layout.firstgame);
 
         backToMainMenu = (Button) findViewById(R.id.backToMainMenu);
+
+        backToMainMenu.setOnClickListener(this);
     }
 
     public void onClick(View third) {

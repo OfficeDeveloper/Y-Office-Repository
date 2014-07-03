@@ -9,7 +9,7 @@ import android.widget.Button;
 /**
  * Created by Андрей on 02.07.2014.
  */
-public class ChooseGameMenu extends MyActivity implements View.OnClickListener {
+public class ChooseGameMenu extends Activity implements View.OnClickListener {
 
     Button goToFirstGame;
    // Button goToSecondGame;
@@ -29,7 +29,7 @@ public class ChooseGameMenu extends MyActivity implements View.OnClickListener {
         //goToFirthGame = (Button) findViewById(R.id.goToFirthGame);
         comeBack = (Button) findViewById(R.id.comeBack);
 
-//        goToFirstGame.setOnClickListener(this);
+       goToFirstGame.setOnClickListener(this);
 //        goToSecondGame.setOnClickListener(this);
  //       goToThirdGame.setOnClickListener(this);
  //       goToFirthGame.setOnClickListener(this);
