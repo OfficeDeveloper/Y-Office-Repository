@@ -89,6 +89,7 @@ public class FirstGame extends Activity implements View.OnClickListener {
                                 }         );
                 AlertDialog alert = looseAlert.create();
                 alert.show();
+                //gt
             }
         }
     }
