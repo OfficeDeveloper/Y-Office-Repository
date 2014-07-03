@@ -11,17 +11,16 @@ public class FirstGame extends Activity implements View.OnClickListener {
     @Override
 
     public void onClick(View view) {
-      //  switch (view.getId()) {
-            //case R.id.chooseButton:
-               // Intent intent = new Intent(this, ChooseGameMenu.class);
-               // startActivity(intent);
-               // break;
+        switch (view.getId()) {
+            case R.id.chooseButton:
+                Intent intent = new Intent(this, ChooseGameMenu.class);
+                startActivity(intent);
+                break;
 
 
+            default:
+                throw new RuntimeException("error: ");
 
-
-           // default:
-               // throw new RuntimeException("error: ");
-
+        }
     }
 }

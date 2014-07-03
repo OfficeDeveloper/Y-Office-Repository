@@ -21,7 +21,7 @@ public class ChooseGameMenu extends MyActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
+        setContentView(R.layout.choosegamemenu);
 
         goToFirstGame = (Button) findViewById(R.id.goToFirstGame);
         //goToSecondGame = (Button) findViewById(R.id.goToSecondGame);
