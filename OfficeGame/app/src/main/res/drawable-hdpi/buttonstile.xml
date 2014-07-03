@@ -17,14 +17,14 @@
                 android:height="25dp"
                 android:width="100dp" />
             <gradient
-                android:startColor="#ffdfdfdf"
+                android:startColor="#C0C0C0"
                 android:endColor="#ffdfdfdf"
                 android:angle="90"
 
                 />
             <stroke
                 android:width="1dip"
-                android:color="#FF0000"/>
+                android:color="#808080"/>
 
         </shape>
     </item>
