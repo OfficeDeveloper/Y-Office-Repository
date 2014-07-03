@@ -1,6 +1,8 @@
 package com.office.officegame;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -28,7 +30,6 @@ public class FirstGame extends Activity implements View.OnClickListener {
     int delay=0;
     int fouls;
     TextView tileArray[];
-
 
     Handler handler1 = new Handler();
     Runnable task1 = new Runnable() {
@@ -75,6 +76,19 @@ public class FirstGame extends Activity implements View.OnClickListener {
                 handler1.removeCallbacks(task1);
                 startButton.setText("start");
                 bool=false;
+                AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
+                looseAlert.setTitle("WARNING!")
+                        .setMessage("You Loose, try again:)")
+                        .setIcon(R.drawable.ic_launcher)
+                        .setCancelable(false)
+                        .setNegativeButton("okay!",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                }         );
+                AlertDialog alert = looseAlert.create();
+                alert.show();
             }
         }
     }
@@ -87,6 +101,8 @@ public class FirstGame extends Activity implements View.OnClickListener {
     }
 
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firstgame);
         tv = (TextView) findViewById(R.id.timer);
