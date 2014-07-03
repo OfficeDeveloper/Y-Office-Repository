@@ -15,7 +15,7 @@ public class ChooseGameMenu extends MyActivity implements View.OnClickListener {
    // Button goToSecondGame;
     //Button goToThirdGame;
     //Button goToFirthGame;
-    //Button comeBack;
+    Button comeBack;
 
 
     @Override
@@ -27,13 +27,13 @@ public class ChooseGameMenu extends MyActivity implements View.OnClickListener {
         //goToSecondGame = (Button) findViewById(R.id.goToSecondGame);
         //goToThirdGame = (Button) findViewById(R.id.goToThirdGame);
         //goToFirthGame = (Button) findViewById(R.id.goToFirthGame);
-        //comeBack = (Button) findViewById(R.id.comeBack);
+        comeBack = (Button) findViewById(R.id.comeBack);
 
 //        goToFirstGame.setOnClickListener(this);
 //        goToSecondGame.setOnClickListener(this);
  //       goToThirdGame.setOnClickListener(this);
  //       goToFirthGame.setOnClickListener(this);
-   //     comeBack.setOnClickListener(this);
+        comeBack.setOnClickListener(this);
         //паскудатварь
     }
 
