@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 public class MyActivity extends Activity implements View.OnClickListener {
@@ -30,10 +32,13 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
     public void onClick(View first) {
 
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyActivity.this);
-            alertDialog.setTitle("Exit");
-            alertDialog.setMessage("Are you sure ?");
-            alertDialog.setPositiveButton("Yea!", new DialogInterface.OnClickListener() {
+            AlertDialog.Builder alertExitDialog = new AlertDialog.Builder(MyActivity.this);
+        TextView myMessage = new TextView(this);
+        myMessage.setText("are you sure?");
+        myMessage.setGravity(Gravity.CENTER_HORIZONTAL);
+        alertExitDialog.setTitle("Exit");
+        alertExitDialog.setView(myMessage);
+        alertExitDialog.setPositiveButton("Yea!", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(Intent.ACTION_MAIN);
                     intent.addCategory(Intent.CATEGORY_HOME);
@@ -42,7 +47,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
                 }
             });
 
-            alertDialog.setNegativeButton("No!", new DialogInterface.OnClickListener() {
+        alertExitDialog.setNegativeButton("No!", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
                 }
@@ -55,7 +60,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
                     break;
 
                 case R.id.exitButton:
-                    alertDialog.show();
+                    alertExitDialog.show();
                     return;
 
                 default:
