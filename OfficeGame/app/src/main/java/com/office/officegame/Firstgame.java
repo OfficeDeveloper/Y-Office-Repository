@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 /**
  * Created by Андрей on 03.07.2014 at 4:10.
- * Паскудатварь
  */
 public class FirstGame extends Activity implements View.OnClickListener, OnTouchListener {
 

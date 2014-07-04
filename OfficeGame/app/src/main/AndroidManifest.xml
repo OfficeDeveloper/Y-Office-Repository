@@ -34,6 +34,11 @@
 
         </activity>
 
+        <activity
+            android:name=".FourthGame"
+            android:label="MemoryGame">
+        </activity>
+
 
 
 
