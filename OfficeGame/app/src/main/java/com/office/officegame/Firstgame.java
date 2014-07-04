@@ -3,6 +3,7 @@ package com.office.officegame;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -79,7 +80,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
             tiv.setBackgroundColor(Color.RED);
             if (fouls == 0) {
                 handler1.removeCallbacks(task1);
-                startButton.setText("start");
+                startButton.setText("Start");
                 bool = false;
                 AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
                 looseAlert.setTitle("GAME OVER")
@@ -106,7 +107,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
         super.onPause();
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
-        b.setText("start");
+        b.setText("Start");
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -269,14 +270,17 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.backToMainMenu:
-                System.exit(0);
+                Intent goToChooseMenu = new Intent (FirstGame.this, ChooseGameMenu.class);
+                startActivity(goToChooseMenu);
                 break;
 
             case R.id.startButton:
                 //startButton tasks
-                if (startButton.getText().equals("stop")) {
+
+
+                if (startButton.getText().equals("Stop")) {
                     handler1.removeCallbacks(task1);
-                    startButton.setText("start");
+                    startButton.setText("Start");
                     bool = false;
                     AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
                     looseAlert.setTitle("GAME OVER")
@@ -298,7 +302,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
                 } else {
                     startTime = System.currentTimeMillis();
                     handler1.postDelayed(task1, 0);
-                    startButton.setText("stop");
+                    startButton.setText("Stop");
                     score = 0;
                     bool = true;
                     delay = 700;

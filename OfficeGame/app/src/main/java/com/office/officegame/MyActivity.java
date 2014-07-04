@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MyActivity extends Activity implements View.OnClickListener {
@@ -16,7 +18,20 @@ public class MyActivity extends Activity implements View.OnClickListener {
     Button chooseButton;
     Button exitButton;
 
+    private static long back_pressed;
 
+
+    public void onBackPressed() {
+
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+        }
+        else
+            Toast.makeText(getBaseContext(), "press again to exit",
+                    Toast.LENGTH_SHORT).show();
+        back_pressed = System.currentTimeMillis();
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +50,10 @@ public class MyActivity extends Activity implements View.OnClickListener {
             AlertDialog.Builder alertExitDialog = new AlertDialog.Builder(MyActivity.this);
         TextView myMessage = new TextView(this);
         myMessage.setText("are you sure?");
-        myMessage.setGravity(Gravity.CENTER_HORIZONTAL);
+        myMessage.setTextSize(30);
+        myMessage.setGravity(Gravity.CENTER);
+
+
         alertExitDialog.setTitle("Exit");
         alertExitDialog.setView(myMessage);
         alertExitDialog.setPositiveButton("Yea!", new DialogInterface.OnClickListener() {

@@ -16,7 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="1"
+
             android:id="@+id/viewFourthGame1"
             android:layout_weight="1" />
 
@@ -24,7 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="2"
+
             android:id="@+id/viewFourthGame2"
             android:layout_gravity="center_vertical"
             android:layout_weight="1" />
@@ -33,7 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="3"
+
             android:id="@+id/viewFourthGame3"
             android:layout_weight="1" />
 
@@ -41,7 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="4"
+
             android:id="@+id/viewFourthGame4"
             android:layout_gravity="center_vertical"
             android:layout_weight="1" />
@@ -58,7 +62,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="1"
+
             android:id="@+id/viewFourthGame5"
             android:layout_weight="1" />
 
@@ -66,7 +71,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="2"
+
             android:id="@+id/viewFourthGame6"
             android:layout_gravity="center_vertical"
             android:layout_weight="1" />
@@ -75,7 +81,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="3"
+
             android:id="@+id/viewFourthGame7"
             android:layout_gravity="center_vertical"
             android:layout_weight="1" />
@@ -84,7 +91,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="4"
+
             android:id="@+id/viewFourthGame8"
             android:layout_gravity="center_vertical"
             android:layout_weight="1" />
@@ -101,7 +109,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="2"
+
             android:id="@+id/viewFourthGame9"
             android:layout_weight="1" />
 
@@ -109,15 +118,17 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="1"
             android:id="@+id/viewFourthGame10"
+
             android:layout_weight="1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="3"
+
             android:id="@+id/viewFourthGame11"
             android:layout_weight="1" />
 
@@ -125,7 +136,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="4"
+
             android:id="@+id/viewFourthGame12"
             android:layout_weight="1" />
     </LinearLayout>
@@ -141,7 +153,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="5"
+
             android:id="@+id/viewFourthGame13"
             android:layout_weight="1" />
 
@@ -149,7 +162,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="6"
+
             android:id="@+id/viewFourthGame14"
             android:layout_weight="1" />
 
@@ -157,7 +171,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="7"
+
             android:id="@+id/viewFourthGame15"
             android:layout_weight="1" />
 
@@ -165,7 +180,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="8"
+
             android:id="@+id/viewFourthGame16"
             android:layout_weight="1" />
     </LinearLayout>
