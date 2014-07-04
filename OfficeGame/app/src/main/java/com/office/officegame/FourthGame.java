@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by Андрей on 04.07.2014.
  */
 public class FourthGame extends Activity implements View.OnClickListener, View.OnTouchListener {
 
+    TextView viewFourthGame1;
+    Button startFourthGame;
     Button backToMainMenuFourthGame;
 
 
@@ -20,9 +23,12 @@ public class FourthGame extends Activity implements View.OnClickListener, View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fourth_game);
 
+        viewFourthGame1 = (TextView) findViewById(R.id.viewFourthGame1);
+        startFourthGame = (Button) findViewById(R.id.startFourthGame);
         backToMainMenuFourthGame = (Button) findViewById(R.id.backToMainMenuFourthGame);
 
         backToMainMenuFourthGame.setOnClickListener(this);
+        startFourthGame.setOnClickListener(this);
 
     }
 
@@ -35,6 +41,11 @@ public class FourthGame extends Activity implements View.OnClickListener, View.O
             case R.id.backToMainMenuFourthGame:
                 Intent goToChooseMenu = new Intent(FourthGame.this, ChooseGameMenu.class);
                 startActivity(goToChooseMenu);
+                break;
+
+            case R.id.startFourthGame:
+
+
                 break;
 
             default:

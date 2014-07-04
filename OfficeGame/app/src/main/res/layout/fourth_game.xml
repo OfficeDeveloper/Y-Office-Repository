@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/viewFourtGame1"
+            android:id="@+id/viewFourthGame1"
             android:layout_weight="1" />
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/viewFourtGame2"
+            android:id="@+id/viewFourthGame2"
             android:layout_gravity="center_vertical"
             android:layout_weight="1" />
 
@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/viewFourtGame3"
+            android:id="@+id/viewFourthGame3"
             android:layout_weight="1" />
 
         <TextView
@@ -42,50 +42,7 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/viewFourtGame4"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.16">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/viewFourtGame5"
-            android:layout_weight="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/viewFourtGame6"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/viewFourtGame7"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/viewFourtGame8"
+            android:id="@+id/viewFourthGame4"
             android:layout_gravity="center_vertical"
             android:layout_weight="1" />
     </LinearLayout>
@@ -102,7 +59,7 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/viewFourtGame9"
+            android:id="@+id/viewFourthGame5"
             android:layout_weight="1" />
 
         <TextView
@@ -110,7 +67,8 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/viewFourtGame10"
+            android:id="@+id/viewFourthGame6"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1" />
 
         <TextView
@@ -118,7 +76,8 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/viewFourtGame11"
+            android:id="@+id/viewFourthGame7"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1" />
 
         <TextView
@@ -126,7 +85,8 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/viewFourtGame12"
+            android:id="@+id/viewFourthGame8"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -142,7 +102,7 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/viewFourtGame13"
+            android:id="@+id/viewFourthGame9"
             android:layout_weight="1" />
 
         <TextView
@@ -150,7 +110,7 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/viewFourtGame14"
+            android:id="@+id/viewFourthGame10"
             android:layout_weight="1" />
 
         <TextView
@@ -158,7 +118,7 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/viewFourtGame15"
+            android:id="@+id/viewFourthGame11"
             android:layout_weight="1" />
 
         <TextView
@@ -166,7 +126,47 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/viewFourtGame16"
+            android:id="@+id/viewFourthGame12"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/viewFourthGame13"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/viewFourthGame14"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/viewFourthGame15"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/viewFourthGame16"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -196,14 +196,14 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_custom"
             android:text="Rules"
-            android:id="@+id/readRulesFourtGame" />
+            android:id="@+id/readRulesFourthGame" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_custom"
             android:text="Start"
-            android:id="@+id/startGameFourtGame" />
+            android:id="@+id/startFourthGame" />
 
         <Button
             android:layout_width="wrap_content"
