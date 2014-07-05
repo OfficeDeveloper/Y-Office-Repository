@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -14,10 +15,13 @@ import android.widget.TextView;
  */
 public class FourthGame extends Activity implements View.OnClickListener, View.OnTouchListener {
 
-
+    protected int currentArrayNumber;
+    protected int maxArrayNumber = 0;
     Button startFourthGame;
     Button backToMainMenuFourthGame;
     TextView viewArray[];
+    EditText editForResult;
+
 
 
     @Override
@@ -62,7 +66,7 @@ public class FourthGame extends Activity implements View.OnClickListener, View.O
 
 
 
-
+        editForResult = (EditText) findViewById(R.id.editForResult);
         startFourthGame = (Button) findViewById(R.id.startFourthGame);
         backToMainMenuFourthGame = (Button) findViewById(R.id.backToMainMenuFourthGame);
 
@@ -85,11 +89,18 @@ public class FourthGame extends Activity implements View.OnClickListener, View.O
                 break;
 
             case R.id.startFourthGame:
-
+                maxArrayNumber = 0;
                 for (int i = 0; i < 16; i++) {
                     viewArray[i].setText(String.valueOf((int)(11 + Math.random() *88)));
+                    String numString = viewArray[i].getText().toString();
+                    currentArrayNumber = Integer.parseInt(numString);
+                     if (currentArrayNumber > maxArrayNumber) {
+                         maxArrayNumber = currentArrayNumber;                                        // c - maximum ARRAY number
 
+                    }
+                    else;
                 }
+                editForResult.setText(String.valueOf(maxArrayNumber));
                 break;
 
             default:
@@ -98,6 +109,8 @@ public class FourthGame extends Activity implements View.OnClickListener, View.O
 
         }
     }
+
+
 
     @Override
     public boolean onTouch(View fourthGame, MotionEvent newEvent) {
