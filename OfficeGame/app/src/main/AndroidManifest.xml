@@ -38,6 +38,10 @@
             android:name=".FourthGame"
             android:label="MemoryGame">
         </activity>
+        <activity android:name=".SecondGame"
+            android:label="secondgame">
+
+            </activity>
 
 
 
