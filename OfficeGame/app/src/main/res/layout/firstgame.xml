@@ -1,63 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".FirstGame">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="44dp"
+        android:layout_height="wrap_content"
         android:id="@+id/top"
         android:minHeight="20dp"
         android:background="#ffdfdfdf"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:padding="5dp">
 
-        <TextView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Misses: "
-            android:id="@+id/textView"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:textSize="20dp"
-            android:textIsSelectable="false"
-            android:paddingLeft="10dp" />
+            android:padding="3dp"
+            android:background="#ffb5b5b5"
+            android:layout_margin="3dp"
+            android:layout_gravity="center_vertical">
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MISSES"
+                android:id="@+id/missTimeText"
+                android:layout_gravity="center_horizontal"
+                android:textSize="16dp"
+                android:textIsSelectable="false"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/misses"
+
+                android:text="20"
+                android:layout_gravity="center_horizontal"
+                android:textSize="16dp"
+                android:textIsSelectable="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/timer"
-
-            android:textAlignment="center"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="20"
-            android:layout_gravity="center_vertical"
-            android:textSize="20dp"
-            android:textIsSelectable="false" />
+            android:padding="3dp"
+            android:background="#ffb5b5b5"
+            android:layout_margin="3dp"
+            android:layout_gravity="center_vertical|left">
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HIGH SCORE"
+                android:id="@+id/textView2"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
+                android:textSize="16dp"
+                android:textIsSelectable="false"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/highscore"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
+                android:textSize="16dp"
+                android:textIsSelectable="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Score: "
-            android:id="@+id/textView3"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:textSize="20dp"
-            android:textIsSelectable="false" />
+            android:padding="3dp"
+            android:background="#ffb5b5b5"
+            android:layout_margin="3dp"
+            android:layout_gravity="center_vertical">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/point"
-            android:textAlignment="center"
-            android:text="0"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:textSize="20dp"
-            android:textIsSelectable="false" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SCORE"
+                android:id="@+id/textView3"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
+                android:textSize="16dp"
+                android:textIsSelectable="false"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/point"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
+                android:textSize="16dp"
+                android:textIsSelectable="false" />
+        </LinearLayout>
 
     </LinearLayout>
 

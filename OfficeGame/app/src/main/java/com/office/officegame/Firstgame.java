@@ -2,52 +2,57 @@ package com.office.officegame;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 /**
- * Created by Андрей on 03.07.2014 at 4:10.
+ * @author Gavlovich Maksim (reverff@gmail.com)
+ * 2014(c)
  */
 public class FirstGame extends Activity implements View.OnClickListener, OnTouchListener {
 
-    Button backToMainMenu;
-    Button startButton;
-    TextView tv;
-    TextView point;
-    long startTime = 0;
-    int random;
-    int score = 0;
-    TextView stile;
-    boolean bool = false;
-    int delay = 0;
-    int fouls;
-    TextView tileArray[];
+    private Button backToMainMenu;
+    private Button startButton;
 
-    Handler handler1 = new Handler();
-    Runnable task1 = new Runnable() {
+    private TextView misses;
+    private TextView point;
+    private TextView tileArray[];
+    private TextView highScore;
 
+    private int score;
+    private int delay;
+    private int fouls;
+    private int hiScore;
+
+    private boolean bool = false;
+
+    private final String LOG_TAG = "myLogs";
+
+    private DBHelper dbHelper;
+    private SQLiteDatabase db;
+    private Cursor cursor;
+
+    private Handler handler1 = new Handler();
+    private Runnable task1 = new Runnable() {
         @Override
         public void run() {
-
             point.setText(String.valueOf(score));
-            tv.setText(String.valueOf(fouls));
-
+            misses.setText(String.valueOf(fouls));
             changeColor(tileArray);
-
-            //if ((score % 30 == 0) && (score > 0)) {
-            delay = (int) (delay * 0.997);
-            //}
-
             handler1.postDelayed(this, delay);
 
         }
@@ -60,24 +65,32 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
 
         for (int i = 0; i < 5; i++) {
             int k = (int) (Math.random() * 16);
-            random = (int) (Math.random() * 1);
             tiles[k].setBackgroundColor(Color.BLACK);
         }
     }
 
-    public void upScore(TextView tiv) {
-        ColorDrawable drawable = (ColorDrawable) tiv.getBackground();
+    public void upScore(TextView tile) {
+        ColorDrawable drawable = (ColorDrawable) tile.getBackground();
         if ((drawable.getColor() == Color.BLACK) && (bool)) {
             score = score + 1;
             point.setText(String.valueOf(score));
-            tiv.setBackgroundColor(Color.DKGRAY);
+            tile.setBackgroundColor(Color.DKGRAY);
+            cursor = db.rawQuery("Select score from highScore where game_id=1", null);
+            cursor.moveToFirst();
+            hiScore = cursor.getInt(cursor.getColumnIndex("score"));
+            if (score>hiScore){
+                db.execSQL("Update highScore set score="+score+" where game_id=1");
+                cursor = db.rawQuery("Select score from highScore where game_id=1", null);
+                cursor.moveToFirst();
+                hiScore = cursor.getInt(cursor.getColumnIndex("score"));
+                highScore.setText(String.valueOf(hiScore));
+            }
         }
-
 
         if ((drawable.getColor() == Color.WHITE) && (bool)) {
             fouls = fouls - 1;
-            tv.setText(String.valueOf(fouls));
-            tiv.setBackgroundColor(Color.RED);
+            misses.setText(String.valueOf(fouls));
+            tile.setBackgroundColor(Color.RED);
             if (fouls == 0) {
                 handler1.removeCallbacks(task1);
                 startButton.setText("Start");
@@ -94,13 +107,18 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
                                     }
                                 }
                         );
-                AlertDialog alert = looseAlert.create();
                 for (int i = 0; i < 16; i++) {
                     tileArray[i].setBackgroundColor(Color.WHITE);
                 }
+                if (score == hiScore){
+                    looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
+                }
+                AlertDialog alert = looseAlert.create();
                 alert.show();
             }
         }
+
+        delay = (int) (delay * 0.997);
     }
 
     public void onPause() {
@@ -113,13 +131,20 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firstgame);
-        tv = (TextView) findViewById(R.id.timer);
-        tv.setText("20");
+
+        TextView missText = (TextView) findViewById(R.id.missTimeText);
+        missText.setText("MISSES");
+        misses = (TextView) findViewById(R.id.misses);
+        misses.setText("20");
+
         point = (TextView) findViewById(R.id.point);
-        point.setText(String.valueOf(score));
+        point.setText("0");
+
+        highScore = (TextView) findViewById(R.id.highscore);
 
         backToMainMenu = (Button) findViewById(R.id.backToMainMenu);
         backToMainMenu.setOnClickListener(this);
+
         startButton = (Button) findViewById(R.id.startButton);
         startButton.setOnClickListener(this);
 
@@ -172,6 +197,13 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
 
         tileArray[15] = (TextView) findViewById(R.id.tile16);
         tileArray[15].setOnTouchListener(this);
+
+        dbHelper = new DBHelper(this);
+        db = dbHelper.getWritableDatabase();
+        cursor = db.rawQuery("Select score from highScore where game_id=1", null);
+        cursor.moveToFirst();
+        hiScore = cursor.getInt(cursor.getColumnIndexOrThrow("score"));
+        highScore.setText(String.valueOf(hiScore));
     }
 
     @Override
@@ -179,89 +211,72 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
         if (event.getAction() == MotionEvent.ACTION_DOWN) switch (v.getId()) {
 
             case R.id.tile1:
-                stile = (TextView) findViewById(R.id.tile1);
-                upScore(stile);
+                upScore(tileArray[0]);
                 break;
 
             case R.id.tile2:
-                stile = (TextView) findViewById(R.id.tile2);
-                upScore(stile);
+                upScore(tileArray[1]);
                 break;
 
             case R.id.tile3:
-                stile = (TextView) findViewById(R.id.tile3);
-                upScore(stile);
+                upScore(tileArray[2]);
                 break;
 
             case R.id.tile4:
-                stile = (TextView) findViewById(R.id.tile4);
-                upScore(stile);
+                upScore(tileArray[3]);
                 break;
 
             case R.id.tile5:
-                stile = (TextView) findViewById(R.id.tile5);
-                upScore(stile);
+                upScore(tileArray[4]);
                 break;
 
             case R.id.tile6:
-                stile = (TextView) findViewById(R.id.tile6);
-                upScore(stile);
+                upScore(tileArray[5]);
                 break;
 
             case R.id.tile7:
-                stile = (TextView) findViewById(R.id.tile7);
-                upScore(stile);
+                upScore(tileArray[6]);
                 break;
 
             case R.id.tile8:
-                stile = (TextView) findViewById(R.id.tile8);
-                upScore(stile);
+                upScore(tileArray[7]);
                 break;
 
             case R.id.tile9:
-                stile = (TextView) findViewById(R.id.tile9);
-                upScore(stile);
+                upScore(tileArray[8]);
                 break;
 
             case R.id.tile10:
-                stile = (TextView) findViewById(R.id.tile10);
-                upScore(stile);
+                upScore(tileArray[9]);
                 break;
 
             case R.id.tile11:
-                stile = (TextView) findViewById(R.id.tile11);
-                upScore(stile);
+                upScore(tileArray[10]);
                 break;
 
             case R.id.tile12:
-                stile = (TextView) findViewById(R.id.tile12);
-                upScore(stile);
+                upScore(tileArray[11]);
                 break;
 
             case R.id.tile13:
-                stile = (TextView) findViewById(R.id.tile13);
-                upScore(stile);
+                upScore(tileArray[12]);
                 break;
 
             case R.id.tile14:
-                stile = (TextView) findViewById(R.id.tile14);
-                upScore(stile);
+                upScore(tileArray[13]);
                 break;
 
             case R.id.tile15:
-                stile = (TextView) findViewById(R.id.tile15);
-                upScore(stile);
+                upScore(tileArray[14]);
                 break;
 
             case R.id.tile16:
-                stile = (TextView) findViewById(R.id.tile16);
-                upScore(stile);
+                upScore(tileArray[15]);
                 break;
 
 
             default:
                 throw new RuntimeException("error: ");
-
         }
         return false;
     }
@@ -275,9 +290,6 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
                 break;
 
             case R.id.startButton:
-                //startButton tasks
-
-
                 if (startButton.getText().equals("Stop")) {
                     handler1.removeCallbacks(task1);
                     startButton.setText("Start");
@@ -300,7 +312,6 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
                     }
                     alert.show();
                 } else {
-                    startTime = System.currentTimeMillis();
                     handler1.postDelayed(task1, 0);
                     startButton.setText("Stop");
                     score = 0;
@@ -312,8 +323,33 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
 
             default:
                 throw new RuntimeException("error: ");
-
         }
 
+    }
+
+    class DBHelper extends SQLiteOpenHelper {
+
+        public DBHelper(Context context) {
+            // конструктор суперкласса
+            super(context, "OfficeGameDB", null, 1);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            Log.d(LOG_TAG, "--- onCreate database ---");
+            // создаем таблицу с полями
+            db.execSQL("create table highScore ("
+                    + "id integer primary key autoincrement,"
+                    + "game_id integer,"
+                    + "score integer);");
+            db.execSQL("insert into highScore ('game_id','score') values (1,0);");
+            db.execSQL("insert into highScore ('game_id','score') values (2,0);");
+            db.execSQL("insert into highScore ('game_id','score') values (3,0);");
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        }
     }
 }

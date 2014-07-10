@@ -49,9 +49,9 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
             AlertDialog.Builder alertExitDialog = new AlertDialog.Builder(MyActivity.this);
         TextView myMessage = new TextView(this);
-        myMessage.setText("are you sure?");
-        myMessage.setTextSize(30);
-        myMessage.setGravity(Gravity.CENTER);
+        myMessage.setText("\nAre you sure?");
+        myMessage.setTextSize(20);
+        myMessage.setGravity(Gravity.CENTER_HORIZONTAL);
 
 
         alertExitDialog.setTitle("Exit");

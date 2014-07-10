@@ -71,10 +71,10 @@ public class FourthGame extends Activity implements View.OnClickListener, OnTouc
 
     public void upScore(TextView tiv) {
 
-        if (tiles[i].getText.toString() != "") {
+        /*if (tiles[i].getText.toString() != "") {
             String newStringForTiles = tiles[i].getText().toString();
             touchArrayNumber = Integer.parseInt(newStringForTiles);
-        }
+        }*/
         if (touchArrayNumber == maxArrayNumber) {
             score = score + 1;
             pointFourthGame.setText(String.valueOf(score));

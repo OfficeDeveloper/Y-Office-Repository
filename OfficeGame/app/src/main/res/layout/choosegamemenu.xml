@@ -1,63 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ChooseGameMenu"
-    android:padding="5dp">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
+    android:weightSum="1">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="backToMainMenu"
-        android:id="@+id/comeBack"
-        android:background="@drawable/button_custom"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:padding="5dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="56dp"
         android:id="@+id/goToFirstGame"
-        android:background="@drawable/buttonback"
+        android:background="@drawable/button1_pic"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="108dp"
-        android:padding="5dp" />
+        android:layout_marginTop="150dp"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="goTo2game"
+        android:layout_width="250dp"
+        android:layout_height="56dp"
         android:id="@+id/goToSecondGame"
         android:layout_below="@+id/goToFirstGame"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
-        android:background="@drawable/button_custom"
-        android:padding="5dp" />
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button2_pic"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="goTo3game"
-        android:id="@+id/goToThirdGame"
-        android:layout_below="@+id/goToSecondGame"
-        android:layout_alignLeft="@+id/goToSecondGame"
-        android:layout_marginTop="42dp"
-        android:background="@drawable/button_custom"
-        android:padding="5dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="goTo4game"
+        android:layout_width="250dp"
+        android:layout_height="56dp"
         android:id="@+id/goToFourthGame"
         android:layout_below="@+id/goToThirdGame"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="50dp"
         android:singleLine="false"
-        android:background="@drawable/button_custom"
-        android:padding="5dp" />
-</RelativeLayout>
+        android:background="@drawable/button3_pic"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="56dp"
+        android:id="@+id/comeBack"
+        android:background="@drawable/back_pic"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:padding="15dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp" />
+</LinearLayout>
