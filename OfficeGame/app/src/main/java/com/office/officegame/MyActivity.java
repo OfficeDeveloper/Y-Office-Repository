@@ -31,7 +31,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
         if (back_pressed + 2000 > System.currentTimeMillis()) {
 
             super.onBackPressed();
-            player.stop();
+            player.pause();
         }
         else
             Toast.makeText(getBaseContext(), "press again to exit",
@@ -40,14 +40,15 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
     }
 
-    //public void onStop() {                   //stop player when pressed HOME BUTTON
-    //super.onStop();
-   // if(player.isPlaying()) {                //звук вырубается с нажатия ДОМОЙ но и пре переходе на другую активити тоже отрубается
-        //player.stop();
-   //}
-   // else
-          //  return;
-//}
+    protected void onStop() {                   //stop player when pressed HOME BUTTON
+    super.onStop();
+    if(player.isPlaying()) {                //звук вырубается с нажатия ДОМОЙ но и пре переходе на другую активити тоже отрубается
+        player.pause();
+   }
+    else {super.onStart();
+            player.start();}
+            return;
+}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
