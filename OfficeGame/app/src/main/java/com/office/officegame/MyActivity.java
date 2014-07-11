@@ -102,9 +102,9 @@ public class MyActivity extends Activity implements View.OnClickListener {
                         float leftVolume = curVolume/maxVolume;
                         float rightVolume = curVolume/maxVolume;
                         int priority = 1;
-                        int no_loop = -1;
-                        float normal_playback_rate = 1f;
-                        soundPool.play(soundID, leftVolume, rightVolume, priority, no_loop, normal_playback_rate);
+                        int loop = -1; // -1 - cycle, 0 - no cycle
+                        float normal_playback_rate = 1f; // 2f = 2x score, 0,5f = 0.5x score
+                        soundPool.play(soundID, leftVolume, rightVolume, priority, loop, normal_playback_rate);
                         voiceButton.setText("on");
                         Toast.makeText(MyActivity.this,
                                 "sound On",
