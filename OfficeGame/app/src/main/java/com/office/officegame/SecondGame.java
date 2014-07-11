@@ -304,10 +304,13 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
                                         }
                                     }
                             );
-                    AlertDialog alert = looseAlert.create();
                     for (int i = 0; i < 16; i++) {
                         tileArray[i].setBackgroundColor(Color.WHITE);
                     }
+                    if (score == hiScore){
+                        looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
+                    }
+                    AlertDialog alert = looseAlert.create();
                     alert.show();
                 } else {
                     handler1.postDelayed(task1, 0);
