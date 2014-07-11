@@ -142,7 +142,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
 
         highScore = (TextView) findViewById(R.id.highscore);
 
-        backToMainMenu = (Button) findViewById(R.id.backToMainMenu);
+        backToMainMenu = (Button) findViewById(R.id.backToMainMenuSecondGame);
         backToMainMenu.setOnClickListener(this);
 
         startButton = (Button) findViewById(R.id.startButton);
@@ -284,7 +284,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.backToMainMenu:
+            case R.id.backToMainMenuSecondGame:
                 Intent goToChooseMenu = new Intent (FirstGame.this, ChooseGameMenu.class);
                 startActivity(goToChooseMenu);
                 break;
