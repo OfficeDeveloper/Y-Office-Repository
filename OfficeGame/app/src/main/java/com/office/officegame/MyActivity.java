@@ -80,7 +80,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
         alertExitDialog.setView(myMessage);
         alertExitDialog.setPositiveButton("Yea!", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    player.pause();
+                    player.stop();
                     Intent intent = new Intent(Intent.ACTION_MAIN);
                     intent.addCategory(Intent.CATEGORY_HOME);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -92,6 +92,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
         alertExitDialog.setNegativeButton("No!", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
+                    player.start();
 
 
                 }
@@ -118,6 +119,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
                 case R.id.exitButton:
                     alertExitDialog.show();
+                    player.pause();
                     return;
 
                 default:
