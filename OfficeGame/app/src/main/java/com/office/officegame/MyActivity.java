@@ -1,23 +1,17 @@
 package com.office.officegame;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.hardware.Camera;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.HashMap;
+
 
 
 public class MyActivity extends Activity implements View.OnClickListener {
@@ -46,21 +40,22 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
     }
 
-    public void onStop() {                                                                          //stop player when pressed HOME BUTTON
-        super.onStop();
-        if(player.isPlaying()) {
-            player.stop();
-        }
-        else
-            return;
-    }
+    //public void onStop() {                   //stop player when pressed HOME BUTTON
+    //super.onStop();
+   // if(player.isPlaying()) {                //звук вырубается с нажатия ДОМОЙ но и пре переходе на другую активити тоже отрубается
+        //player.stop();
+   //}
+   // else
+          //  return;
+//}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-
+        player = MediaPlayer.create(MyActivity.this, R.raw.guitarsound);
+        player.start();
 
         voiceButton = (Button) findViewById(R.id.voiceButton);
         chooseButton = (Button) findViewById(R.id.chooseButton);
@@ -85,11 +80,12 @@ public class MyActivity extends Activity implements View.OnClickListener {
         alertExitDialog.setView(myMessage);
         alertExitDialog.setPositiveButton("Yea!", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
+                    player.pause();
                     Intent intent = new Intent(Intent.ACTION_MAIN);
                     intent.addCategory(Intent.CATEGORY_HOME);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                    player.stop();
+
                 }
             });
 
@@ -108,14 +104,15 @@ public class MyActivity extends Activity implements View.OnClickListener {
                     break;
 
                 case R.id.voiceButton:
-                    if (voiceButton.getText().equals("off")) {
-                        player = MediaPlayer.create(MyActivity.this, R.raw.guitarsound);
-                        player.start();
-                        voiceButton.setText("on");
-                    }
-                    else  {
+                    if (player.isPlaying()) {
                         voiceButton.setText("off");
                         player.pause();
+
+                    }
+                    else  {
+                        player.start();
+                        voiceButton.setText("on");
+
                     }
                     break;
 
