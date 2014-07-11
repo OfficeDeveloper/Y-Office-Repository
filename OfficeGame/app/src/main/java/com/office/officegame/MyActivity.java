@@ -10,6 +10,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -21,10 +22,8 @@ import java.util.HashMap;
 
 public class MyActivity extends Activity implements View.OnClickListener {
 
-    SoundPool soundPool;
-    HashMap<Integer, Integer> soundPoolMap;
-    int soundID = 1;
 
+    MediaPlayer player;
     Button chooseButton;
     Button exitButton;
     Button voiceButton;
@@ -32,10 +31,13 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
     private static long back_pressed;
 
-    public void onBackPressed() {
+    public void onBackPressed() {                                                                   //exit when pressed double 'back' in main menu
+
 
         if (back_pressed + 2000 > System.currentTimeMillis()) {
+
             super.onBackPressed();
+            player.stop();
         }
         else
             Toast.makeText(getBaseContext(), "press again to exit",
@@ -43,14 +45,22 @@ public class MyActivity extends Activity implements View.OnClickListener {
         back_pressed = System.currentTimeMillis();
 
     }
+
+    public void onStop() {                                                                          //stop player when pressed HOME BUTTON
+        super.onStop();
+        if(player.isPlaying()) {
+            player.stop();
+        }
+        else
+            return;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-        soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
-        soundPoolMap = new HashMap<Integer, Integer>();
-        soundPoolMap.put(soundID, soundPool.load(this, R.raw.piano_test, 1));
+
 
         voiceButton = (Button) findViewById(R.id.voiceButton);
         chooseButton = (Button) findViewById(R.id.chooseButton);
@@ -79,12 +89,15 @@ public class MyActivity extends Activity implements View.OnClickListener {
                     intent.addCategory(Intent.CATEGORY_HOME);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+                    player.stop();
                 }
             });
 
         alertExitDialog.setNegativeButton("No!", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
+
+
                 }
             });
 
@@ -96,29 +109,13 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
                 case R.id.voiceButton:
                     if (voiceButton.getText().equals("off")) {
-                        AudioManager audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-                        float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-                        float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-                        float leftVolume = curVolume/maxVolume;
-                        float rightVolume = curVolume/maxVolume;
-                        int priority = 1;
-                        int loop = -1; // -1 - cycle, 0 - no cycle
-                        float normal_playback_rate = 1f; // 2f = 2x score, 0,5f = 0.5x score
-                        soundPool.play(soundID, leftVolume, rightVolume, priority, loop, normal_playback_rate);
+                        player = MediaPlayer.create(MyActivity.this, R.raw.guitarsound);
+                        player.start();
                         voiceButton.setText("on");
-                        Toast.makeText(MyActivity.this,
-                                "sound On",
-                                Toast.LENGTH_LONG).show();
-
                     }
-
                     else  {
-                        soundPool.pause(soundID);
                         voiceButton.setText("off");
-                        Toast.makeText(MyActivity.this,
-                                "sound Off",
-                                Toast.LENGTH_LONG).show();
-
+                        player.pause();
                     }
                     break;
 

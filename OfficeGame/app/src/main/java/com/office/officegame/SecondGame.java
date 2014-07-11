@@ -283,7 +283,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.backToMainMenu:
-                Intent goToChooseMenu = new Intent(SecondGame.this, ChooseGameMenu.class);
+                Intent goToChooseMenu = new Intent(this, ChooseGameMenu.class);
                 startActivity(goToChooseMenu);
                 break;
 
@@ -292,7 +292,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
                     handler1.removeCallbacks(task1);
                     startButton.setText("Start");
                     bool = false;
-                    AlertDialog.Builder looseAlert = new AlertDialog.Builder(SecondGame.this);
+                    AlertDialog.Builder looseAlert = new AlertDialog.Builder(this);
                     looseAlert.setTitle("GAME OVER")
                             .setMessage("You finished with score: " + score)
                             .setIcon(R.drawable.ic_launcher)
