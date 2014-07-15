@@ -69,4 +69,9 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
         }
 
     }
+
+    public void onBackPressed() {
+        Intent comeBackToMainMenu = new Intent (ChooseGameMenu.this, MyActivity.class);
+        startActivity(comeBackToMainMenu);
+    }
 }
