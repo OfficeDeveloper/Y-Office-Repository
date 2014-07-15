@@ -13,19 +13,19 @@
         android:layout_height="wrap_content"
         android:id="@+id/top"
         android:minHeight="20dp"
-        android:background="#ffdfdfdf"
+        android:background="#ffdba0ff"
         android:baselineAligned="false"
         android:padding="5dp">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="50dp"
             android:padding="3dp"
-            android:background="#ffb5b5b5"
+            android:background="@drawable/top_back"
             android:layout_margin="3dp"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,12 +51,12 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
+            android:layout_height="50dp"
             android:padding="3dp"
-            android:background="#ffb5b5b5"
+            android:background="@drawable/top_back"
             android:layout_margin="3dp"
-            android:layout_gravity="center_vertical|left">
+            android:layout_gravity="center_vertical|left"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,12 +83,12 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
+            android:layout_height="50dp"
             android:padding="3dp"
-            android:background="#ffb5b5b5"
+            android:background="@drawable/top_back"
             android:layout_margin="3dp"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -126,7 +126,7 @@
         android:layout_weight="1"
         android:baselineAligned="false"
         android:divider="#ff000000"
-        android:background="#ffdfdfdf">
+        android:background="#ffdba0ff">
 
         <TextView
             android:layout_width="match_parent"
@@ -191,7 +191,7 @@
         android:layout_above="@+id/backToMainMenuSecondGame"
         android:id="@+id/line2"
         android:layout_weight="1"
-        android:background="#ffdfdfdf">
+        android:background="#ffdba0ff">
 
         <TextView
             android:layout_width="match_parent"
@@ -249,7 +249,7 @@
         android:layout_above="@+id/backToMainMenuSecondGame"
         android:id="@+id/line3"
         android:layout_weight="1"
-        android:background="#ffdfdfdf">
+        android:background="#ffdba0ff">
 
         <TextView
             android:layout_width="match_parent"
@@ -306,7 +306,7 @@
         android:layout_above="@+id/backToMainMenuSecondGame"
         android:id="@+id/line4"
         android:layout_weight="1"
-        android:background="#ffdfdfdf">
+        android:background="#ffdba0ff">
 
         <TextView
             android:layout_width="match_parent"
@@ -363,20 +363,19 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottom"
-        android:background="#ffdfdfdf"
+        android:background="#ffdcaaff"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:paddingRight="90dp"
         android:paddingLeft="90dp">
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Start"
+            android:layout_width="150dp"
+            android:layout_height="48dp"
             android:id="@+id/startButton"
-            android:background="@drawable/button_custom"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal" />
+            android:background="@drawable/start_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1" />
 
     </LinearLayout>
 

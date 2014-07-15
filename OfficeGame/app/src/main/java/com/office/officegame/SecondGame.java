@@ -68,6 +68,12 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         }
     }
 
+    public void whiteArray(){
+        for (int i = 0; i < 16; i++) {
+            tileArray[i].setBackgroundColor(Color.WHITE);
+        }
+    }
+
     public void showScore(){
         AlertDialog.Builder looseAlert = new AlertDialog.Builder(SecondGame.this);
         looseAlert.setTitle("GAME OVER")
@@ -81,12 +87,10 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
                             }
                         }
                 );
-        for (int i = 0; i < 16; i++) {
-            tileArray[i].setBackgroundColor(Color.WHITE);
-        }
         if (score == hiScore){
             looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
         }
+        whiteArray();
         AlertDialog alert = looseAlert.create();
         alert.show();
     }
@@ -123,11 +127,13 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     }
 
     public void onPause() {
+        bool = false;
+        whiteArray();
+        if(score != 0) showScore();
         super.onPause();
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
-        b.setText("Start");
-        showScore();
+        b.setBackgroundResource(R.drawable.start_button);
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -284,14 +290,14 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.startButton:
-                if (startButton.getText().equals("Stop")) {
+                if (bool) {
                     handler1.removeCallbacks(task1);
-                    startButton.setText("Start");
+                    startButton.setBackgroundResource(R.drawable.start_button);
                     bool = false;
                     showScore();
                 } else {
                     handler1.postDelayed(task1, 0);
-                    startButton.setText("Stop");
+                    startButton.setBackgroundResource(R.drawable.stop_button);
                     score = 0;
                     bool = true;
                     delay = 500;
@@ -308,6 +314,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     public void onBackPressed() {
         Intent goToChooseMenu = new Intent(this, ChooseGameMenu.class);
         startActivity(goToChooseMenu);
+        super.finishActivity(0);
     }
 
     class DBHelper extends SQLiteOpenHelper {
