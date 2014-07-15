@@ -25,7 +25,6 @@ import android.widget.TextView;
 
 public class SecondGame extends Activity implements View.OnClickListener, View.OnTouchListener {
 
-    private Button backToMainMenu;
     private Button startButton;
 
     private TextView misses;
@@ -69,6 +68,29 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         }
     }
 
+    public void showScore(){
+        AlertDialog.Builder looseAlert = new AlertDialog.Builder(SecondGame.this);
+        looseAlert.setTitle("GAME OVER")
+                .setMessage("You finished with score: " + score)
+                .setIcon(R.drawable.ic_launcher)
+                .setCancelable(false)
+                .setNegativeButton("Okay!",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        }
+                );
+        for (int i = 0; i < 16; i++) {
+            tileArray[i].setBackgroundColor(Color.WHITE);
+        }
+        if (score == hiScore){
+            looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
+        }
+        AlertDialog alert = looseAlert.create();
+        alert.show();
+    }
+
     public void upScore(TextView tile) {
         ColorDrawable drawable = (ColorDrawable) tile.getBackground();
         if ((drawable.getColor() == Color.BLACK) && (bool)) {
@@ -95,26 +117,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
                 handler1.removeCallbacks(task1);
                 startButton.setText("Start");
                 bool = false;
-                AlertDialog.Builder looseAlert = new AlertDialog.Builder(SecondGame.this);
-                looseAlert.setTitle("GAME OVER")
-                        .setMessage("You finished with score: " + score)
-                        .setIcon(R.drawable.ic_launcher)
-                        .setCancelable(false)
-                        .setNegativeButton("Okay!",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                }
-                        );
-                for (int i = 0; i < 16; i++) {
-                    tileArray[i].setBackgroundColor(Color.WHITE);
-                }
-                if (score == hiScore) {
-                    looseAlert.setMessage("You finished with score: " + score + "\nThis is your new high score!");
-                }
-                AlertDialog alert = looseAlert.create();
-                alert.show();
+                showScore();
             }
         }
     }
@@ -124,6 +127,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setText("Start");
+        showScore();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,9 +143,6 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         point.setText("0");
 
         highScore = (TextView) findViewById(R.id.highscore);
-
-        backToMainMenu = (Button) findViewById(R.id.backToMainMenu);
-        backToMainMenu.setOnClickListener(this);
 
         startButton = (Button) findViewById(R.id.startButton);
         startButton.setOnClickListener(this);
@@ -282,36 +283,12 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.backToMainMenu:
-                Intent goToChooseMenu = new Intent(this, ChooseGameMenu.class);
-                startActivity(goToChooseMenu);
-                break;
-
             case R.id.startButton:
                 if (startButton.getText().equals("Stop")) {
                     handler1.removeCallbacks(task1);
                     startButton.setText("Start");
                     bool = false;
-                    AlertDialog.Builder looseAlert = new AlertDialog.Builder(this);
-                    looseAlert.setTitle("GAME OVER")
-                            .setMessage("You finished with score: " + score)
-                            .setIcon(R.drawable.ic_launcher)
-                            .setCancelable(false)
-                            .setNegativeButton("Okay!",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    }
-                            );
-                    for (int i = 0; i < 16; i++) {
-                        tileArray[i].setBackgroundColor(Color.WHITE);
-                    }
-                    if (score == hiScore){
-                        looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
-                    }
-                    AlertDialog alert = looseAlert.create();
-                    alert.show();
+                    showScore();
                 } else {
                     handler1.postDelayed(task1, 0);
                     startButton.setText("Stop");
@@ -326,6 +303,11 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
                 throw new RuntimeException("error: ");
         }
 
+    }
+
+    public void onBackPressed() {
+        Intent goToChooseMenu = new Intent(this, ChooseGameMenu.class);
+        startActivity(goToChooseMenu);
     }
 
     class DBHelper extends SQLiteOpenHelper {
