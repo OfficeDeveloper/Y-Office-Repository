@@ -36,6 +36,8 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     private int delay;
     private int fouls;
     private int hiScore;
+    private int time;
+    private int t=0;
 
     private boolean bool = false;
 
@@ -49,11 +51,16 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     private Runnable task1 = new Runnable() {
         @Override
         public void run() {
-            point.setText(String.valueOf(score));
-            misses.setText(String.valueOf(fouls+"/30"));
             changeColor(tileArray);
-            handler1.postDelayed(this, delay);
 
+            t++;
+            if (t==2) {
+                time--;
+                t = 0;
+            }
+
+            handler1.postDelayed(this, delay);
+            checkScoreAndTime();
         }
     };
 
@@ -115,14 +122,19 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
 
         if ((drawable.getColor() == Color.WHITE) && (bool)) {
             fouls = fouls - 1;
-            misses.setText(String.valueOf(fouls)+"/30");
+            misses.setText(String.valueOf(fouls+"/"+time));
             tile.setBackgroundColor(Color.RED);
-            if (fouls == 0) {
-                handler1.removeCallbacks(task1);
-                startButton.setText("Start");
-                bool = false;
-                showScore();
-            }
+        }
+    }
+
+    public void checkScoreAndTime(){
+        point.setText(String.valueOf(score));
+        misses.setText(String.valueOf(fouls+"/"+time));
+        if ( (fouls == 0) || (time == 0) ) {
+            handler1.removeCallbacks(task1);
+            startButton.setBackgroundResource(R.drawable.start_button);
+            bool = false;
+            showScore();
         }
     }
 
@@ -302,6 +314,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
                     bool = true;
                     delay = 500;
                     fouls = 20;
+                    time = 30;
                 }
                 break;
 

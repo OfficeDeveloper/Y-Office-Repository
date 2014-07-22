@@ -119,7 +119,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
             tile.setBackgroundColor(Color.RED);
             if (fouls == 0) {
                 handler1.removeCallbacks(task1);
-                startButton.setText("Start");
+                startButton.setBackgroundResource(R.drawable.start_button);
                 bool = false;
                 showScore();
             }

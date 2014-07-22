@@ -5,6 +5,6 @@
                 android:state_pressed="true" />
             <item android:drawable="@drawable/clicked_button_style"
                 android:state_focused="true" />
-            <item android:drawable="@drawable/button_style" />
+            <item android:drawable="@drawable/tile" />
 
 </selector>
