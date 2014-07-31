@@ -221,6 +221,33 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         cursor.moveToFirst();
         hiScore = cursor.getInt(cursor.getColumnIndexOrThrow("score"));
         highScore.setText(String.valueOf(hiScore));
+        onShow();
+    }
+
+
+    public void onShow(){
+        AlertDialog.Builder looseAlert = new AlertDialog.Builder(SecondGame.this);
+        looseAlert.setTitle("Time Sprint Rules")
+                .setMessage("Time sprint rules go here")
+                .setIcon(R.drawable.ic_launcher)
+                .setCancelable(false)
+                .setNegativeButton("Start",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                handler1.postDelayed(task1, delay);
+                                startButton.setBackgroundResource(R.drawable.stop_button);
+                                score = 0;
+                                bool = true;
+                                delay = 500;
+                                fouls = 20;
+                                time = 30;
+                            }
+                        }
+                );
+        whiteArray();
+        AlertDialog alert = looseAlert.create();
+        alert.show();
     }
 
     @Override
