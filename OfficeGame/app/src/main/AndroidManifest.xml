@@ -33,21 +33,19 @@
 
         <activity
             android:name=".FirstGame"
-            android:label="FirstGame">
+            android:label="Arcade">
 
         </activity>
 
         <activity
-            android:name=".FourthGame"
-            android:label="MemoryGame">
+            android:name=".ThirdGame"
+            android:label="Time Attack">
         </activity>
-        <activity android:name=".SecondGame"
-            android:label="secondgame">
 
-            </activity>
-
-
-
+        <activity
+            android:name=".SecondGame"
+            android:label="Time Sprint">
+        </activity>
 
     </application>
 

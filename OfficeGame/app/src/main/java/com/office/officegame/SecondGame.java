@@ -47,6 +47,9 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     private SQLiteDatabase db;
     private Cursor cursor;
 
+    private String mode = "Time sprint";
+    private String rules = "Time sprint mode. In this game you should hit as much black tiles as you can. But you can miss only 20 times and you have only 30 seconds. Good luck!";
+
     private Handler handler1 = new Handler();
     private Runnable task1 = new Runnable() {
         @Override
@@ -227,8 +230,8 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
 
     public void onShow(){
         AlertDialog.Builder looseAlert = new AlertDialog.Builder(SecondGame.this);
-        looseAlert.setTitle("Time Sprint Rules")
-                .setMessage("Time sprint rules go here")
+        looseAlert.setTitle(mode)
+                .setMessage(rules)
                 .setIcon(R.drawable.ic_launcher)
                 .setCancelable(false)
                 .setNegativeButton("Start",

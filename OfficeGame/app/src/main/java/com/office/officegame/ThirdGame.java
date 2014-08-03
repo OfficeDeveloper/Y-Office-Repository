@@ -23,19 +23,20 @@ import android.widget.TextView;
  * @author Gavlovich Maksim (reverff@gmail.com)
  * 2014(c)
  */
-public class FirstGame extends Activity implements View.OnClickListener, OnTouchListener {
+public class ThirdGame extends Activity implements View.OnClickListener, OnTouchListener {
 
     private Button startButton;
 
-    private TextView misses;
+    private TextView timer;
     private TextView point;
     private TextView tileArray[];
     private TextView highScore;
 
     private int score;
     private int delay;
-    private int fouls;
+    private int time;
     private int hiScore;
+    private int t;
 
     private boolean bool = false;
 
@@ -45,18 +46,29 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
     private SQLiteDatabase db;
     private Cursor cursor;
 
-    private String mode = "Arcade";
-    private String rules = "Arcade mode. In this game you should hit as much black tiles as you can. But you can miss only 20 times. Every time when you will shout tiles will change faster. Good luck!";
+    private String mode = "Time attack";
+    private String rules = "Time attack mode. In this game you should hit as much black tiles as you can. But you have only 5 seconds at begin. Every time when you hit time will increase +1 second, if you will miss then -1 second. Good luck!";
 
     private Handler handler1 = new Handler();
     private Runnable task1 = new Runnable() {
         @Override
         public void run() {
             point.setText(String.valueOf(score));
-            misses.setText(String.valueOf(fouls));
+            timer.setText(String.valueOf(time));
             changeColor(tileArray);
+            t++;
+            if (t==2) {
+                time--;
+                t = 0;
+            }
             handler1.postDelayed(this, delay);
-
+            if ( time == 0 ) {
+                timer.setText(String.valueOf(time));
+                handler1.removeCallbacks(task1);
+                startButton.setBackgroundResource(R.drawable.start_button);
+                bool = false;
+                showScore();
+            }
         }
     };
 
@@ -65,7 +77,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
             tiles[i].setBackgroundColor(Color.WHITE);
         }
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 7; i++) {
             int k = (int) (Math.random() * 16);
             tiles[k].setBackgroundColor(Color.BLACK);
         }
@@ -78,7 +90,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
     }
 
     public void showScore(){
-        AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
+        AlertDialog.Builder looseAlert = new AlertDialog.Builder(ThirdGame.this);
         looseAlert.setTitle("GAME OVER")
                 .setMessage("You finished with score: " + score)
                 .setIcon(R.drawable.ic_launcher)
@@ -102,14 +114,16 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
         ColorDrawable drawable = (ColorDrawable) tile.getBackground();
         if ((drawable.getColor() == Color.BLACK) && (bool)) {
             score = score + 1;
+            time = time + 1;
+            timer.setText(String.valueOf(time));
             point.setText(String.valueOf(score));
             tile.setBackgroundColor(Color.DKGRAY);
-            cursor = db.rawQuery("Select score from highScore where game_id=1", null);
+            cursor = db.rawQuery("Select score from highScore where game_id=3", null);
             cursor.moveToFirst();
             hiScore = cursor.getInt(cursor.getColumnIndex("score"));
             if (score>hiScore){
-                db.execSQL("Update highScore set score="+score+" where game_id=1");
-                cursor = db.rawQuery("Select score from highScore where game_id=1", null);
+                db.execSQL("Update highScore set score="+score+" where game_id=3");
+                cursor = db.rawQuery("Select score from highScore where game_id=3", null);
                 cursor.moveToFirst();
                 hiScore = cursor.getInt(cursor.getColumnIndex("score"));
                 highScore.setText(String.valueOf(hiScore));
@@ -117,18 +131,16 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
         }
 
         if ((drawable.getColor() == Color.WHITE) && (bool)) {
-            fouls = fouls - 1;
-            misses.setText(String.valueOf(fouls));
+            time = time - 1;
+            timer.setText(String.valueOf(time));
             tile.setBackgroundColor(Color.RED);
-            if (fouls == 0) {
+            if (time == 0) {
                 handler1.removeCallbacks(task1);
                 startButton.setBackgroundResource(R.drawable.start_button);
                 bool = false;
                 showScore();
             }
         }
-
-        delay = (int) (delay * 0.997);
     }
 
     public void onPause() {
@@ -146,9 +158,9 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
         setContentView(R.layout.firstgame);
 
         TextView missText = (TextView) findViewById(R.id.missTimeText);
-        missText.setText("MISSES");
-        misses = (TextView) findViewById(R.id.misses);
-        misses.setText("20");
+        missText.setText("TIME");
+        timer = (TextView) findViewById(R.id.misses);
+        timer.setText("5");
 
         point = (TextView) findViewById(R.id.point);
         point.setText("0");
@@ -210,7 +222,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
 
         dbHelper = new DBHelper(this);
         db = dbHelper.getWritableDatabase();
-        cursor = db.rawQuery("Select score from highScore where game_id=1", null);
+        cursor = db.rawQuery("Select score from highScore where game_id=3", null);
         cursor.moveToFirst();
         hiScore = cursor.getInt(cursor.getColumnIndexOrThrow("score"));
         highScore.setText(String.valueOf(hiScore));
@@ -218,7 +230,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
     }
 
     public void onShow(){
-        AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
+        AlertDialog.Builder looseAlert = new AlertDialog.Builder(ThirdGame.this);
         looseAlert.setTitle(mode)
                 .setMessage(rules)
                 .setIcon(R.drawable.ic_launcher)
@@ -232,7 +244,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
                                 score = 0;
                                 bool = true;
                                 delay = 500;
-                                fouls = 20;
+                                time = 5;
                             }
                         }
                 );
@@ -330,8 +342,8 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
                     startButton.setBackgroundResource(R.drawable.stop_button);
                     score = 0;
                     bool = true;
-                    delay = 700;
-                    fouls = 20;
+                    delay = 500;
+                    time = 5;
                 }
                 break;
 

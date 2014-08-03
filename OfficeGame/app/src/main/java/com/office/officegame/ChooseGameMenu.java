@@ -7,15 +7,14 @@ import android.view.View;
 import android.widget.Button;
 
 /**
- * Created by Андрей on 02.07.2014 at 4:10.
- * Паскудатварь
+ * @author Gavlovich Maksim (reverff@gmail.com)
+ * 2014(c)
  */
 public class ChooseGameMenu extends Activity implements View.OnClickListener {
 
     Button goToFirstGame;
     Button goToSecondGame;
-    //Button goToThirdGame;
-    Button goToFourthGame;
+    Button goToThirdGame;
     Button comeBack;
 
 
@@ -26,16 +25,13 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
 
         goToFirstGame = (Button) findViewById(R.id.goToFirstGame);
         goToSecondGame = (Button) findViewById(R.id.goToSecondGame);
-        //goToThirdGame = (Button) findViewById(R.id.goToThirdGame);
-        goToFourthGame = (Button) findViewById(R.id.goToFourthGame);
+        goToThirdGame = (Button) findViewById(R.id.goToThirdGame);
         comeBack = (Button) findViewById(R.id.comeBack);
 
-       goToFirstGame.setOnClickListener(this);
-       goToSecondGame.setOnClickListener(this);
- //       goToThirdGame.setOnClickListener(this);
-        goToFourthGame.setOnClickListener(this);
+        goToFirstGame.setOnClickListener(this);
+        goToSecondGame.setOnClickListener(this);
+        goToThirdGame.setOnClickListener(this);
         comeBack.setOnClickListener(this);
-        //паскудатварь
     }
 
     @Override
@@ -53,9 +49,9 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
                 startActivity(beginSecondGame);
                 break;
 
-            case R.id.goToFourthGame:
-                Intent beginFourthGame = new Intent(ChooseGameMenu.this, FourthGame.class);
-                startActivity(beginFourthGame);
+            case R.id.goToThirdGame:
+                Intent beginThirdGame = new Intent(ChooseGameMenu.this, ThirdGame.class);
+                startActivity(beginThirdGame);
                 break;
 
             case R.id.comeBack:
