@@ -51,7 +51,6 @@ public class MyActivity extends Activity implements View.OnClickListener {
    }
     else {super.onStart();
             player.start();}
-            return;
 }
 
     @Override
