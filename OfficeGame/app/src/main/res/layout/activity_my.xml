@@ -28,14 +28,4 @@
         android:layout_alignLeft="@+id/chooseButton"
         android:layout_marginBottom="121dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="on"
-        android:id="@+id/voiceButton"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/chooseButton"
-        android:layout_alignEnd="@+id/chooseButton"
-        android:layout_marginTop="68dp" />
-
 </RelativeLayout>
