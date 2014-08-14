@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 /**
  * @author Gavlovich Maksim (reverff@gmail.com)
  * 2014(c)
  */
 public class ChooseGameMenu extends Activity implements View.OnClickListener {
+
+
 
     Button goToFirstGame;
     Button goToSecondGame;

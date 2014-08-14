@@ -3,7 +3,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -17,10 +16,10 @@ import android.widget.Toast;
 public class MyActivity extends Activity implements View.OnClickListener {
 
 
-    MediaPlayer player;
-    Button chooseButton;
-    Button exitButton;
-    Button voiceButton;
+
+    private Button chooseButton;
+    private Button exitButton;
+
 
 
     private static long back_pressed;
@@ -31,7 +30,6 @@ public class MyActivity extends Activity implements View.OnClickListener {
         if (back_pressed + 2000 > System.currentTimeMillis()) {
 
             super.onBackPressed();
-            player.pause();
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -44,28 +42,17 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
     }
 
-    protected void onStop() {                   //stop player when pressed HOME BUTTON
-    super.onStop();
-    if(player.isPlaying()) {                //звук вырубается с нажатия ДОМОЙ но и пре переходе на другую активити тоже отрубается
-        player.pause();
-   }
-    else {super.onStart();
-            player.start();}
-}
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-        player = MediaPlayer.create(MyActivity.this, R.raw.guitarsound);
-        player.start();
-
-        voiceButton = (Button) findViewById(R.id.voiceButton);
         chooseButton = (Button) findViewById(R.id.chooseButton);
         exitButton = (Button) findViewById(R.id.exitButton);
 
-        voiceButton.setOnClickListener(this);
+
         chooseButton.setOnClickListener(this);
         exitButton.setOnClickListener(this);
     }
@@ -84,7 +71,6 @@ public class MyActivity extends Activity implements View.OnClickListener {
         alertExitDialog.setView(myMessage);
         alertExitDialog.setPositiveButton("Yea!", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    player.stop();
                     Intent intent = new Intent(Intent.ACTION_MAIN);
                     intent.addCategory(Intent.CATEGORY_HOME);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -96,7 +82,6 @@ public class MyActivity extends Activity implements View.OnClickListener {
         alertExitDialog.setNegativeButton("No!", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
-                    player.start();
 
 
                 }
@@ -108,22 +93,8 @@ public class MyActivity extends Activity implements View.OnClickListener {
                     startActivity(intent);
                     break;
 
-                case R.id.voiceButton:
-                    if (player.isPlaying()) {
-                        voiceButton.setText("off");
-                        player.pause();
-
-                    }
-                    else  {
-                        player.start();
-                        voiceButton.setText("on");
-
-                    }
-                    break;
-
                 case R.id.exitButton:
                     alertExitDialog.show();
-                    player.pause();
                     return;
 
                 default:
