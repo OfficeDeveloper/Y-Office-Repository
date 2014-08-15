@@ -28,4 +28,13 @@
         android:layout_alignLeft="@+id/chooseButton"
         android:layout_marginBottom="121dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="settings"
+        android:id="@+id/settingsButton"
+        android:layout_above="@+id/chooseButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="54dp" />
+
 </RelativeLayout>

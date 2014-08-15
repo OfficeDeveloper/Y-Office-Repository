@@ -30,6 +30,11 @@
             android:label="ChooseGameMenu">
 
             </activity>
+        <activity
+            android:name=".SettingsMenu"
+            android:label="SettingsMenu">
+
+        </activity>
 
         <activity
             android:name=".FirstGame"

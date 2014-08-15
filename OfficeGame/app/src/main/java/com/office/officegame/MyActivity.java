@@ -16,14 +16,15 @@ import android.widget.Toast;
 public class MyActivity extends Activity implements View.OnClickListener {
 
 
-    private  Button   chooseButton;
-    private  Button   exitButton;
+    private Button  chooseButton;
+    private Button  exitButton;
+    private Button  settingsButton;
 
 
 
     private static long back_pressed;
 
-    public void onBackPressed() {                                                                   //exit when pressed double 'back' in main menu
+    public void onBackPressed() {        //exit when pressed double 'back' in main menu
 
 
         if (back_pressed + 2000 > System.currentTimeMillis()) {
@@ -48,9 +49,11 @@ public class MyActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
+        settingsButton = (Button) findViewById(R.id.settingsButton);
         chooseButton = (Button) findViewById(R.id.chooseButton);
         exitButton = (Button) findViewById(R.id.exitButton);
 
+        settingsButton.setOnClickListener(this);
         chooseButton.setOnClickListener(this);
         exitButton.setOnClickListener(this);
     }
@@ -97,8 +100,13 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
             switch (first.getId()) {
                 case R.id.chooseButton:
-                    Intent intent = new Intent(MyActivity.this, ChooseGameMenu.class);
-                    startActivity(intent);
+                    Intent goToChooseGameMenu = new Intent(MyActivity.this, ChooseGameMenu.class);
+                    startActivity(goToChooseGameMenu);
+                    break;
+
+                case R.id.settingsButton:
+                    Intent goToSettings = new Intent(MyActivity.this, SettingsMenu.class);
+                    startActivity(goToSettings);
                     break;
 
                 case R.id.exitButton:
