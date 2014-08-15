@@ -9,6 +9,7 @@ import android.widget.Button;
 
 /**
  * @author Gavlovich Maksim (reverff@gmail.com)
+ * @author Yakubenko Andrii (ayakubenko92@gmail.com)
  * 2014(c)
  */
 public class ChooseGameMenu extends Activity implements View.OnClickListener {
@@ -35,6 +36,10 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
         goToSecondGame.setOnClickListener(this);
         goToThirdGame.setOnClickListener(this);
         comeBack.setOnClickListener(this);
+    }
+    protected void onResume() {
+        super.onResume();
+        Music.play(this, R.raw.main);
     }
 
     @Override

@@ -10,6 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -21,11 +23,18 @@ import android.widget.TextView;
 
 /**
  * @author Gavlovich Maksim (reverff@gmail.com)
+ * @author Yakubenko Andrii
  * 2014(c)
  */
 public class ThirdGame extends Activity implements View.OnClickListener, OnTouchListener {
 
     private Button startButton;
+
+    private SoundPool sPool;
+    private int popTileTouchSound;          //sound pop on touch tile
+    private int wrongTileTouchSound;        //wrong voice on wrong touch tile
+    private int congratulationEndGameSound; //congratulation sound when game over
+
 
     private TextView timer;
     private TextView point;
@@ -107,12 +116,14 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         }
         whiteArray();
         AlertDialog alert = looseAlert.create();
+        sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
         alert.show();
     }
 
     public void upScore(TextView tile) {
         ColorDrawable drawable = (ColorDrawable) tile.getBackground();
         if ((drawable.getColor() == Color.BLACK) && (bool)) {
+            sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
             score = score + 1;
             time = time + 1;
             timer.setText(String.valueOf(time));
@@ -131,6 +142,7 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         }
 
         if ((drawable.getColor() == Color.WHITE) && (bool)) {
+            sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
             time = time - 1;
             timer.setText(String.valueOf(time));
             tile.setBackgroundColor(Color.RED);
@@ -156,6 +168,11 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firstgame);
+
+        sPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
+        popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
+        wrongTileTouchSound = sPool.load(this, R.raw.wrong, 1);
+        congratulationEndGameSound = sPool.load(this, R.raw.smallcrowd, 1);
 
         TextView missText = (TextView) findViewById(R.id.missTimeText);
         missText.setText("TIME");

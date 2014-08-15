@@ -16,9 +16,8 @@ import android.widget.Toast;
 public class MyActivity extends Activity implements View.OnClickListener {
 
 
-
-    private Button chooseButton;
-    private Button exitButton;
+    private  Button   chooseButton;
+    private  Button   exitButton;
 
 
 
@@ -52,10 +51,19 @@ public class MyActivity extends Activity implements View.OnClickListener {
         chooseButton = (Button) findViewById(R.id.chooseButton);
         exitButton = (Button) findViewById(R.id.exitButton);
 
-
         chooseButton.setOnClickListener(this);
         exitButton.setOnClickListener(this);
     }
+        protected void onResume() {
+            super.onResume();
+            Music.play(this, R.raw.main);
+        }
+
+        protected void onPause() {
+            super.onPause();
+            Music.stop(this);
+        }
+
 
 
     public void onClick(View first) {

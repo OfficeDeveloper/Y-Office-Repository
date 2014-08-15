@@ -23,18 +23,19 @@ import android.widget.TextView;
 
 /**
  * @author Gavlovich Maksim (reverff@gmail.com)
+ * @author Yakubenko Andrii (ayakubenko92@gmail.com)
  * 2014(c)
  */
-public class Firstgame extends Activity implements View.OnClickListener, OnTouchListener {
+public class FirstGame extends Activity implements View.OnClickListener, OnTouchListener {
 
     private Button startButton;
 
 
     private SoundPool sPool;
-    private int soundPop; //звук касания плитки (правильный)
-    private int soundWrong; //звук ошибочных касаний плиток
-    private int soundCongratulation; //звук поздравления
-    private int soundBoo; //звук недовольства
+    private int popTileTouchSound;          //sound pop on touch tile
+    private int wrongTileTouchSound;        //wrong voice on wrong touch tile
+    private int congratulationEndGameSound; //congratulation sound when result >=35
+    private int booEndGameSound;            //boo voice when result <35
 
     private TextView misses;
     private TextView point;
@@ -89,8 +90,8 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
     public void showScore(){
         AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
 
-        if (score >= 15) {   //если игра заканчивается со счетом >= заданому - апплодисменты
-            sPool.play(soundCongratulation, 1, 1, 1, 0, 1f);
+        if (score >= 35) {   //if game over with result >=35 - play sound congratulation
+            sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
             looseAlert.setTitle("GAME OVER")
                 .setMessage("You finished with score: " + score)
                 .setIcon(R.drawable.ic_launcher)
@@ -106,8 +107,8 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
             looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
             }
         }
-            else {           //если игра заканчивается со счетом <= заданому в if выше - недовольство
-            sPool.play(soundBoo, 1, 1, 1, 0, 1f);
+            else {           //if game over with result <35 - play sound Boo
+            sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
             looseAlert.setTitle("GAME OVER")
                     .setMessage("You finished with score: " + score)
                     .setIcon(R.drawable.ic_launcher)
@@ -131,9 +132,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
     public void upScore(TextView tile) {
         ColorDrawable drawable = (ColorDrawable) tile.getBackground();
         if ((drawable.getColor() == Color.BLACK) && (bool)) {
-
-            sPool.play(soundPop, 1, 1, 1, 0, 1f);
-
+            sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
             score = score + 1;
             point.setText(String.valueOf(score));
             tile.setBackgroundColor(Color.DKGRAY);
@@ -150,9 +149,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         }
 
         if ((drawable.getColor() == Color.WHITE) && (bool)) {
-
-            sPool.play(soundWrong, 1, 1, 1, 0, 1f);
-
+            sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
             fouls = fouls - 1;
             misses.setText(String.valueOf(fouls));
             tile.setBackgroundColor(Color.RED);
@@ -182,10 +179,10 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         setContentView(R.layout.firstgame);
 
         sPool = new SoundPool(4,AudioManager.STREAM_MUSIC, 0);
-        soundPop = sPool.load(this, R.raw.poptile, 1);
-        soundWrong = sPool.load(this, R.raw.wrong, 1);
-        soundCongratulation = sPool.load(this, R.raw.smallcrowd, 1);
-        soundBoo = sPool.load(this, R.raw.crowdboo, 1);
+        popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
+        wrongTileTouchSound = sPool.load(this, R.raw.wrong, 1);
+        congratulationEndGameSound = sPool.load(this, R.raw.smallcrowd, 1);
+        booEndGameSound = sPool.load(this, R.raw.crowdboo, 1);
 
         TextView missText = (TextView) findViewById(R.id.missTimeText);
         missText.setText("MISSES");
@@ -257,7 +254,11 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         hiScore = cursor.getInt(cursor.getColumnIndexOrThrow("score"));
         highScore.setText(String.valueOf(hiScore));
         onShow();
+
     }
+
+
+
 
     public void onShow(){
         AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
@@ -282,6 +283,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         AlertDialog alert = looseAlert.create();
         alert.show();
     }
+
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
