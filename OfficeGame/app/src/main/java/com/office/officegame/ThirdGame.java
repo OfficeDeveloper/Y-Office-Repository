@@ -160,6 +160,7 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         whiteArray();
         if(score != 0) showScore();
         super.onPause();
+        Music.stop(this);
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setBackgroundResource(R.drawable.start_button);

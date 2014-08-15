@@ -161,7 +161,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
             }
         }
 
-        delay = (int) (delay * 0.997);
+        delay = (int) (delay * 0.998);
     }
 
     public void onPause() {
@@ -169,6 +169,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
         whiteArray();
         if(score != 0) showScore();
         super.onPause();
+        Music.stop(this);
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setBackgroundResource(R.drawable.start_button);

@@ -56,7 +56,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
     }
         protected void onResume() {
             super.onResume();
-            Music.play(this, R.raw.main);
+            Music.play(this, R.raw.guitarmainfon);
         }
 
         protected void onPause() {
