@@ -183,6 +183,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
 
         startButton = (Button) findViewById(R.id.startButton);
         startButton.setOnClickListener(this);
+        startButton.setVisibility(View.INVISIBLE);
 
         tileArray = new TextView[16];
 
@@ -256,6 +257,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
                                 dialog.cancel();
                                 handler1.postDelayed(task1, delay);
                                 startButton.setBackgroundResource(R.drawable.stop_button);
+                                startButton.setVisibility(View.VISIBLE);
                                 score = 0;
                                 bool = true;
                                 delay = 500;
