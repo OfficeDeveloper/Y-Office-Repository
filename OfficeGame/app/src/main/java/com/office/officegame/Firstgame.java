@@ -26,10 +26,9 @@ import android.widget.TextView;
  * @author Yakubenko Andrii (ayakubenko92@gmail.com)
  * 2014(c)
  */
-public class FirstGame extends Activity implements View.OnClickListener, OnTouchListener {
+public class Firstgame extends Activity implements View.OnClickListener, OnTouchListener {
 
     private Button startButton;
-
 
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
@@ -42,6 +41,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
     private TextView tileArray[];
     private TextView highScore;
 
+    private int tileArrayNumber;
     private int score;
     private int delay;
     private int fouls;
@@ -88,7 +88,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
     }
 
     public void showScore(){
-        AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
+        AlertDialog.Builder looseAlert = new AlertDialog.Builder(Firstgame.this);
 
         if (score >= 35) {   //if game over with result >=35 - play sound congratulation
             sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
@@ -168,7 +168,6 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
         bool = false;
         whiteArray();
         super.onPause();
-        Music.stop(this);
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setBackgroundResource(R.drawable.start_button);
@@ -200,53 +199,27 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
 
         tileArray = new TextView[16];
 
-        tileArray[0] = (TextView) findViewById(R.id.tile1);
-        tileArray[0].setOnTouchListener(this);
-
-        tileArray[1] = (TextView) findViewById(R.id.tile2);
-        tileArray[1].setOnTouchListener(this);
-
-        tileArray[2] = (TextView) findViewById(R.id.tile3);
-        tileArray[2].setOnTouchListener(this);
-
-        tileArray[3] = (TextView) findViewById(R.id.tile4);
-        tileArray[3].setOnTouchListener(this);
-
-        tileArray[4] = (TextView) findViewById(R.id.tile5);
-        tileArray[4].setOnTouchListener(this);
-
-        tileArray[5] = (TextView) findViewById(R.id.tile6);
-        tileArray[5].setOnTouchListener(this);
-
-        tileArray[6] = (TextView) findViewById(R.id.tile7);
-        tileArray[6].setOnTouchListener(this);
-
-        tileArray[7] = (TextView) findViewById(R.id.tile8);
-        tileArray[7].setOnTouchListener(this);
-
-        tileArray[8] = (TextView) findViewById(R.id.tile9);
-        tileArray[8].setOnTouchListener(this);
-
-        tileArray[9] = (TextView) findViewById(R.id.tile10);
-        tileArray[9].setOnTouchListener(this);
-
+        tileArray[0]  = (TextView) findViewById(R.id.tile1);
+        tileArray[1]  = (TextView) findViewById(R.id.tile2);
+        tileArray[2]  = (TextView) findViewById(R.id.tile3);
+        tileArray[3]  = (TextView) findViewById(R.id.tile4);
+        tileArray[4]  = (TextView) findViewById(R.id.tile5);
+        tileArray[5]  = (TextView) findViewById(R.id.tile6);
+        tileArray[6]  = (TextView) findViewById(R.id.tile7);
+        tileArray[7]  = (TextView) findViewById(R.id.tile8);
+        tileArray[8]  = (TextView) findViewById(R.id.tile9);
+        tileArray[9]  = (TextView) findViewById(R.id.tile10);
         tileArray[10] = (TextView) findViewById(R.id.tile11);
-        tileArray[10].setOnTouchListener(this);
-
         tileArray[11] = (TextView) findViewById(R.id.tile12);
-        tileArray[11].setOnTouchListener(this);
-
         tileArray[12] = (TextView) findViewById(R.id.tile13);
-        tileArray[12].setOnTouchListener(this);
-
         tileArray[13] = (TextView) findViewById(R.id.tile14);
-        tileArray[13].setOnTouchListener(this);
-
         tileArray[14] = (TextView) findViewById(R.id.tile15);
-        tileArray[14].setOnTouchListener(this);
-
         tileArray[15] = (TextView) findViewById(R.id.tile16);
-        tileArray[15].setOnTouchListener(this);
+
+        for (tileArrayNumber=0; tileArrayNumber<16; tileArrayNumber++) {
+            tileArray[tileArrayNumber].setOnTouchListener(this);
+        }
+
 
         dbHelper = new DBHelper(this);
         db = dbHelper.getWritableDatabase();
@@ -261,7 +234,7 @@ public class FirstGame extends Activity implements View.OnClickListener, OnTouch
 
 
     public void onShow(){
-        AlertDialog.Builder looseAlert = new AlertDialog.Builder(FirstGame.this);
+        AlertDialog.Builder looseAlert = new AlertDialog.Builder(Firstgame.this);
         looseAlert.setTitle(mode)
                 .setMessage(rules)
                 .setIcon(R.drawable.ic_launcher)

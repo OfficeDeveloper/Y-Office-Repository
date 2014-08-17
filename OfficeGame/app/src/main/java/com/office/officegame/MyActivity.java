@@ -3,6 +3,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -15,10 +17,12 @@ import android.widget.Toast;
 
 public class MyActivity extends Activity implements View.OnClickListener {
 
-
+    private SoundPool sPool;
+    private int popTileTouchSound;          //sound pop on touch tile
     private Button  chooseButton;
     private Button  exitButton;
     private Button  settingsButton;
+
 
 
 
@@ -49,6 +53,9 @@ public class MyActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
+        sPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
+        popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
+
         settingsButton = (Button) findViewById(R.id.settingsButton);
         chooseButton = (Button) findViewById(R.id.chooseButton);
         exitButton = (Button) findViewById(R.id.exitButton);
@@ -56,17 +63,13 @@ public class MyActivity extends Activity implements View.OnClickListener {
         settingsButton.setOnClickListener(this);
         chooseButton.setOnClickListener(this);
         exitButton.setOnClickListener(this);
+
+
+
+
+
+
     }
-        protected void onResume() {
-            super.onResume();
-            Music.play(this, R.raw.guitarmainfon);
-        }
-
-        protected void onPause() {
-            super.onPause();
-            Music.stop(this);
-        }
-
 
 
     public void onClick(View first) {
@@ -101,15 +104,18 @@ public class MyActivity extends Activity implements View.OnClickListener {
             switch (first.getId()) {
                 case R.id.chooseButton:
                     Intent goToChooseGameMenu = new Intent(MyActivity.this, ChooseGameMenu.class);
+                    sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
                     startActivity(goToChooseGameMenu);
                     break;
 
                 case R.id.settingsButton:
                     Intent goToSettings = new Intent(MyActivity.this, SettingsMenu.class);
+                    sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
                     startActivity(goToSettings);
                     break;
 
                 case R.id.exitButton:
+                    sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
                     alertExitDialog.show();
                     return;
 

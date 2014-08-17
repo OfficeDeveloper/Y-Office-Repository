@@ -37,7 +37,7 @@
         </activity>
 
         <activity
-            android:name=".FirstGame"
+            android:name=".Firstgame"
             android:label="Arcade">
 
         </activity>
