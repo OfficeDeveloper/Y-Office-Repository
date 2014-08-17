@@ -155,7 +155,6 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     public void onPause() {
         bool = false;
         whiteArray();
-        if(score != 0) showScore();
         super.onPause();
         Music.stop(this);
         handler1.removeCallbacks(task1);

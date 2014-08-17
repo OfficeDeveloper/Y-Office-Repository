@@ -158,7 +158,6 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
     public void onPause() {
         bool = false;
         whiteArray();
-        if(score != 0) showScore();
         super.onPause();
         Music.stop(this);
         handler1.removeCallbacks(task1);
