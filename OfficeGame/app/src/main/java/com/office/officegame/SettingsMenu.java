@@ -1,7 +1,6 @@
 package com.office.officegame;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -17,15 +16,17 @@ import android.widget.Button;
 public class SettingsMenu extends Activity implements View.OnClickListener {
 
     private SoundPool sPool;
-    private int popTileTouchSound;          //sound pop on touch tile
+    private int     popTileTouchSound;          //sound pop on touch tile
     private Button  backToMainMenuButton;
     private Button  muteVoiceButtonInTheEntrieGame;
+    private boolean boolMusicCheckVariable = true;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_menu);
+
 
         sPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
@@ -51,9 +52,14 @@ public class SettingsMenu extends Activity implements View.OnClickListener {
 
             case R.id.muteVoiceButtonInTheEntrieGame:
                 sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-
-
-
+                if (boolMusicCheckVariable == false) {
+                    startService(new Intent(this, MyService.class));
+                    boolMusicCheckVariable = true;
+                }
+                else {
+                    stopService(new Intent(this, MyService.class));
+                    boolMusicCheckVariable = false;
+                }
                 break;
 
 

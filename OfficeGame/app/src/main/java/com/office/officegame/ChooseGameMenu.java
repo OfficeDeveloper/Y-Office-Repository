@@ -19,10 +19,7 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
 
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
-    private Button goToFirstGame;
-    private Button goToSecondGame;
-    private Button goToThirdGame;
-    private Button comeBack;
+    private Button goToFirstGame, goToSecondGame, goToThirdGame, comeBack;
 
 
     @Override

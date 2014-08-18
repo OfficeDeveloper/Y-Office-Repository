@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -16,23 +17,16 @@ import android.widget.Toast;
 
 
 public class MyActivity extends Activity implements View.OnClickListener {
-
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
-    private Button  chooseButton;
-    private Button  exitButton;
-    private Button  settingsButton;
-
-
-
-
+    private Button  chooseButton, exitButton, settingsButton, muteButton;
     private static long back_pressed;
+    private boolean boolMusicCheckVariable = true;
 
     public void onBackPressed() {        //exit when pressed double 'back' in main menu
 
-
         if (back_pressed + 2000 > System.currentTimeMillis()) {
-
+            stopService(new Intent(this, MyService.class));     //stop background music
             super.onBackPressed();
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
@@ -46,33 +40,32 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
     }
 
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
         sPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
 
+        muteButton = (Button) findViewById(R.id.muteButton);
         settingsButton = (Button) findViewById(R.id.settingsButton);
         chooseButton = (Button) findViewById(R.id.chooseButton);
         exitButton = (Button) findViewById(R.id.exitButton);
 
+        muteButton.setOnClickListener(this);
         settingsButton.setOnClickListener(this);
         chooseButton.setOnClickListener(this);
         exitButton.setOnClickListener(this);
 
 
-
-
+        startService(new Intent(this, MyService.class));  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
     }
 
-
     public void onClick(View first) {
+
 
             AlertDialog.Builder alertExitDialog = new AlertDialog.Builder(MyActivity.this);
         TextView myMessage = new TextView(this);
@@ -119,6 +112,16 @@ public class MyActivity extends Activity implements View.OnClickListener {
                     alertExitDialog.show();
                     return;
 
+                case R.id.muteButton:
+                    if (boolMusicCheckVariable == false) {
+                        startService(new Intent(this, MyService.class));
+                        boolMusicCheckVariable = true;
+                    }
+                    else {
+                        stopService(new Intent(this, MyService.class));
+                        boolMusicCheckVariable = false;
+                    }
+                    break;
                 default:
                     throw new RuntimeException("error: ");
 
