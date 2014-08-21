@@ -21,7 +21,6 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
     private int popTileTouchSound;          //sound pop on touch tile
     private Button goToFirstGame, goToSecondGame, goToThirdGame, comeBack;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,43 +38,62 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
         goToSecondGame.setOnClickListener(this);
         goToThirdGame.setOnClickListener(this);
         comeBack.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View button) {
 
         switch (button.getId()) {
-
             case R.id.goToFirstGame:
-                Intent beginFirstGame = new Intent(ChooseGameMenu.this, Firstgame.class);
-                sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                startActivity(beginFirstGame);
+                if (MyService.boolSoundTileCheck == true) {
+                    Intent beginFirstGame = new Intent(ChooseGameMenu.this, Firstgame.class);
+                    sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+                    startActivity(beginFirstGame);
+                }
+                else {
+                    Intent beginFirstGame = new Intent(ChooseGameMenu.this, Firstgame.class);
+                    startActivity(beginFirstGame);
+                }
                 break;
 
             case R.id.goToSecondGame:
-                Intent beginSecondGame = new Intent(ChooseGameMenu.this, SecondGame.class);
-                sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                startActivity(beginSecondGame);
+                if (MyService.boolSoundTileCheck == true) {
+                    Intent beginSecondGame = new Intent(ChooseGameMenu.this, SecondGame.class);
+                    sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+                    startActivity(beginSecondGame);
+                }
+                else {
+                    Intent beginSecondGame = new Intent(ChooseGameMenu.this, SecondGame.class);
+                    startActivity(beginSecondGame);
+                }
                 break;
 
             case R.id.goToThirdGame:
-                Intent beginThirdGame = new Intent(ChooseGameMenu.this, ThirdGame.class);
-                sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                startActivity(beginThirdGame);
+                if (MyService.boolSoundTileCheck == true) {
+                    Intent beginThirdGame = new Intent(ChooseGameMenu.this, ThirdGame.class);
+                    sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+                    startActivity(beginThirdGame);
+                }
+                else {
+                    Intent beginThirdGame = new Intent(ChooseGameMenu.this, ThirdGame.class);
+                    startActivity(beginThirdGame);
+                }
                 break;
 
             case R.id.comeBack:
-                Intent comeBackToMainMenu = new Intent (ChooseGameMenu.this, MyActivity.class);
-                sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                startActivity(comeBackToMainMenu);
+                if (MyService.boolSoundTileCheck == true) {
+                    Intent comeBackToMainMenu = new Intent(ChooseGameMenu.this, MyActivity.class);
+                    sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+                    startActivity(comeBackToMainMenu);
+                }
+                else {
+                    Intent comeBackToMainMenu = new Intent(ChooseGameMenu.this, MyActivity.class);
+                    startActivity(comeBackToMainMenu);
+                }
                 break;
-
             default:
                 throw new RuntimeException("error: ");
-
         }
-
     }
 
     public void onBackPressed() {

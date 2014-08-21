@@ -9,10 +9,12 @@ import android.os.IBinder;
  * Created by Andrii on 8/18/14.
  */
 public class MyService extends Service {
-
     public MediaPlayer     mPlayer;
-    private boolean boolMusicVolumeCheck   = true;
+    private boolean boolMusicVolumeCheckKey = true;
 
+    public static int backgroundMusicKey = 1;
+    public static boolean boolMusicCheck = true;
+    public static boolean boolSoundTileCheck = true;
 
     public void onCreate() {
         mPlayer = MediaPlayer.create(this, R.raw.guitarmainfon);
@@ -36,17 +38,16 @@ public class MyService extends Service {
     private void startMyMediaPlayer() {
             mPlayer.start();
             mPlayer.setLooping(true);
-
     }
 
     private void stopMyMediaPlayer() {
-        if (boolMusicVolumeCheck == true) {
+        if (boolMusicVolumeCheckKey == true) {
             mPlayer.setVolume(0,0);
-            boolMusicVolumeCheck = false;
+            boolMusicVolumeCheckKey = false;
         }
         else {
             mPlayer.setVolume(1,1);
-            boolMusicVolumeCheck = true;
+            boolMusicVolumeCheckKey = true;
         }
 
 

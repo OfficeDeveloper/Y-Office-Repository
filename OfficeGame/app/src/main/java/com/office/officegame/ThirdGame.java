@@ -35,7 +35,6 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
     private int wrongTileTouchSound;        //wrong voice on wrong touch tile
     private int congratulationEndGameSound; //congratulation sound when game over
 
-
     private TextView timer;
     private TextView point;
     private TextView tileArray[];
@@ -47,11 +46,9 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
     private int time;
     private int hiScore;
     private int t;
-
     private boolean bool = false;
 
     private final String LOG_TAG = "myLogs";
-
     private DBHelper dbHelper;
     private SQLiteDatabase db;
     private Cursor cursor;
@@ -99,59 +96,113 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         }
     }
 
-    public void showScore(){
-        AlertDialog.Builder looseAlert = new AlertDialog.Builder(ThirdGame.this);
-        looseAlert.setTitle("GAME OVER")
+    public void showScore() {
+        if (MyService.boolSoundTileCheck == true) {
+            AlertDialog.Builder looseAlert = new AlertDialog.Builder(ThirdGame.this);
+            looseAlert.setTitle("GAME OVER")
                 .setMessage("You finished with score: " + score)
                 .setIcon(R.drawable.ic_launcher)
                 .setCancelable(false)
                 .setNegativeButton("Okay!",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
                             }
-                        }
-                );
-        if (score == hiScore){
-            looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
+                    );
+            if (score == hiScore) {
+                looseAlert.setMessage("You finished with score: " + score + "\nThis is your new high score!");
+            }
+            whiteArray();
+            AlertDialog alert = looseAlert.create();
+            sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
+            alert.show();
         }
-        whiteArray();
-        AlertDialog alert = looseAlert.create();
-        sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
-        alert.show();
+        else {
+            AlertDialog.Builder looseAlert = new AlertDialog.Builder(ThirdGame.this);
+            looseAlert.setTitle("GAME OVER")
+                    .setMessage("You finished with score: " + score)
+                    .setIcon(R.drawable.ic_launcher)
+                    .setCancelable(false)
+                    .setNegativeButton("Okay!",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            }
+                    );
+            if (score == hiScore) {
+                looseAlert.setMessage("You finished with score: " + score + "\nThis is your new high score!");
+            }
+            whiteArray();
+            AlertDialog alert = looseAlert.create();
+            alert.show();
+        }
     }
 
     public void upScore(TextView tile) {
-        ColorDrawable drawable = (ColorDrawable) tile.getBackground();
-        if ((drawable.getColor() == Color.BLACK) && (bool)) {
-            sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-            score = score + 1;
-            time = time + 1;
-            timer.setText(String.valueOf(time));
-            point.setText(String.valueOf(score));
-            tile.setBackgroundColor(Color.DKGRAY);
-            cursor = db.rawQuery("Select score from highScore where game_id=3", null);
-            cursor.moveToFirst();
-            hiScore = cursor.getInt(cursor.getColumnIndex("score"));
-            if (score>hiScore){
-                db.execSQL("Update highScore set score="+score+" where game_id=3");
+        if (MyService.boolSoundTileCheck == true) {
+            ColorDrawable drawable = (ColorDrawable) tile.getBackground();
+            if ((drawable.getColor() == Color.BLACK) && (bool)) {
+                sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+                score = score + 1;
+                time = time + 1;
+                timer.setText(String.valueOf(time));
+                point.setText(String.valueOf(score));
+                tile.setBackgroundColor(Color.DKGRAY);
                 cursor = db.rawQuery("Select score from highScore where game_id=3", null);
                 cursor.moveToFirst();
                 hiScore = cursor.getInt(cursor.getColumnIndex("score"));
-                highScore.setText(String.valueOf(hiScore));
+                if (score > hiScore) {
+                    db.execSQL("Update highScore set score=" + score + " where game_id=3");
+                    cursor = db.rawQuery("Select score from highScore where game_id=3", null);
+                    cursor.moveToFirst();
+                    hiScore = cursor.getInt(cursor.getColumnIndex("score"));
+                    highScore.setText(String.valueOf(hiScore));
+                }
+            }
+            if ((drawable.getColor() == Color.WHITE) && (bool)) {
+                sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
+                time = time - 1;
+                timer.setText(String.valueOf(time));
+                tile.setBackgroundColor(Color.RED);
+                if (time == 0) {
+                    handler1.removeCallbacks(task1);
+                    startButton.setBackgroundResource(R.drawable.start_button);
+                    bool = false;
+                    showScore();
+                }
             }
         }
-
-        if ((drawable.getColor() == Color.WHITE) && (bool)) {
-            sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
-            time = time - 1;
-            timer.setText(String.valueOf(time));
-            tile.setBackgroundColor(Color.RED);
-            if (time == 0) {
-                handler1.removeCallbacks(task1);
-                startButton.setBackgroundResource(R.drawable.start_button);
-                bool = false;
-                showScore();
+        else {
+            ColorDrawable drawable = (ColorDrawable) tile.getBackground();
+            if ((drawable.getColor() == Color.BLACK) && (bool)) {
+                score = score + 1;
+                time = time + 1;
+                timer.setText(String.valueOf(time));
+                point.setText(String.valueOf(score));
+                tile.setBackgroundColor(Color.DKGRAY);
+                cursor = db.rawQuery("Select score from highScore where game_id=3", null);
+                cursor.moveToFirst();
+                hiScore = cursor.getInt(cursor.getColumnIndex("score"));
+                if (score > hiScore) {
+                    db.execSQL("Update highScore set score=" + score + " where game_id=3");
+                    cursor = db.rawQuery("Select score from highScore where game_id=3", null);
+                    cursor.moveToFirst();
+                    hiScore = cursor.getInt(cursor.getColumnIndex("score"));
+                    highScore.setText(String.valueOf(hiScore));
+                }
+            }
+            if ((drawable.getColor() == Color.WHITE) && (bool)) {
+                time = time - 1;
+                timer.setText(String.valueOf(time));
+                tile.setBackgroundColor(Color.RED);
+                if (time == 0) {
+                    handler1.removeCallbacks(task1);
+                    startButton.setBackgroundResource(R.drawable.start_button);
+                    bool = false;
+                    showScore();
+                }
             }
         }
     }
@@ -178,10 +229,8 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         missText.setText("TIME");
         timer = (TextView) findViewById(R.id.misses);
         timer.setText("5");
-
         point = (TextView) findViewById(R.id.point);
         point.setText("0");
-
         highScore = (TextView) findViewById(R.id.highscore);
 
         startButton = (Button) findViewById(R.id.startButton);
@@ -189,7 +238,6 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         startButton.setVisibility(View.INVISIBLE);
 
         tileArray = new TextView[16];
-
         tileArray[0]  = (TextView) findViewById(R.id.tile1);
         tileArray[1]  = (TextView) findViewById(R.id.tile2);
         tileArray[2]  = (TextView) findViewById(R.id.tile3);
@@ -324,25 +372,41 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.startButton:
-                if (bool) {
-                    handler1.removeCallbacks(task1);
-                    startButton.setBackgroundResource(R.drawable.start_button);
-                    bool = false;
-                    showScore();
-                } else {
-                    handler1.postDelayed(task1, 0);
-                    startButton.setBackgroundResource(R.drawable.stop_button);
-                    score = 0;
-                    bool = true;
-                    delay = 500;
-                    time = 5;
+                if(MyService.boolSoundTileCheck == true) {
+                    sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+                    if (bool) {
+                        handler1.removeCallbacks(task1);
+                        startButton.setBackgroundResource(R.drawable.start_button);
+                        bool = false;
+                        showScore();
+                    } else {
+                        handler1.postDelayed(task1, 0);
+                        startButton.setBackgroundResource(R.drawable.stop_button);
+                        score = 0;
+                        bool = true;
+                        delay = 500;
+                        time = 5;
+                    }
+                }
+                else {
+                    if (bool) {
+                        handler1.removeCallbacks(task1);
+                        startButton.setBackgroundResource(R.drawable.start_button);
+                        bool = false;
+                        showScore();
+                    } else {
+                        handler1.postDelayed(task1, 0);
+                        startButton.setBackgroundResource(R.drawable.stop_button);
+                        score = 0;
+                        bool = true;
+                        delay = 500;
+                        time = 5;
+                    }
                 }
                 break;
-
             default:
                 throw new RuntimeException("error: ");
         }
-
     }
 
     public void onBackPressed() {
@@ -351,7 +415,6 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
     }
 
     class DBHelper extends SQLiteOpenHelper {
-
         public DBHelper(Context context) {
             // конструктор суперкласса
             super(context, "OfficeGameDB", null, 1);

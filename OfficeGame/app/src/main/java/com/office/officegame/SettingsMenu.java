@@ -18,8 +18,6 @@ public class SettingsMenu extends Activity implements View.OnClickListener {
     private SoundPool sPool;
     private int     popTileTouchSound;          //sound pop on touch tile
     private Button  backToMainMenuButton;
-    private Button  muteVoiceButtonInTheEntrieGame;
-    private boolean boolMusicCheckVariable = true;
 
 
     @Override
@@ -32,10 +30,8 @@ public class SettingsMenu extends Activity implements View.OnClickListener {
         popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
 
         backToMainMenuButton = (Button) findViewById(R.id.backToMainMenuButton);
-        muteVoiceButtonInTheEntrieGame = (Button) findViewById(R.id.muteVoiceButtonInTheEntrieGame);
 
         backToMainMenuButton.setOnClickListener(this);
-        muteVoiceButtonInTheEntrieGame.setOnClickListener(this);
 
     }
 
@@ -45,23 +41,16 @@ public class SettingsMenu extends Activity implements View.OnClickListener {
 
         switch (SettingsMenu.getId()) {
             case R.id.backToMainMenuButton:
-                Intent goToMainActivity = new Intent(SettingsMenu.this, MyActivity.class);
-                sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                startActivity(goToMainActivity);
-                break;
-
-            case R.id.muteVoiceButtonInTheEntrieGame:
-                sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                if (boolMusicCheckVariable == false) {
-                    startService(new Intent(this, MyService.class));
-                    boolMusicCheckVariable = true;
+                if (MyService.boolMusicCheck == true) {
+                    Intent goToMainActivity = new Intent(SettingsMenu.this, MyActivity.class);
+                    sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+                    startActivity(goToMainActivity);
                 }
                 else {
-                    stopService(new Intent(this, MyService.class));
-                    boolMusicCheckVariable = false;
+                    Intent goToMainActivity = new Intent(SettingsMenu.this, MyActivity.class);
+                    startActivity(goToMainActivity);
                 }
                 break;
-
 
         }
     }
