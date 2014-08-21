@@ -4,7 +4,7 @@
 
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="19">
+        android:targetSdkVersion="20">
         </uses-sdk>
 
     <application
@@ -55,6 +55,11 @@
             android:enabled="true"
             android:name=".MyService"
             />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.HOME" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
     </application>
 
 
