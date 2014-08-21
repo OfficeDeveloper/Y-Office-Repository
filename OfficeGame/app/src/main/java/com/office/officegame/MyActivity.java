@@ -7,7 +7,9 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +62,47 @@ public class MyActivity extends Activity implements View.OnClickListener {
         }
     }
 
+   
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_HOME)
+        {
+            stopService(new Intent(this, MyService.class));
+        }
+        return true;
+    }
+
+    /*@Override
+    public void onPause() {
+        super.onPause();
+        stopService(new Intent(this, MyService.class));
+        return;
+    }
+*/
+    @Override
+    public void onStop() {
+        super.onStop();
+        stopService(new Intent(this, MyService.class));
+        return;
+    }
+    @Override
+    public void onRestart() {
+        super.onRestart();
+            startService(new Intent(this, MyService.class));
+            return;
+    }
+/*
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        super.onKeyDown(keyCode, event);
+        if (keyCode == KeyEvent.KEYCODE_HOME) {
+           stopService(new Intent(this, MyService.class));
+        }
+        stopService(new Intent(this, MyService.class));
+        return false;
+        }
+ */
     public void onClick(View first) {
         AlertDialog.Builder alertExitDialog = new AlertDialog.Builder(MyActivity.this);
             TextView myMessage = new TextView(this);

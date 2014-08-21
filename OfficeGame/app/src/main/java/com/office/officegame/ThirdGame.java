@@ -211,6 +211,7 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         bool = false;
         whiteArray();
         super.onPause();
+        stopService(new Intent(this, MyService.class));
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setBackgroundResource(R.drawable.start_button);

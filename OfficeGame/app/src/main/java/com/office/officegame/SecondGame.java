@@ -203,6 +203,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         bool = false;
         whiteArray();
         super.onPause();
+        stopService(new Intent(this, MyService.class));
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setBackgroundResource(R.drawable.start_button);
