@@ -37,4 +37,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/chooseButton" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="more"
+        android:id="@+id/aboutGameAndDevButton"
+        android:layout_above="@+id/chooseButton"
+        android:layout_toLeftOf="@+id/tileMuteButton"
+        android:layout_toStartOf="@+id/tileMuteButton"
+        android:layout_marginBottom="61dp" />
+
 </RelativeLayout>

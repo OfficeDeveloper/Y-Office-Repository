@@ -266,18 +266,14 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
             .setMessage(rules)
             .setIcon(R.drawable.ic_launcher)
             .setCancelable(false)
-            .setNegativeButton("Start",
+            .setNegativeButton("i'am ready",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
-                                handler1.postDelayed(task1, delay);
-                                startButton.setBackgroundResource(R.drawable.stop_button);
+                                handler1.removeCallbacks(task1);
+                                startButton.setBackgroundResource(R.drawable.start_button);
                                 startButton.setVisibility(View.VISIBLE);
-                                score = 0;
-                                bool = true;
-                                delay = 500;
-                                fouls = 20;
-                                time = 30;
+                                bool = false;
                             }
                         }
                 );
@@ -407,6 +403,10 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     }
 
     public void onBackPressed() {
+        score = 0;
+        delay = 500;
+        fouls = 20;
+        time = 30;
         Intent goToChooseMenu = new Intent(this, ChooseGameMenu.class);
         startActivity(goToChooseMenu);
         super.finishActivity(0);

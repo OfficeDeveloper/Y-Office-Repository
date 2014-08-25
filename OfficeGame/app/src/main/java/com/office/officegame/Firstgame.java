@@ -302,17 +302,14 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
                 .setMessage(rules)
                 .setIcon(R.drawable.ic_launcher)
                 .setCancelable(false)
-                .setNegativeButton("Start",
+                .setNegativeButton("i'am ready",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
-                                handler1.postDelayed(task1, delay);
-                                startButton.setBackgroundResource(R.drawable.stop_button);
+                                handler1.removeCallbacks(task1);
+                                startButton.setBackgroundResource(R.drawable.start_button);
                                 startButton.setVisibility(View.VISIBLE);
-                                score = 0;
-                                bool = true;
-                                delay = 500;
-                                fouls = 20;
+                                bool = false;
                             }
                         }
                 );
@@ -440,6 +437,9 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
     }
 
     public void onBackPressed() {
+        score = 0;
+        delay = 700;
+        fouls = 20;
         Intent goToChooseMenu = new Intent(this, ChooseGameMenu.class);
         startActivity(goToChooseMenu);
     }
