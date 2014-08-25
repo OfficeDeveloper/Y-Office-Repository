@@ -16,14 +16,14 @@ import android.widget.Toast;
 
 public class MyActivity extends Activity implements View.OnClickListener {
 
+    public static boolean boolSoundTileCheck = true;
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
-    private Button  chooseButton, exitButton, settingsButton, muteButton, muteTileButton;
+    private Button  chooseButton, exitButton, muteTileButton;
     private static long back_pressed;
     public void onBackPressed() {        //exit when pressed double 'back' in main menu
 
         if (back_pressed + 2000 > System.currentTimeMillis()) {
-            stopService(new Intent(this, MyService.class));     //stop background music
             super.onBackPressed();
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
@@ -45,64 +45,14 @@ public class MyActivity extends Activity implements View.OnClickListener {
         popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
 
         muteTileButton = (Button) findViewById(R.id.tileMuteButton);
-        muteButton = (Button) findViewById(R.id.muteSoundButton);
-        settingsButton = (Button) findViewById(R.id.settingsButton);
         chooseButton = (Button) findViewById(R.id.chooseButton);
         exitButton = (Button) findViewById(R.id.exitButton);
 
         muteTileButton.setOnClickListener(this);
-        muteButton.setOnClickListener(this);
-        settingsButton.setOnClickListener(this);
         chooseButton.setOnClickListener(this);
         exitButton.setOnClickListener(this);
-
-        if (MyService.backgroundMusicKey == 1) {
-            startService(new Intent(this, MyService.class));  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            MyService.backgroundMusicKey = 2;
-        }
     }
 
-   
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_HOME)
-        {
-            stopService(new Intent(this, MyService.class));
-        }
-        return true;
-    }
-
-    /*@Override
-    public void onPause() {
-        super.onPause();
-        stopService(new Intent(this, MyService.class));
-        return;
-    }
-*/
-    @Override
-    public void onStop() {
-        super.onStop();
-        stopService(new Intent(this, MyService.class));
-        return;
-    }
-    @Override
-    public void onRestart() {
-        super.onRestart();
-            startService(new Intent(this, MyService.class));
-            return;
-    }
-/*
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        super.onKeyDown(keyCode, event);
-        if (keyCode == KeyEvent.KEYCODE_HOME) {
-           stopService(new Intent(this, MyService.class));
-        }
-        stopService(new Intent(this, MyService.class));
-        return false;
-        }
- */
     public void onClick(View first) {
         AlertDialog.Builder alertExitDialog = new AlertDialog.Builder(MyActivity.this);
             TextView myMessage = new TextView(this);
@@ -114,32 +64,30 @@ public class MyActivity extends Activity implements View.OnClickListener {
             alertExitDialog.setView(myMessage);
             alertExitDialog.setPositiveButton("Yea!", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                    MyService.backgroundMusicKey = 1;
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 }
             });
+            alertExitDialog.setNegativeButton("No!", new DialogInterface.OnClickListener() {
 
-        alertExitDialog.setNegativeButton("No!", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
                 }
         });
-
             switch (first.getId()) {
                 case R.id.tileMuteButton:
-                    if (MyService.boolSoundTileCheck == false) {
-                        MyService.boolSoundTileCheck = true;
+                    if (this.boolSoundTileCheck == false) {
+                        this.boolSoundTileCheck = true;
                     }
                     else {
-                        MyService.boolSoundTileCheck = false;
+                        this.boolSoundTileCheck = false;
                     }
                     break;
 
                 case R.id.chooseButton:
-                    if (MyService.boolSoundTileCheck == true) {
+                    if (this.boolSoundTileCheck == true) {
                         Intent goToChooseGameMenu = new Intent(MyActivity.this, ChooseGameMenu.class);
                         sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
                         startActivity(goToChooseGameMenu);
@@ -149,41 +97,15 @@ public class MyActivity extends Activity implements View.OnClickListener {
                         startActivity(goToChooseGameMenu);
                     }
                     break;
-
-                case R.id.settingsButton:
-                    if (MyService.boolSoundTileCheck == true) {
-                        Intent goToSettings = new Intent(MyActivity.this, SettingsMenu.class);
-                        sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                        startActivity(goToSettings);
-                    }
-                    else {
-                        Intent goToSettings = new Intent(MyActivity.this, SettingsMenu.class);
-                        startActivity(goToSettings);
-                    }
-                    break;
-
                 case R.id.exitButton:
-                    if (MyService.boolSoundTileCheck == true) {
+                    if (this.boolSoundTileCheck == true) {
                         sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
                         alertExitDialog.show();
-                        stopService(new Intent(this, MyService.class));
                     }
                     else {
                         alertExitDialog.show();
-                        stopService(new Intent(this, MyService.class));
                     }
                     return;
-
-                case R.id.muteSoundButton:
-                    if (MyService.boolMusicCheck == false) {
-                        startService(new Intent(this, MyService.class));
-                        MyService.boolMusicCheck = true;
-                    }
-                    else {
-                        stopService(new Intent(this, MyService.class));
-                        MyService.boolMusicCheck = false;
-                    }
-                    break;
                 default:
                     throw new RuntimeException("error: ");
 

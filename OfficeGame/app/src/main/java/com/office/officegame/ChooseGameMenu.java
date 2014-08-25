@@ -41,11 +41,17 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
     }
 
     @Override
+    public void onRestart() {
+        super.onRestart();
+        return;
+    }
+
+    @Override
     public void onClick(View button) {
 
         switch (button.getId()) {
             case R.id.goToFirstGame:
-                if (MyService.boolSoundTileCheck == true) {
+                if (MyActivity.boolSoundTileCheck == true) {
                     Intent beginFirstGame = new Intent(ChooseGameMenu.this, Firstgame.class);
                     sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
                     startActivity(beginFirstGame);
@@ -57,7 +63,7 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.goToSecondGame:
-                if (MyService.boolSoundTileCheck == true) {
+                if (MyActivity.boolSoundTileCheck == true) {
                     Intent beginSecondGame = new Intent(ChooseGameMenu.this, SecondGame.class);
                     sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
                     startActivity(beginSecondGame);
@@ -69,7 +75,7 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.goToThirdGame:
-                if (MyService.boolSoundTileCheck == true) {
+                if (MyActivity.boolSoundTileCheck == true) {
                     Intent beginThirdGame = new Intent(ChooseGameMenu.this, ThirdGame.class);
                     sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
                     startActivity(beginThirdGame);
@@ -81,7 +87,7 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.comeBack:
-                if (MyService.boolSoundTileCheck == true) {
+                if (MyActivity.boolSoundTileCheck == true) {
                     Intent comeBackToMainMenu = new Intent(ChooseGameMenu.this, MyActivity.class);
                     sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
                     startActivity(comeBackToMainMenu);

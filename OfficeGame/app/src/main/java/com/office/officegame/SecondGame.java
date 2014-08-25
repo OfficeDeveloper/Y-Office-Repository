@@ -93,7 +93,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     }
 
     public void showScore(){
-        if (MyService.boolSoundTileCheck == true) {
+        if (MyActivity.boolSoundTileCheck == true) {
             AlertDialog.Builder looseAlert = new AlertDialog.Builder(SecondGame.this);
             looseAlert.setTitle("GAME OVER")
                 .setMessage("You finished with score: " + score)
@@ -138,7 +138,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
 
 
     public void upScore(TextView tile) {
-       if (MyService.boolSoundTileCheck == true) {
+       if (MyActivity.boolSoundTileCheck == true) {
            ColorDrawable drawable = (ColorDrawable) tile.getBackground();
            if ((drawable.getColor() == Color.BLACK) && (bool)) {
                sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
@@ -203,7 +203,6 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         bool = false;
         whiteArray();
         super.onPause();
-        stopService(new Intent(this, MyService.class));
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setBackgroundResource(R.drawable.start_button);
@@ -366,7 +365,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.startButton:
-                if(MyService.boolSoundTileCheck == true) {
+                if(MyActivity.boolSoundTileCheck == true) {
                     sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
                     if (bool) {
                         handler1.removeCallbacks(task1);

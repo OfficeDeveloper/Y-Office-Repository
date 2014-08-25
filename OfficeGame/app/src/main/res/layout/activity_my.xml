@@ -11,7 +11,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="goToChooseButton"
+        android:text="Play"
         android:background="@drawable/button_custom"
         android:id="@+id/chooseButton"
         android:layout_centerVertical="true"
@@ -21,30 +21,12 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="exitButton"
+        android:text="Quit"
         android:background="@drawable/button_custom"
         android:id="@+id/exitButton"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/chooseButton"
         android:layout_marginBottom="121dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="settings"
-        android:id="@+id/settingsButton"
-        android:layout_above="@+id/chooseButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="54dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="bckSoundMute"
-        android:id="@+id/muteSoundButton"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/chooseButton"
-        android:layout_alignEnd="@+id/chooseButton" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -53,7 +35,6 @@
         android:text="tileMute"
         android:id="@+id/tileMuteButton"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/muteSoundButton"
-        android:layout_toStartOf="@+id/muteSoundButton" />
+        android:layout_alignRight="@+id/chooseButton" />
 
 </RelativeLayout>
