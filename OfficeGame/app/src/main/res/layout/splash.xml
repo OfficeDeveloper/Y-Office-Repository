@@ -5,17 +5,12 @@
     android:layout_height="match_parent"
     android:weightSum="1">
     <ImageView
-        android:layout_width="248dp"
+        android:layout_width="match_parent"
         android:layout_height="408dp"
         android:id="@+id/SplashImageView"
-        android:src="@drawable/fingers"
-        android:layout_gravity="center_horizontal">
+
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.48">
     </ImageView>
-    <ImageView
-        android:layout_width="84dp"
-        android:layout_height="137dp"
-        android:id="@+id/SplashImageViewLoad"
-        android:src="@drawable/load"
-        android:layout_gravity="center_horizontal">
-    </ImageView>
+
 </LinearLayout>

@@ -22,6 +22,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
     private int popTileTouchSound;          //sound pop on touch tile
     private Button  chooseButton, exitButton, muteTileButton, aboutGameAndDevButton;
     private static long back_pressed;
+
     public void onBackPressed() {        //exit when pressed double 'back' in main menu
         if (back_pressed + 2000 > System.currentTimeMillis()) {
             super.onBackPressed();

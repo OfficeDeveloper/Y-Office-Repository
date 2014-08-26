@@ -7,4 +7,10 @@
         <!-- Customize your theme here. -->
     </style>
 
-</resources>
+    <style name="Animations" parent="@android:Animation" />
+    <style name="Animations.SplashScreen">
+        <item name="android:windowEnterAnimation">@anim/appear</item>
+        <item name="android:windowExitAnimation">@anim/disappear</item>
+    </style>
+
+    </resources>
