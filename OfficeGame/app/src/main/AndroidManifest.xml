@@ -20,21 +20,20 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-
+        <activity android:name="SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"></action>
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ChooseGameMenu"
             android:label="ChooseGameMenu">
 
             </activity>
-        <activity
-            android:name=".SettingsMenu"
-            android:label="SettingsMenu">
-
-        </activity>
 
         <activity
             android:name=".Firstgame"
@@ -51,10 +50,6 @@
             android:name=".SecondGame"
             android:label="Time Sprint">
         </activity>
-        <service
-            android:enabled="true"
-            android:name=".MyService"
-            />
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.HOME" />
