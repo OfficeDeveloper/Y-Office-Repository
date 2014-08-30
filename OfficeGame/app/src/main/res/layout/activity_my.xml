@@ -14,9 +14,10 @@
         android:text="Play"
         android:background="@drawable/button_custom"
         android:id="@+id/chooseButton"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/tileMuteButton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="134dp" />
 
     <Button
         android:layout_width="match_parent"
@@ -24,9 +25,10 @@
         android:text="Quit"
         android:background="@drawable/button_custom"
         android:id="@+id/exitButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/chooseButton"
-        android:layout_marginBottom="121dp" />
+        android:layout_below="@+id/aboutGameAndDevButton"
+        android:layout_alignRight="@+id/tileMuteButton"
+        android:layout_alignEnd="@+id/tileMuteButton"
+        android:layout_marginTop="61dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -42,9 +44,8 @@
         android:layout_height="wrap_content"
         android:text="more"
         android:id="@+id/aboutGameAndDevButton"
-        android:layout_above="@+id/chooseButton"
-        android:layout_toLeftOf="@+id/tileMuteButton"
         android:layout_toStartOf="@+id/tileMuteButton"
-        android:layout_marginBottom="61dp" />
+        android:layout_below="@+id/chooseButton"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
