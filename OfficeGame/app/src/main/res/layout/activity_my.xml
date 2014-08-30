@@ -6,46 +6,56 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/gradient"
     tools:context=".MyActivity">
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Play"
-        android:background="@drawable/button_custom"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:background="@drawable/button4_pic"
         android:id="@+id/chooseButton"
+        android:layout_marginTop="150dp"
         android:layout_below="@+id/tileMuteButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="134dp" />
+        android:layout_alignLeft="@+id/exitButton"
+        android:layout_alignStart="@+id/exitButton" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Quit"
-        android:background="@drawable/button_custom"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:background="@drawable/button6_pic"
         android:id="@+id/exitButton"
+        android:layout_marginTop="52dp"
         android:layout_below="@+id/aboutGameAndDevButton"
-        android:layout_alignRight="@+id/tileMuteButton"
-        android:layout_alignEnd="@+id/tileMuteButton"
-        android:layout_marginTop="61dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="tileMute"
+        android:background="@drawable/button_custom"
         android:id="@+id/tileMuteButton"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/chooseButton" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="more"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:background="@drawable/button5_pic"
         android:id="@+id/aboutGameAndDevButton"
         android:layout_toStartOf="@+id/tileMuteButton"
         android:layout_below="@+id/chooseButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignRight="@+id/chooseButton"
+        android:layout_alignEnd="@+id/chooseButton" />
+
+    <Button
+        android:layout_width="280dp"
+        android:layout_height="65dp"
+        android:id="@+id/button"
+        android:background="@drawable/button7_pic"
+        android:layout_below="@+id/tileMuteButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp" />
 
 </RelativeLayout>

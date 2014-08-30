@@ -19,7 +19,7 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
 
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
-    private Button goToFirstGame, goToSecondGame, goToThirdGame, comeBack;
+    private Button goToFirstGame, goToSecondGame, goToThirdGame; //, comeBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +32,12 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
         goToFirstGame = (Button) findViewById(R.id.goToFirstGame);
         goToSecondGame = (Button) findViewById(R.id.goToSecondGame);
         goToThirdGame = (Button) findViewById(R.id.goToThirdGame);
-        comeBack = (Button) findViewById(R.id.comeBack);
+        //comeBack = (Button) findViewById(R.id.comeBack);
 
         goToFirstGame.setOnClickListener(this);
         goToSecondGame.setOnClickListener(this);
         goToThirdGame.setOnClickListener(this);
-        comeBack.setOnClickListener(this);
+        //comeBack.setOnClickListener(this);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
                 }
                 break;
 
-            case R.id.comeBack:
+            /*case R.id.comeBack:
                 if (MyActivity.boolSoundTileCheck == true) {
                     Intent comeBackToMainMenu = new Intent(ChooseGameMenu.this, MyActivity.class);
                     sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
@@ -97,6 +97,7 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
                     startActivity(comeBackToMainMenu);
                 }
                 break;
+                */
             default:
                 throw new RuntimeException("error: ");
         }
