@@ -4,11 +4,8 @@
     android:id="@+id/flaganim"
     android:oneshot="false"
     >
-    <item android:drawable="@drawable/finone" android:duration="100" />
-    <item android:drawable="@drawable/fintwo" android:duration="100" />
-    <item android:drawable="@drawable/finthree" android:duration="100" />
-    <item android:drawable="@drawable/finfour" android:duration="100" />
-    <item android:drawable="@drawable/finthree" android:duration="100" />
-    <item android:drawable="@drawable/fintwo" android:duration="100" />
-    <item android:drawable="@drawable/finone" android:duration="100" />
+    <item android:drawable="@drawable/splash1" android:duration="200" />
+    <item android:drawable="@drawable/splash2" android:duration="200" />
+    <item android:drawable="@drawable/splash3" android:duration="200" />
+
 </animation-list>

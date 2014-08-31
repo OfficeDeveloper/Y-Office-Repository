@@ -4,11 +4,11 @@
     android:shape="rectangle" >
 
     <gradient
-        android:centerColor="#E80C81"
-        android:centerX="0.6"
-        android:centerY="0.2"
-        android:endColor="#E8FF3F"
+        android:centerColor="#484848"
+        android:centerX="0.4"
+        android:centerY="0.4"
+        android:endColor="#C6C6C6"
         android:gradientRadius="40"
-        android:startColor="#FF8C01"
+        android:startColor="#A2A2A2"
         android:type="sweep" />
 </shape>
