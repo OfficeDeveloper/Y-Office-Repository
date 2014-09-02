@@ -4,15 +4,15 @@
     android:id="@+id/flaganim"
     android:oneshot="false"
     >
-    <item android:drawable="@drawable/splashman1" android:duration="200"
+    <item android:drawable="@drawable/xhdpi" android:duration="200"
           android:layout_width="300dp"
           android:layout_height="426dp"
           android:layout_alignParentBottom="true" />
-    <item android:drawable="@drawable/splashman2" android:duration="200"
+    <item android:drawable="@drawable/xhdpi2" android:duration="200"
           android:layout_width="300dp"
           android:layout_height="426dp"
         android:layout_alignParentBottom="true" />
-    <item android:drawable="@drawable/splashman3" android:duration="200"
+    <item android:drawable="@drawable/xhdpi3" android:duration="200"
           android:layout_width="300dp"
           android:layout_height="426dp"
           android:layout_alignParentBottom="true" />

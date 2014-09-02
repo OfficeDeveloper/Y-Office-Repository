@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
+
     android:orientation="vertical">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.50" />
+
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="426dp"
+        android:layout_width="320dp"
+        android:layout_height="480dp"
         android:id="@+id/SplashImageView"
-
         android:background="@drawable/flag"
         android:contentDescription="@string/LoadAnimation"
-        android:layout_gravity="center_horizontal"
-        android:baselineAlignBottom="false">
+        android:baselineAlignBottom="false"
+        android:layout_gravity="center_vertical"
+        android:scaleType="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
     </ImageView>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.50" />
 
-</LinearLayout>
+
+</RelativeLayout>

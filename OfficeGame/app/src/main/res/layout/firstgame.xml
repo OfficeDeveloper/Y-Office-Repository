@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/top"
         android:minHeight="20dp"
-        android:background="#ff0046ff"
+        android:background="#2196f3"
         android:baselineAligned="false"
         android:padding="5dp">
 
@@ -126,7 +126,7 @@
         android:layout_weight="1"
         android:baselineAligned="false"
         android:divider="#ff000000"
-        android:background="#FF0046FF">
+        android:background="#2196f3">
 
         <TextView
             android:layout_width="match_parent"
@@ -191,7 +191,7 @@
         android:layout_above="@+id/backToMainMenuSecondGame"
         android:id="@+id/line2"
         android:layout_weight="1"
-        android:background="#FF0046FF"
+        android:background="#2196f3"
         android:baselineAligned="false">
 
         <TextView
@@ -250,7 +250,7 @@
         android:layout_above="@+id/backToMainMenuSecondGame"
         android:id="@+id/line3"
         android:layout_weight="1"
-        android:background="#FF0046FF"
+        android:background="#2196f3"
         android:baselineAligned="false">
 
         <TextView
@@ -308,7 +308,7 @@
         android:layout_above="@+id/backToMainMenuSecondGame"
         android:id="@+id/line4"
         android:layout_weight="1"
-        android:background="#FF0046FF"
+        android:background="#2196f3"
         android:baselineAligned="false">
 
         <TextView
@@ -366,14 +366,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottom"
-        android:background="#FF0046FF"
+        android:background="#2196f3"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:paddingRight="90dp"
         android:paddingLeft="90dp"
         android:baselineAligned="false">
 
-        <Button
+        <Button          
             android:layout_width="150dp"
             android:layout_height="48dp"
             android:id="@+id/startButton"
