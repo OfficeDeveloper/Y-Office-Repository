@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class MyActivity extends Activity implements View.OnClickListener {
 
     private String helloUserAlertTitle = "Hello friend!"; //title
-    private String aboutUsAlertTextForButton = "This game is created by three students from the Ukraine. Compete with her friends in the reaction and do not be bored :)";
+    private String aboutUsAlertTextForButton = "This game is created by three students from Ukraine. Compete with your friends in the reaction and do not be bored :)";
     public static boolean boolSoundTileCheck = true;
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
