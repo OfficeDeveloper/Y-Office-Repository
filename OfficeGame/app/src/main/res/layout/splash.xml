@@ -15,9 +15,8 @@
         android:contentDescription="@string/LoadAnimation"
         android:baselineAlignBottom="false"
         android:layout_gravity="center_vertical"
-        android:scaleType="center"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_alignParentBottom="false"
+        android:layout_centerInParent="true">
     </ImageView>
 
 </RelativeLayout>
