@@ -13,6 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * @author Gavlovich Maksim (reverff@gmail.com)
+ * @author Yakubenko Andrii (ayakubenko92@gmail.com)
+ * 2014(c)
+ */
+
 public class MyActivity extends Activity implements View.OnClickListener {
 
     private String helloUserAlertTitle = "Hello friend!"; //title

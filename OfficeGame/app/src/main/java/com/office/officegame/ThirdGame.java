@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 /**
  * @author Gavlovich Maksim (reverff@gmail.com)
- * @author Yakubenko Andrii
+ * @author Yakubenko Andrii (ayakubenko92@gmail.com)
  * 2014(c)
  */
 public class ThirdGame extends Activity implements View.OnClickListener, OnTouchListener {

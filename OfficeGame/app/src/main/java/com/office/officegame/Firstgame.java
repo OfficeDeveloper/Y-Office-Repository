@@ -36,18 +36,18 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
     private int congratulationEndGameSound; //congratulation sound when result >=35
     private int booEndGameSound;            //boo voice when result <35
 
-    private TextView misses;
-    private TextView point;
-    private TextView tileArray[];
-    private TextView highScore;
+    private TextView gameMisses;            //game-miss counter
+    private TextView gamePoint;             //game-point counter
+    private TextView tileArray[];           //game-tile array [15]
+    private TextView highScore;             //game-high score
 
-    private int tileArrayNumber;
-    private int score;
-    private int delay;
-    private int fouls;
-    private int hiScore;
+    private int tileArrayNumber;            //setOnTouch number of current tile
+    private int score;                      //field in game with game-score and database field
+    private int delay;                      //the delay between setColor black\white on tile
+    private int currentFoulsInGame;         //<--
+    private int highScoreInGame;            //<--
 
-    private boolean bool = false;
+    private boolean boolKey = false;        //checking boolean key.
 
     private final String LOG_TAG = "myLogs";
 
@@ -62,32 +62,32 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
     private Runnable task1 = new Runnable() {
         @Override
         public void run() {
-            point.setText(String.valueOf(score));
-            misses.setText(String.valueOf(fouls));
+            gamePoint.setText(String.valueOf(score));
+            gameMisses.setText(String.valueOf(currentFoulsInGame));
             changeColor(tileArray);
             handler1.postDelayed(this, delay);
 
         }
     };
 
-    public void changeColor(TextView[] tiles) {
+    public void changeColor(TextView[] tiles) {            //setColor all tiles to white which not black
         for (int i = 0; i < 16; i++) {
             tiles[i].setBackgroundColor(Color.WHITE);
         }
 
         for (int i = 0; i < 5; i++) {
-            int k = (int) (Math.random() * 16);
+            int k = (int) (Math.random() * 16);            //setColor tiles to black for clicked and up-gameScore
             tiles[k].setBackgroundColor(Color.BLACK);
         }
     }
 
-    public void whiteArray(){
+    public void whiteArray(){                              //setColor all tiles to White
         for (int i = 0; i < 16; i++) {
             tileArray[i].setBackgroundColor(Color.WHITE);
         }
     }
 
-    public void showScore(){
+    public void showScore(){                              //show gameScore when game end or stop
         if (MyActivity.boolSoundTileCheck == true) {
             AlertDialog.Builder looseAlert = new AlertDialog.Builder(Firstgame.this);
             if (score >= 35) {                              //if game over with result >=35 - play sound congratulation
@@ -103,7 +103,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
                             }
                         }
                 );
-                if (score == hiScore){
+                if (score == highScoreInGame){
             looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
                 }
             }
@@ -121,7 +121,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
                             }
                         }
                 );
-                if (score == hiScore){
+                if (score == highScoreInGame){
                     looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
                 }
             }
@@ -144,7 +144,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
                             }
                         }
                     );
-                    if (score == hiScore){
+                    if (score == highScoreInGame){
                         looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
                     }
                 }
@@ -160,7 +160,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
                             }
                         }
                         );
-                        if (score == hiScore){
+                        if (score == highScoreInGame){
                             looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
                         }
                     }
@@ -170,35 +170,35 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         }
     }
 
-    public void upScore(TextView tile) {
+    public void upScore(TextView tile) {                    //up-gameScore when user clicked black tile
         if (MyActivity.boolSoundTileCheck == true) {
             ColorDrawable drawable = (ColorDrawable) tile.getBackground();
-            if ((drawable.getColor() == Color.BLACK) && (bool)) {
+            if ((drawable.getColor() == Color.BLACK) && (boolKey)) {
                 sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
                 score = score + 1;
-                point.setText(String.valueOf(score));
+                gamePoint.setText(String.valueOf(score));
                 tile.setBackgroundColor(Color.DKGRAY);
                 DatabaseCursor = db.rawQuery("Select score from highScore where game_id=1", null);
                 DatabaseCursor.moveToFirst();
-                hiScore = DatabaseCursor.getInt(DatabaseCursor.getColumnIndex("score"));
-                if (score>hiScore){
+                highScoreInGame = DatabaseCursor.getInt(DatabaseCursor.getColumnIndex("score"));
+                if (score> highScoreInGame){
                     db.execSQL("Update highScore set score="+score+" where game_id=1");
                     DatabaseCursor = db.rawQuery("Select score from highScore where game_id=1", null);
                     DatabaseCursor.moveToFirst();
-                    hiScore = DatabaseCursor.getInt(DatabaseCursor.getColumnIndex("score"));
-                    highScore.setText(String.valueOf(hiScore));
+                    highScoreInGame = DatabaseCursor.getInt(DatabaseCursor.getColumnIndex("score"));
+                    highScore.setText(String.valueOf(highScoreInGame));
                 }
             }
 
-            if ((drawable.getColor() == Color.WHITE) && (bool)) {
+            if ((drawable.getColor() == Color.WHITE) && (boolKey)) {
                 sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
-                fouls = fouls - 1;
-                misses.setText(String.valueOf(fouls));
+                currentFoulsInGame = currentFoulsInGame - 1;
+                gameMisses.setText(String.valueOf(currentFoulsInGame));
                 tile.setBackgroundColor(Color.RED);
-                if (fouls == 0) {
+                if (currentFoulsInGame == 0) {
                     handler1.removeCallbacks(task1);
                     startButton.setBackgroundResource(R.drawable.start_button);
-                    bool = false;
+                    boolKey = false;
                     showScore();
                 }
             }
@@ -207,29 +207,29 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         }
         else {
             ColorDrawable drawable = (ColorDrawable) tile.getBackground();
-            if ((drawable.getColor() == Color.BLACK) && (bool)) {
+            if ((drawable.getColor() == Color.BLACK) && (boolKey)) {
                 score = score + 1;
-                point.setText(String.valueOf(score));
+                gamePoint.setText(String.valueOf(score));
                 tile.setBackgroundColor(Color.DKGRAY);
                 DatabaseCursor = db.rawQuery("Select score from highScore where game_id=1", null);
                 DatabaseCursor.moveToFirst();
-                hiScore = DatabaseCursor.getInt(DatabaseCursor.getColumnIndex("score"));
-                if (score>hiScore){
+                highScoreInGame = DatabaseCursor.getInt(DatabaseCursor.getColumnIndex("score"));
+                if (score> highScoreInGame){
                     db.execSQL("Update highScore set score="+score+" where game_id=1");
                     DatabaseCursor = db.rawQuery("Select score from highScore where game_id=1", null);
                     DatabaseCursor.moveToFirst();
-                    hiScore = DatabaseCursor.getInt(DatabaseCursor.getColumnIndex("score"));
-                    highScore.setText(String.valueOf(hiScore));
+                    highScoreInGame = DatabaseCursor.getInt(DatabaseCursor.getColumnIndex("score"));
+                    highScore.setText(String.valueOf(highScoreInGame));
                 }
             }
-            if ((drawable.getColor() == Color.WHITE) && (bool)) {
-                fouls = fouls - 1;
-                misses.setText(String.valueOf(fouls));
+            if ((drawable.getColor() == Color.WHITE) && (boolKey)) {
+                currentFoulsInGame = currentFoulsInGame - 1;
+                gameMisses.setText(String.valueOf(currentFoulsInGame));
                 tile.setBackgroundColor(Color.RED);
-                if (fouls == 0) {
+                if (currentFoulsInGame == 0) {
                     handler1.removeCallbacks(task1);
                     startButton.setBackgroundResource(R.drawable.start_button);
-                    bool = false;
+                    boolKey = false;
                     showScore();
                 }
             }
@@ -238,7 +238,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
     }
 
     public void onPause() {
-        bool = false;
+        boolKey = false;
         whiteArray();
         super.onPause();
         handler1.removeCallbacks(task1);
@@ -257,10 +257,10 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         booEndGameSound = sPool.load(this, R.raw.crowdboo, 1);
         TextView missText = (TextView) findViewById(R.id.missTimeText);
         missText.setText("MISSES");
-        misses = (TextView) findViewById(R.id.misses);
-        misses.setText("20");
-        point = (TextView) findViewById(R.id.point);
-        point.setText("0");
+        gameMisses = (TextView) findViewById(R.id.misses);
+        gameMisses.setText("20");
+        gamePoint = (TextView) findViewById(R.id.point);
+        gamePoint.setText("0");
         highScore = (TextView) findViewById(R.id.highscore);
         startButton = (Button) findViewById(R.id.startButton);
         startButton.setOnClickListener(this);
@@ -291,12 +291,12 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         db = dbHelper.getWritableDatabase();
         DatabaseCursor = db.rawQuery("Select score from highScore where game_id=1", null);
         DatabaseCursor.moveToFirst();
-        hiScore = DatabaseCursor.getInt(DatabaseCursor.getColumnIndexOrThrow("score"));
-        highScore.setText(String.valueOf(hiScore));
+        highScoreInGame = DatabaseCursor.getInt(DatabaseCursor.getColumnIndexOrThrow("score"));
+        highScore.setText(String.valueOf(highScoreInGame));
         onShow();
     }
 
-    public void onShow(){
+    public void onShow(){                          //show rules before start game
         AlertDialog.Builder looseAlert = new AlertDialog.Builder(Firstgame.this);
         looseAlert.setTitle(mode)
                 .setMessage(rules)
@@ -309,7 +309,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
                                 handler1.removeCallbacks(task1);
                                 startButton.setBackgroundResource(R.drawable.start_button);
                                 startButton.setVisibility(View.VISIBLE);
-                                bool = false;
+                                boolKey = false;
                             }
                         }
                 );
@@ -399,35 +399,35 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
             case R.id.startButton:
                 if(MyActivity.boolSoundTileCheck == true) {
                     sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                    if (bool) {
+                    if (boolKey) {
                         handler1.removeCallbacks(task1);
                         startButton.setBackgroundResource(R.drawable.start_button);
-                        bool = false;
+                        boolKey = false;
                         showScore();
                     }
                     else {
                         handler1.postDelayed(task1, 0);
                         startButton.setBackgroundResource(R.drawable.stop_button);
                         score = 0;
-                        bool = true;
+                        boolKey = true;
                         delay = 700;
-                        fouls = 20;
+                        currentFoulsInGame = 20;
                     }
                 }
                 else {
-                    if (bool) {
+                    if (boolKey) {
                         handler1.removeCallbacks(task1);
                         startButton.setBackgroundResource(R.drawable.start_button);
-                        bool = false;
+                        boolKey = false;
                         showScore();
                     }
                     else {
                         handler1.postDelayed(task1, 0);
                         startButton.setBackgroundResource(R.drawable.stop_button);
                         score = 0;
-                        bool = true;
+                        boolKey = true;
                         delay = 700;
-                        fouls = 20;
+                        currentFoulsInGame = 20;
                     }
                 }
                 break;
@@ -439,7 +439,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
     public void onBackPressed() {
         score = 0;
         delay = 700;
-        fouls = 20;
+        currentFoulsInGame = 20;
         Intent goToChooseMenu = new Intent(this, ChooseGameMenu.class);
         startActivity(goToChooseMenu);
     }
