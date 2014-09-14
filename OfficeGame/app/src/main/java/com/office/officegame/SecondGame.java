@@ -1,8 +1,6 @@
 package com.office.officegame;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -33,6 +31,8 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
     private int wrongTileTouchSound;        //wrong voice on wrong touch tile
+    private int congratulationEndGameSound;
+    private int booEndGameSound;
 
     private TextView misses;
     private TextView point;
@@ -50,8 +50,6 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     private boolean bool = false;
 
     private Cursor DatabaseCursor;
-
-    private String rules;
 
     private Handler handler1 = new Handler();
     private Runnable task1 = new Runnable() {
@@ -103,7 +101,9 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
             handler1.removeCallbacks(task1);
             startButton.setBackgroundResource(R.drawable.start_button);
             bool = false;
+            secondGame.whiteArray(tileArray);
             secondGame.showScore(score, highScoreInGame);
+            onEnd();
         }
     }
 
@@ -123,6 +123,8 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         sPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
         wrongTileTouchSound = sPool.load(this, R.raw.wrong, 1);
+        congratulationEndGameSound = sPool.load(this, R.raw.smallcrowd, 1);
+        booEndGameSound = sPool.load(this, R.raw.crowdboo, 1);
         TextView timeText = (TextView) findViewById(R.id.missTimeText);
         timeText.setText("MISS/TIME");
         misses = (TextView) findViewById(R.id.misses);
@@ -157,31 +159,17 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         }
 
         secondGame.connectDb();
-        rules = secondGame.getGameRules();
         highScoreInGame = secondGame.getHighScore();
         highScore.setText(String.valueOf(highScoreInGame));
-        onShow();
+        secondGame.onShow(startButton);
     }
 
-    public void onShow() {
-        AlertDialog.Builder looseAlert = new AlertDialog.Builder(SecondGame.this);
-        looseAlert.setTitle(gameMode)
-                .setMessage(rules)
-                .setCancelable(false)
-                .setNegativeButton("I am ready",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                                handler1.removeCallbacks(task1);
-                                startButton.setBackgroundResource(R.drawable.start_button);
-                                startButton.setVisibility(View.VISIBLE);
-                                bool = false;
-                            }
-                        }
-                );
-        secondGame.whiteArray(tileArray);
-        AlertDialog alert = looseAlert.create();
-        alert.show();
+    public void onEnd() {
+        if (MyActivity.boolSoundTileCheck) {
+            if (score == highScoreInGame)
+                sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
+            else sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
+        }
     }
 
     @Override
@@ -199,7 +187,9 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
             handler1.removeCallbacks(task1);
             startButton.setBackgroundResource(R.drawable.start_button);
             bool = false;
+            secondGame.whiteArray(tileArray);
             secondGame.showScore(score, highScoreInGame);
+            onEnd();
         } else {
             handler1.postDelayed(task1, 0);
             startButton.setBackgroundResource(R.drawable.stop_button);

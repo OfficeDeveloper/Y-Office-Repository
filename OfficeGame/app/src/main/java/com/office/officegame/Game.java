@@ -8,8 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
-import android.media.AudioManager;
-import android.media.SoundPool;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -72,6 +72,24 @@ public class Game extends Activity {
         this.context = context;
     }
 
+    public void onShow(final Button startButton) {
+        AlertDialog.Builder looseAlert = new AlertDialog.Builder(context);
+        looseAlert.setTitle(gameMode)
+                .setMessage(getGameRules())
+                .setCancelable(false)
+                .setNegativeButton("I am ready",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                startButton.setBackgroundResource(R.drawable.start_button);
+                                startButton.setVisibility(View.VISIBLE);
+                            }
+                        }
+                );
+        AlertDialog alert = looseAlert.create();
+        alert.show();
+    }
+
     public void whiteArray(TextView[] tileArray) {                              //setColor all tiles to White
         for (int i = 0; i < 16; i++) {
             tileArray[i].setBackgroundColor(Color.WHITE);
@@ -112,13 +130,8 @@ public class Game extends Activity {
         return db;
     }
 
-    public void showScore(int score, int highScoreInGame) {                              //show gameScore when game end or stop
-        SoundPool sPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
-        int congratulationEndGameSound = sPool.load(context, R.raw.smallcrowd, 1);
-        int booEndGameSound = sPool.load(context, R.raw.crowdboo, 1);
-
+    public void showScore(int score, int highScoreInGame) {
         AlertDialog.Builder looseAlert = new AlertDialog.Builder(context);
-
         looseAlert.setTitle("GAME OVER")
                 .setMessage("You finished with score: " + score)
                 .setCancelable(false)
@@ -131,9 +144,7 @@ public class Game extends Activity {
                 );
         if (score == highScoreInGame) {
             looseAlert.setMessage("You finished with score: " + score + "\nThis is your new high score!");
-            if (MyActivity.boolSoundTileCheck)
-                sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
-        } else if (MyActivity.boolSoundTileCheck) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
+        }
 
         AlertDialog alert = looseAlert.create();
         alert.show();

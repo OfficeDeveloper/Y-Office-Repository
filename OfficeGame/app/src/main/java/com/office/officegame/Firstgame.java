@@ -1,8 +1,6 @@
 package com.office.officegame;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -33,6 +31,8 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
     private int wrongTileTouchSound;        //wrong voice on wrong touch tile
+    private int congratulationEndGameSound;
+    private int booEndGameSound;
 
     private TextView gameMisses;            //game-miss counter
     private TextView gamePoint;             //game-point counter
@@ -48,8 +48,6 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
     private boolean boolKey = false;        //checking boolean key.
 
     private Cursor DatabaseCursor;
-
-    private String rules;
 
     private Handler handler1 = new Handler();
     private Runnable task1 = new Runnable() {
@@ -92,7 +90,9 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
                 handler1.removeCallbacks(task1);
                 startButton.setBackgroundResource(R.drawable.start_button);
                 boolKey = false;
+                firstGame.whiteArray(tileArray);
                 firstGame.showScore(score, highScoreInGame);
+                onEnd();
             }
         }
 
@@ -115,6 +115,8 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         sPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
         wrongTileTouchSound = sPool.load(this, R.raw.wrong, 1);
+        congratulationEndGameSound = sPool.load(this, R.raw.smallcrowd, 1);
+        booEndGameSound = sPool.load(this, R.raw.crowdboo, 1);
         TextView missText = (TextView) findViewById(R.id.missTimeText);
         missText.setText("MISSES");
         gameMisses = (TextView) findViewById(R.id.misses);
@@ -149,31 +151,17 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         }
 
         firstGame.connectDb();
-        rules = firstGame.getGameRules();
         highScoreInGame = firstGame.getHighScore();
         highScore.setText(String.valueOf(highScoreInGame));
-        onShow();
+        firstGame.onShow(startButton);
     }
 
-    public void onShow() {                          //show rules before start game
-        AlertDialog.Builder looseAlert = new AlertDialog.Builder(Firstgame.this);
-        looseAlert.setTitle(gameMode)
-                .setMessage(rules)
-                .setCancelable(false)
-                .setNegativeButton("I am ready",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                                handler1.removeCallbacks(task1);
-                                startButton.setBackgroundResource(R.drawable.start_button);
-                                startButton.setVisibility(View.VISIBLE);
-                                boolKey = false;
-                            }
-                        }
-                );
-        firstGame.whiteArray(tileArray);
-        AlertDialog alert = looseAlert.create();
-        alert.show();
+    public void onEnd() {
+        if (MyActivity.boolSoundTileCheck) {
+            if (score == highScoreInGame)
+                sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
+            else sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
+        }
     }
 
     @Override
@@ -191,7 +179,9 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
             handler1.removeCallbacks(task1);
             startButton.setBackgroundResource(R.drawable.start_button);
             boolKey = false;
+            firstGame.whiteArray(tileArray);
             firstGame.showScore(score, highScoreInGame);
+            onEnd();
         } else {
             handler1.postDelayed(task1, 0);
             startButton.setBackgroundResource(R.drawable.stop_button);

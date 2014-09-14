@@ -1,8 +1,6 @@
 package com.office.officegame;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -33,6 +31,8 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
     private int wrongTileTouchSound;        //wrong voice on wrong touch tile
+    private int congratulationEndGameSound;
+    private int booEndGameSound;
 
     private TextView timer;
     private TextView point;
@@ -48,8 +48,6 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
     private boolean bool = false;
 
     private Cursor DatabaseCursor;
-
-    private String rules;
 
     private Handler handler1 = new Handler();
     private Runnable task1 = new Runnable() {
@@ -69,7 +67,9 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
                 handler1.removeCallbacks(task1);
                 startButton.setBackgroundResource(R.drawable.start_button);
                 bool = false;
+                thirdGame.whiteArray(tileArray);
                 thirdGame.showScore(score, highScoreInGame);
+                onEnd();
             }
         }
     };
@@ -104,7 +104,9 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
                 handler1.removeCallbacks(task1);
                 startButton.setBackgroundResource(R.drawable.start_button);
                 bool = false;
+                thirdGame.whiteArray(tileArray);
                 thirdGame.showScore(score, highScoreInGame);
+                onEnd();
             }
         }
     }
@@ -125,6 +127,8 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         sPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
         wrongTileTouchSound = sPool.load(this, R.raw.wrong, 1);
+        congratulationEndGameSound = sPool.load(this, R.raw.smallcrowd, 1);
+        booEndGameSound = sPool.load(this, R.raw.crowdboo, 1);
 
         TextView missText = (TextView) findViewById(R.id.missTimeText);
         missText.setText("TIME");
@@ -161,31 +165,17 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         }
 
         thirdGame.connectDb();
-        rules = thirdGame.getGameRules();
         highScoreInGame = thirdGame.getHighScore();
         highScore.setText(String.valueOf(highScoreInGame));
-        onShow();
+        thirdGame.onShow(startButton);
     }
 
-    public void onShow() {
-        AlertDialog.Builder looseAlert = new AlertDialog.Builder(ThirdGame.this);
-        looseAlert.setTitle(gameMode)
-                .setMessage(rules)
-                .setCancelable(false)
-                .setNegativeButton("I am ready",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                                handler1.removeCallbacks(task1);
-                                startButton.setBackgroundResource(R.drawable.start_button);
-                                startButton.setVisibility(View.VISIBLE);
-                                bool = false;
-                            }
-                        }
-                );
-        thirdGame.whiteArray(tileArray);
-        AlertDialog alert = looseAlert.create();
-        alert.show();
+    public void onEnd() {
+        if (MyActivity.boolSoundTileCheck) {
+            if (score == highScoreInGame)
+                sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
+            else sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
+        }
     }
 
     @Override
@@ -202,7 +192,9 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
             handler1.removeCallbacks(task1);
             startButton.setBackgroundResource(R.drawable.start_button);
             bool = false;
+            thirdGame.whiteArray(tileArray);
             thirdGame.showScore(score, highScoreInGame);
+            onEnd();
         } else {
             handler1.postDelayed(task1, 0);
             startButton.setBackgroundResource(R.drawable.stop_button);
