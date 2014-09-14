@@ -51,39 +51,28 @@ public class ChooseGameMenu extends Activity implements View.OnClickListener {
 
         switch (button.getId()) {
             case R.id.goToFirstGame:
-                if (MyActivity.boolSoundTileCheck == true) {
-                    Intent beginFirstGame = new Intent(ChooseGameMenu.this, Firstgame.class);
+                if (MyActivity.boolSoundTileCheck) {
                     sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                    startActivity(beginFirstGame);
                 }
-                else {
                     Intent beginFirstGame = new Intent(ChooseGameMenu.this, Firstgame.class);
                     startActivity(beginFirstGame);
-                }
+
                 break;
 
             case R.id.goToSecondGame:
-                if (MyActivity.boolSoundTileCheck == true) {
-                    Intent beginSecondGame = new Intent(ChooseGameMenu.this, SecondGame.class);
+                if (MyActivity.boolSoundTileCheck) {
                     sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                    startActivity(beginSecondGame);
                 }
-                else {
                     Intent beginSecondGame = new Intent(ChooseGameMenu.this, SecondGame.class);
                     startActivity(beginSecondGame);
-                }
                 break;
 
             case R.id.goToThirdGame:
-                if (MyActivity.boolSoundTileCheck == true) {
-                    Intent beginThirdGame = new Intent(ChooseGameMenu.this, ThirdGame.class);
+                if (MyActivity.boolSoundTileCheck) {
                     sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                    startActivity(beginThirdGame);
                 }
-                else {
                     Intent beginThirdGame = new Intent(ChooseGameMenu.this, ThirdGame.class);
                     startActivity(beginThirdGame);
-                }
                 break;
 
             /*case R.id.comeBack:
