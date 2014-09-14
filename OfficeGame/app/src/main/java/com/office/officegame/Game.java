@@ -126,8 +126,8 @@ public class Game extends Activity {
         return highScore;
     }
 
-    public SQLiteDatabase getDB() {
-        return db;
+    public void updateHighScore(int highScoreInGame) {
+        db.execSQL("Update highScore set score=" + highScoreInGame + " where game_id=" + gameId + ";");
     }
 
     public void showScore(int score, int highScoreInGame) {

@@ -2,7 +2,6 @@ package com.office.officegame;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
@@ -49,8 +48,6 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
 
     private boolean bool = false;
 
-    private Cursor DatabaseCursor;
-
     private Handler handler1 = new Handler();
     private Runnable task1 = new Runnable() {
         @Override
@@ -74,14 +71,8 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
             score++;
             point.setText(String.valueOf(score));
             tile.setBackgroundColor(Color.DKGRAY);
-            DatabaseCursor = secondGame.getDB().rawQuery("Select score from highScore where game_id=2", null);
-            DatabaseCursor.moveToFirst();
-            highScoreInGame = DatabaseCursor.getInt(DatabaseCursor.getColumnIndex("score"));
             if (score > highScoreInGame) {
-                secondGame.getDB().execSQL("Update highScore set score=" + score + " where game_id=2");
-                DatabaseCursor = secondGame.getDB().rawQuery("Select score from highScore where game_id=2", null);
-                DatabaseCursor.moveToFirst();
-                highScoreInGame = DatabaseCursor.getInt(DatabaseCursor.getColumnIndex("score"));
+                highScoreInGame = score;
                 highScore.setText(String.valueOf(highScoreInGame));
             }
         }
@@ -166,8 +157,10 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
 
     public void onEnd() {
         if (MyActivity.boolSoundTileCheck) {
-            if (score == highScoreInGame)
+            if (score == highScoreInGame) {
                 sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
+                secondGame.updateHighScore(highScoreInGame);
+            }
             else sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
         }
     }
