@@ -2,38 +2,37 @@ package com.office.officegame;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * @author Gavlovich Maksim (reverff@gmail.com)
+ * @author Gavlovych Maksym (reverff@gmail.com)
  * @author Yakubenko Andrii (ayakubenko92@gmail.com)
- * 2014(c)
+ *         2014(c)
  */
 
 public class SecondGame extends Activity implements View.OnClickListener, View.OnTouchListener {
 
     private Button startButton;
 
+    private final int gameId = 2;
+    private final String gameMode = "TIME SPRINT";
+    private Game secondGame = new Game(gameId, gameMode, this);
+
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
     private int wrongTileTouchSound;        //wrong voice on wrong touch tile
-    private int congratulationEndGameSound; //congratulation sound when game over
 
     private TextView misses;
     private TextView point;
@@ -43,29 +42,24 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     private int tileArrayNumber;
     private int score;
     private int delay;
-    private int fouls;
-    private int hiScore;
+    private int currentFoulsInGame;
+    private int highScoreInGame;
     private int time;
-    private int t=0;
+    private int t = 0;
 
     private boolean bool = false;
 
-    private final String LOG_TAG = "myLogs";
+    private Cursor DatabaseCursor;
 
-    private DBHelper dbHelper;
-    private SQLiteDatabase db;
-    private Cursor cursor;
-
-    private String mode = "Time sprint";
-    private String rules = "Time sprint mode. In this game you should hit as much black tiles as you can. But you can miss only 20 times and you have only 30 seconds. Good luck!";
+    private String rules;
 
     private Handler handler1 = new Handler();
     private Runnable task1 = new Runnable() {
         @Override
         public void run() {
-            changeColor(tileArray);
+            secondGame.changeColor(tileArray);
             t++;
-            if (t==2) {
+            if (t == 2) {
                 time--;
                 t = 0;
             }
@@ -75,133 +69,47 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         }
     };
 
-    public void changeColor(TextView[] tiles) {
-        for (int i = 0; i < 16; i++) {
-            tiles[i].setBackgroundColor(Color.WHITE);
-        }
-
-        for (int i = 0; i < 8; i++) {
-            int k = (int) (Math.random() * 16);
-            tiles[k].setBackgroundColor(Color.BLACK);
-        }
-    }
-
-    public void whiteArray(){
-        for (int i = 0; i < 16; i++) {
-            tileArray[i].setBackgroundColor(Color.WHITE);
-        }
-    }
-
-    public void showScore(){
-        if (MyActivity.boolSoundTileCheck == true) {
-            AlertDialog.Builder looseAlert = new AlertDialog.Builder(SecondGame.this);
-            looseAlert.setTitle("GAME OVER")
-                .setMessage("You finished with score: " + score)
-                .setIcon(R.drawable.ic_launcher)
-                .setCancelable(false)
-                .setNegativeButton("Okay!",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            }
-                );
-            if (score == hiScore) {
-                looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
-            }
-            whiteArray();
-            AlertDialog alert = looseAlert.create();
-            sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
-            alert.show();
-        }
-        else {
-            AlertDialog.Builder looseAlert = new AlertDialog.Builder(SecondGame.this);
-            looseAlert.setTitle("GAME OVER")
-                .setMessage("You finished with score: " + score)
-                .setIcon(R.drawable.ic_launcher)
-                .setCancelable(false)
-                .setNegativeButton("Okay!",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            }
-                    );
-            if (score == hiScore) {
-                looseAlert.setMessage("You finished with score: " + score+"\nThis is your new high score!");
-            }
-            whiteArray();
-            AlertDialog alert = looseAlert.create();
-            alert.show();
-        }
-    }
-
-
     public void upScore(TextView tile) {
-       if (MyActivity.boolSoundTileCheck == true) {
-           ColorDrawable drawable = (ColorDrawable) tile.getBackground();
-           if ((drawable.getColor() == Color.BLACK) && (bool)) {
-               sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-               score = score + 1;
-               point.setText(String.valueOf(score));
-               tile.setBackgroundColor(Color.DKGRAY);
-               cursor = db.rawQuery("Select score from highScore where game_id=2", null);
-               cursor.moveToFirst();
-               hiScore = cursor.getInt(cursor.getColumnIndex("score"));
-               if (score > hiScore) {
-                   db.execSQL("Update highScore set score=" + score + " where game_id=2");
-                   cursor = db.rawQuery("Select score from highScore where game_id=2", null);
-                   cursor.moveToFirst();
-                   hiScore = cursor.getInt(cursor.getColumnIndex("score"));
-                   highScore.setText(String.valueOf(hiScore));
-               }
-           }
-           if ((drawable.getColor() == Color.WHITE) && (bool)) {
-               sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
-               fouls = fouls - 1;
-               misses.setText(String.valueOf(fouls+"/"+time));
-               tile.setBackgroundColor(Color.RED);
-           }
-       }
-        else {
-           ColorDrawable drawable = (ColorDrawable) tile.getBackground();
-           if ((drawable.getColor() == Color.BLACK) && (bool)) {
-               score = score + 1;
-               point.setText(String.valueOf(score));
-               tile.setBackgroundColor(Color.DKGRAY);
-               cursor = db.rawQuery("Select score from highScore where game_id=2", null);
-               cursor.moveToFirst();
-               hiScore = cursor.getInt(cursor.getColumnIndex("score"));
-               if (score > hiScore) {
-                   db.execSQL("Update highScore set score=" + score + " where game_id=2");
-                   cursor = db.rawQuery("Select score from highScore where game_id=2", null);
-                   cursor.moveToFirst();
-                   hiScore = cursor.getInt(cursor.getColumnIndex("score"));
-                   highScore.setText(String.valueOf(hiScore));
-               }
-           }
-                   if ((drawable.getColor() == Color.WHITE) && (bool)) {
-                       fouls = fouls - 1;
-                       misses.setText(String.valueOf(fouls+"/"+time));
-                       tile.setBackgroundColor(Color.RED);
-                   }
+        ColorDrawable drawable = (ColorDrawable) tile.getBackground();
+        if ((drawable.getColor() == Color.BLACK) && (bool)) {
+            if (MyActivity.boolSoundTileCheck) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+            score++;
+            point.setText(String.valueOf(score));
+            tile.setBackgroundColor(Color.DKGRAY);
+            DatabaseCursor = secondGame.getDB().rawQuery("Select score from highScore where game_id=2", null);
+            DatabaseCursor.moveToFirst();
+            highScoreInGame = DatabaseCursor.getInt(DatabaseCursor.getColumnIndex("score"));
+            if (score > highScoreInGame) {
+                secondGame.getDB().execSQL("Update highScore set score=" + score + " where game_id=2");
+                DatabaseCursor = secondGame.getDB().rawQuery("Select score from highScore where game_id=2", null);
+                DatabaseCursor.moveToFirst();
+                highScoreInGame = DatabaseCursor.getInt(DatabaseCursor.getColumnIndex("score"));
+                highScore.setText(String.valueOf(highScoreInGame));
+            }
         }
+        if ((drawable.getColor() == Color.WHITE) && (bool)) {
+            if (MyActivity.boolSoundTileCheck) sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
+            currentFoulsInGame--;
+            misses.setText(String.valueOf(currentFoulsInGame + "/" + time));
+            tile.setBackgroundColor(Color.RED);
+        }
+
     }
 
     public void checkScoreAndTime() {
         point.setText(String.valueOf(score));
-        misses.setText(String.valueOf(fouls+"/"+time));
-        if ( (fouls == 0) || (time == 0) ) {
+        misses.setText(String.valueOf(currentFoulsInGame + "/" + time));
+        if ((currentFoulsInGame == 0) || (time == 0)) {
             handler1.removeCallbacks(task1);
             startButton.setBackgroundResource(R.drawable.start_button);
             bool = false;
-            showScore();
+            secondGame.showScore(score, highScoreInGame);
         }
     }
 
     public void onPause() {
         bool = false;
-        whiteArray();
+        secondGame.whiteArray(tileArray);
         super.onPause();
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
@@ -215,8 +123,6 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         sPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
         wrongTileTouchSound = sPool.load(this, R.raw.wrong, 1);
-        congratulationEndGameSound = sPool.load(this, R.raw.smallcrowd, 1);
-
         TextView timeText = (TextView) findViewById(R.id.missTimeText);
         timeText.setText("MISS/TIME");
         misses = (TextView) findViewById(R.id.misses);
@@ -229,16 +135,16 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         startButton.setVisibility(View.INVISIBLE);
 
         tileArray = new TextView[16];
-        tileArray[0]  = (TextView) findViewById(R.id.tile1);
-        tileArray[1]  = (TextView) findViewById(R.id.tile2);
-        tileArray[2]  = (TextView) findViewById(R.id.tile3);
-        tileArray[3]  = (TextView) findViewById(R.id.tile4);
-        tileArray[4]  = (TextView) findViewById(R.id.tile5);
-        tileArray[5]  = (TextView) findViewById(R.id.tile6);
-        tileArray[6]  = (TextView) findViewById(R.id.tile7);
-        tileArray[7]  = (TextView) findViewById(R.id.tile8);
-        tileArray[8]  = (TextView) findViewById(R.id.tile9);
-        tileArray[9]  = (TextView) findViewById(R.id.tile10);
+        tileArray[0] = (TextView) findViewById(R.id.tile1);
+        tileArray[1] = (TextView) findViewById(R.id.tile2);
+        tileArray[2] = (TextView) findViewById(R.id.tile3);
+        tileArray[3] = (TextView) findViewById(R.id.tile4);
+        tileArray[4] = (TextView) findViewById(R.id.tile5);
+        tileArray[5] = (TextView) findViewById(R.id.tile6);
+        tileArray[6] = (TextView) findViewById(R.id.tile7);
+        tileArray[7] = (TextView) findViewById(R.id.tile8);
+        tileArray[8] = (TextView) findViewById(R.id.tile9);
+        tileArray[9] = (TextView) findViewById(R.id.tile10);
         tileArray[10] = (TextView) findViewById(R.id.tile11);
         tileArray[11] = (TextView) findViewById(R.id.tile12);
         tileArray[12] = (TextView) findViewById(R.id.tile13);
@@ -246,27 +152,23 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         tileArray[14] = (TextView) findViewById(R.id.tile15);
         tileArray[15] = (TextView) findViewById(R.id.tile16);
 
-        for (tileArrayNumber=0; tileArrayNumber<16; tileArrayNumber++) {
+        for (tileArrayNumber = 0; tileArrayNumber < 16; tileArrayNumber++) {
             tileArray[tileArrayNumber].setOnTouchListener(this);
         }
 
-        dbHelper = new DBHelper(this);
-        db = dbHelper.getWritableDatabase();
-        cursor = db.rawQuery("Select score from highScore where game_id=2", null);
-        cursor.moveToFirst();
-        hiScore = cursor.getInt(cursor.getColumnIndexOrThrow("score"));
-        highScore.setText(String.valueOf(hiScore));
+        secondGame.connectDb();
+        rules = secondGame.getGameRules();
+        highScoreInGame = secondGame.getHighScore();
+        highScore.setText(String.valueOf(highScoreInGame));
         onShow();
     }
 
-
-    public void onShow(){
+    public void onShow() {
         AlertDialog.Builder looseAlert = new AlertDialog.Builder(SecondGame.this);
-        looseAlert.setTitle(mode)
-            .setMessage(rules)
-            .setIcon(R.drawable.ic_launcher)
-            .setCancelable(false)
-            .setNegativeButton("i'am ready",
+        looseAlert.setTitle(gameMode)
+                .setMessage(rules)
+                .setCancelable(false)
+                .setNegativeButton("I am ready",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
@@ -277,162 +179,46 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
                             }
                         }
                 );
-        whiteArray();
+        secondGame.whiteArray(tileArray);
         AlertDialog alert = looseAlert.create();
         alert.show();
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) switch (v.getId()) {
-
-            case R.id.tile1:
-                upScore(tileArray[0]);
-                break;
-
-            case R.id.tile2:
-                upScore(tileArray[1]);
-                break;
-
-            case R.id.tile3:
-                upScore(tileArray[2]);
-                break;
-
-            case R.id.tile4:
-                upScore(tileArray[3]);
-                break;
-
-            case R.id.tile5:
-                upScore(tileArray[4]);
-                break;
-
-            case R.id.tile6:
-                upScore(tileArray[5]);
-                break;
-
-            case R.id.tile7:
-                upScore(tileArray[6]);
-                break;
-
-            case R.id.tile8:
-                upScore(tileArray[7]);
-                break;
-
-            case R.id.tile9:
-                upScore(tileArray[8]);
-                break;
-
-            case R.id.tile10:
-                upScore(tileArray[9]);
-                break;
-
-            case R.id.tile11:
-                upScore(tileArray[10]);
-                break;
-
-            case R.id.tile12:
-                upScore(tileArray[11]);
-                break;
-
-            case R.id.tile13:
-                upScore(tileArray[12]);
-                break;
-
-            case R.id.tile14:
-                upScore(tileArray[13]);
-                break;
-
-            case R.id.tile15:
-                upScore(tileArray[14]);
-                break;
-
-            case R.id.tile16:
-                upScore(tileArray[15]);
-                break;
-
-
-            default:
-                throw new RuntimeException("error: ");
-        }
+        if (event.getAction() == MotionEvent.ACTION_DOWN)
+            upScore((TextView) findViewById(v.getId()));
         return false;
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.startButton:
-                if(MyActivity.boolSoundTileCheck == true) {
-                    sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                    if (bool) {
-                        handler1.removeCallbacks(task1);
-                        startButton.setBackgroundResource(R.drawable.start_button);
-                        bool = false;
-                        showScore();
-                    }
-                    else {
-                        handler1.postDelayed(task1, 0);
-                        startButton.setBackgroundResource(R.drawable.stop_button);
-                        score = 0;
-                        bool = true;
-                        delay = 500;
-                        fouls = 20;
-                        time = 30;
-                    }
-                }
-                else {
-                    if (bool) {
-                        handler1.removeCallbacks(task1);
-                        startButton.setBackgroundResource(R.drawable.start_button);
-                        bool = false;
-                        showScore();
-                    }
-                    else {
-                        handler1.postDelayed(task1, 0);
-                        startButton.setBackgroundResource(R.drawable.stop_button);
-                        score = 0;
-                        bool = true;
-                        delay = 500;
-                        fouls = 20;
-                        time = 30;
-                    }
-                }
-                break;
-            default:
-                throw new RuntimeException("error: ");
+        if (MyActivity.boolSoundTileCheck)
+            sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+        if (bool) {
+            handler1.removeCallbacks(task1);
+            startButton.setBackgroundResource(R.drawable.start_button);
+            bool = false;
+            secondGame.showScore(score, highScoreInGame);
+        } else {
+            handler1.postDelayed(task1, 0);
+            startButton.setBackgroundResource(R.drawable.stop_button);
+            score = 0;
+            bool = true;
+            delay = 500;
+            currentFoulsInGame = 20;
+            time = 30;
         }
+
     }
 
     public void onBackPressed() {
         score = 0;
         delay = 500;
-        fouls = 20;
+        currentFoulsInGame = 20;
         time = 30;
         Intent goToChooseMenu = new Intent(this, ChooseGameMenu.class);
         startActivity(goToChooseMenu);
         super.finishActivity(0);
-    }
-
-    class DBHelper extends SQLiteOpenHelper {
-        public DBHelper(Context context) {
-            // конструктор суперкласса
-            super(context, "OfficeGameDB", null, 1);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            Log.d(LOG_TAG, "--- onCreate database ---");
-            // создаем таблицу с полями
-            db.execSQL("create table highScore ("
-                    + "id integer primary key autoincrement,"
-                    + "game_id integer,"
-                    + "score integer);");
-            db.execSQL("insert into highScore ('game_id','score') values (1,0);");
-            db.execSQL("insert into highScore ('game_id','score') values (2,0);");
-            db.execSQL("insert into highScore ('game_id','score') values (3,0);");
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        }
     }
 }
