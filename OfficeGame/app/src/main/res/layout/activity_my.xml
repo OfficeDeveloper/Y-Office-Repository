@@ -55,22 +55,12 @@
         android:layout_marginTop="26dp" />
 
 
-
-    <ToggleButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New ToggleButton"
-        android:id="@+id/togVoiceButton"
-        android:layout_above="@+id/chooseButton"
-        android:layout_centerHorizontal="true" />
-
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ivew"
+        android:layout_height="320dp"
+        android:id="@+id/view"
         android:background="@drawable/lk"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/exitButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
