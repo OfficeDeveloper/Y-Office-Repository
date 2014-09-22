@@ -11,7 +11,7 @@
         android:background="@drawable/button4_pic"
         android:id="@+id/chooseButton"
 
-        android:layout_toStartOf="@+id/tileMuteButton"
+
         android:layout_above="@+id/aboutGameAndDevButton"
         android:layout_centerHorizontal="true" />
 
@@ -40,7 +40,7 @@
         android:background="@drawable/button5_pic"
         android:id="@+id/aboutGameAndDevButton"
 
-        android:layout_toStartOf="@+id/tileMuteButton"
+
         android:layout_above="@+id/exitButton"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="80dp" />
@@ -56,7 +56,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/chooseButton" />
+         />
 
 
     <ImageView

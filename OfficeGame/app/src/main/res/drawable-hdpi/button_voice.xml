@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/sound_in"
+    <item android:drawable="@drawable/sound_inBtn"
         android:state_pressed="true" />
-    <item android:drawable="@drawable/sound_in"
+    <item android:drawable="@drawable/sound_inBtn"
         android:state_focused="true" />
-    <item android:drawable="@drawable/sound" />
+    <item android:drawable="@drawable/soundBtn" />
 
 </selector>
