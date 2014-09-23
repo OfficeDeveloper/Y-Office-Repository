@@ -67,7 +67,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     public void upScore(TextView tile) {
         ColorDrawable drawable = (ColorDrawable) tile.getBackground();
         if ((drawable.getColor() == Color.BLACK) && (bool)) {
-            if (MyActivity.boolSoundTileCheck) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+            if (MyActivity.soundOn) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
             score++;
             point.setText(String.valueOf(score));
             tile.setBackgroundColor(Color.DKGRAY);
@@ -77,7 +77,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
             }
         }
         if ((drawable.getColor() == Color.WHITE) && (bool)) {
-            if (MyActivity.boolSoundTileCheck) sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
+            if (MyActivity.soundOn) sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
             currentFoulsInGame--;
             misses.setText(String.valueOf(currentFoulsInGame + "/" + time));
             tile.setBackgroundColor(Color.RED);
@@ -156,13 +156,11 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     }
 
     public void onEnd() {
-        if (MyActivity.boolSoundTileCheck) {
             if (score == highScoreInGame) {
-                sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
+                if (MyActivity.soundOn) sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
                 secondGame.updateHighScore(highScoreInGame);
             }
-            else sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
-        }
+            else if (MyActivity.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
     }
 
     @Override
@@ -174,7 +172,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
 
     @Override
     public void onClick(View v) {
-        if (MyActivity.boolSoundTileCheck)
+        if (MyActivity.soundOn)
             sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
         if (bool) {
             handler1.removeCallbacks(task1);

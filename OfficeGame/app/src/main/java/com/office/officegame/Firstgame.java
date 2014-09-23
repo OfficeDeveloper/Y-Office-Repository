@@ -62,7 +62,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
 
         ColorDrawable drawable = (ColorDrawable) tile.getBackground();
         if ((drawable.getColor() == Color.BLACK) && (boolKey)) {
-            if (MyActivity.boolSoundTileCheck) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+            if (MyActivity.soundOn) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
             score++;
             gamePoint.setText(String.valueOf(score));
             tile.setBackgroundColor(Color.DKGRAY);
@@ -73,7 +73,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         }
 
         if ((drawable.getColor() == Color.WHITE) && (boolKey)) {
-            if (MyActivity.boolSoundTileCheck) sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
+            if (MyActivity.soundOn) sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
             currentFoulsInGame--;
             gameMisses.setText(String.valueOf(currentFoulsInGame));
             tile.setBackgroundColor(Color.RED);
@@ -148,13 +148,11 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
     }
 
     public void onEnd() {
-        if (MyActivity.boolSoundTileCheck) {
-            if (score == highScoreInGame) {
-                sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
-                firstGame.updateHighScore(highScoreInGame);
-            }
-            else sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
+        if (score == highScoreInGame) {
+            if (MyActivity.soundOn) sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
+            firstGame.updateHighScore(highScoreInGame);
         }
+        else if (MyActivity.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
     }
 
     @Override
@@ -166,7 +164,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
 
     @Override
     public void onClick(View v) {
-        if (MyActivity.boolSoundTileCheck)
+        if (MyActivity.soundOn)
             sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
         if (boolKey) {
             handler1.removeCallbacks(task1);

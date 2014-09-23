@@ -20,7 +20,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
 
     private String helloUserAlertTitle = "Hello friend!"; //title
     private String aboutUsAlertTextForButton = "This game is created by three students from Ukraine. Compete with your friends in the reaction and do not be bored :)";
-    public static boolean boolSoundTileCheck = true;
+    public static boolean soundOn = true;
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
     private Button  arcadeButton, infoButton, soundButton, timeSprintButton, timeAttackButton;
@@ -62,7 +62,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
         soundButton.setOnClickListener(this);
 
 
-        int background = boolSoundTileCheck ? R.drawable.button_voice : R.drawable.button_no_voice;
+        int background = soundOn ? R.drawable.button_voice : R.drawable.button_no_voice;
         soundButton.setBackgroundResource(background);
     }
 
@@ -84,7 +84,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
     }
 
     public void playSound() {
-        if (boolSoundTileCheck) {
+        if (soundOn) {
             sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
         }
     }
@@ -92,9 +92,9 @@ public class MyActivity extends Activity implements View.OnClickListener {
     public void onClick(View first) {
             switch (first.getId()) {
                 case R.id.soundButton:
-                    boolSoundTileCheck = !boolSoundTileCheck;
+                    soundOn = !soundOn;
                     playSound();
-                    int background = boolSoundTileCheck ? R.drawable.button_voice : R.drawable.button_no_voice;
+                    int background = soundOn ? R.drawable.button_voice : R.drawable.button_no_voice;
                     soundButton.setBackgroundResource(background);
                     break;
 
