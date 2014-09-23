@@ -88,7 +88,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     public void checkScoreAndTime() {
         point.setText(String.valueOf(score));
         misses.setText(String.valueOf(currentFoulsInGame + "/" + time));
-        if ((currentFoulsInGame == 0) || (time == 0)) {
+        if ((currentFoulsInGame < 1) || (time == 0)) {
             handler1.removeCallbacks(task1);
             startButton.setBackgroundResource(R.drawable.start_button);
             bool = false;
