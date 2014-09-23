@@ -7,5 +7,6 @@
     <string name="misses">MISSES</string>
     <string name="LoadAnimation">LoadAnimation</string>
     <string name="gamelogo">Game logo</string>
+    <string name="bottomPic">bottom picture</string>
 
 </resources>

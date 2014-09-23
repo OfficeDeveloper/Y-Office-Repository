@@ -17,8 +17,6 @@
         android:layout_height="70dp"
         android:id="@+id/arcadeButton"
         android:background="@drawable/button1_pic"
-        android:layout_alignLeft="@+id/goToSecondGame"
-        android:layout_alignStart="@+id/goToSecondGame"
         android:layout_gravity="center_horizontal" />
 
     <Button
@@ -26,9 +24,7 @@
         android:layout_height="70dp"
         android:id="@+id/timeSprintButton"
         android:background="@drawable/button2_pic"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="250dp"
@@ -37,10 +33,7 @@
         android:singleLine="false"
         android:background="@drawable/button3_pic"
         android:padding="5dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/goToSecondGame"
-        android:layout_alignLeft="@+id/goToSecondGame"
-        android:layout_alignStart="@+id/goToSecondGame" />
+        android:layout_gravity="center_horizontal" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -55,8 +48,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_info"
             android:id="@+id/infoButton"
-            android:layout_toEndOf="@+id/exitButton"
-            android:layout_above="@+id/view"
             android:layout_gravity="right" />
 
         <Button
@@ -64,14 +55,12 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_voice"
             android:id="@+id/soundButton"
-            android:layout_toEndOf="@+id/exitButton"
-            android:layout_above="@+id/view"
             android:layout_gravity="right" />
     </LinearLayout>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/nullSpace" />
 
@@ -80,11 +69,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/bottomPic"
         android:background="@drawable/lk"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/tileMuteButton"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center_horizontal|bottom" />
+        android:layout_gravity="center_horizontal|bottom"
+        android:contentDescription="@string/bottomPic" />
 </LinearLayout>
