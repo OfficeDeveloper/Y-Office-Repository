@@ -199,11 +199,11 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
     }
 
     public void onBackPressed() {
+        super.onBackPressed();
         score = 0;
         delay = 500;
         time = 5;
-        Intent goToChooseMenu = new Intent(this, ChooseGameMenu.class);
+        Intent goToChooseMenu = new Intent(this, MyActivity.class);
         startActivity(goToChooseMenu);
-
     }
 }

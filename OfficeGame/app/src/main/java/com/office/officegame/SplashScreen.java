@@ -2,13 +2,13 @@ package com.office.officegame;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
-import android.widget.ImageView;
 
 /**
- * Created by Andrii on 8/26/14.
+ * @author Gavlovych Maksym (reverff@gmail.com)
+ * @author Yakubenko Andrii (ayakubenko92@gmail.com)
+ *         2014(c)
  */
 public class SplashScreen extends Activity {
     /**
@@ -23,20 +23,6 @@ public class SplashScreen extends Activity {
 
         // Splash screen view
         setContentView(R.layout.splash);
-
-
-        final ImageView splashImageView = (ImageView) findViewById(R.id.SplashImageView);
-        splashImageView.setBackgroundResource(R.drawable.flag);
-        final AnimationDrawable frameAnimation = (AnimationDrawable)splashImageView.getBackground();
-        splashImageView.post(new Runnable(){
-            @Override
-            public void run() {
-                frameAnimation.start();
-            }
-        });
-
-        final SplashScreen sPlashScreen = this;
-
         // The thread to wait for splash screen events
         mSplashThread =  new Thread(){
             @Override
@@ -48,13 +34,14 @@ public class SplashScreen extends Activity {
                     }
                 }
                 catch(InterruptedException ex){
+                    System.out.println("interrupted");
                 }
 
                 finish();
 
                 // Run next activity
                 Intent intent = new Intent();
-                intent.setClass(sPlashScreen, MyActivity.class);
+                intent.setClass(SplashScreen.this, MyActivity.class);
                 startActivity(intent);
                 onStop();
             }
@@ -70,11 +57,10 @@ public class SplashScreen extends Activity {
     public boolean onTouchEvent(MotionEvent evt)
     {
         if(evt.getAction() == MotionEvent.ACTION_DOWN)
-        {
+            //noinspection SynchronizeOnNonFinalField
             synchronized(mSplashThread){
                 mSplashThread.notifyAll();
             }
-        }
         return true;
     }
 }

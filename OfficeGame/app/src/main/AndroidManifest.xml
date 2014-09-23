@@ -35,14 +35,6 @@
         <activity
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:name=".ChooseGameMenu"
-            android:label="ChooseGameMenu">
-
-            </activity>
-
-        <activity
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"
             android:name=".Firstgame"
             android:label="Arcade">
 

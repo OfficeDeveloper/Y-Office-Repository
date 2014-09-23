@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1"
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="0dp">
 
-    android:orientation="vertical">
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nullSpaceTop"
+        android:layout_weight="1" />
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="320dp"
+        android:layout_height="480dp"
         android:id="@+id/SplashImageView"
-        android:background="@drawable/flag"
         android:contentDescription="@string/LoadAnimation"
-        android:baselineAlignBottom="false"
-        android:layout_gravity="center_vertical"
-        android:layout_alignParentBottom="false"
-        android:layout_centerInParent="true">
-    </ImageView>
+        android:layout_gravity="center"
+        android:theme="@style/Theme.Transparent"
+        android:src="@drawable/flag"
+        android:padding="0dp"
+        android:layout_margin="0dp" />
 
-</RelativeLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nullSpaceBottom"
+        android:layout_weight="1" />
+
+</LinearLayout>

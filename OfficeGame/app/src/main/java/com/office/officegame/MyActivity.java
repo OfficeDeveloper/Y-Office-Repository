@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -26,7 +23,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
     public static boolean boolSoundTileCheck = true;
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
-    private Button  chooseButton, exitButton, muteTileButton, aboutGameAndDevButton;
+    private Button  arcadeButton, infoButton, soundButton, timeSprintButton, timeAttackButton;
     private static long back_pressed;
 
     public void onBackPressed() {        //exit when pressed double 'back' in main menu
@@ -52,22 +49,27 @@ public class MyActivity extends Activity implements View.OnClickListener {
         sPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
 
-        aboutGameAndDevButton = (Button) findViewById(R.id.aboutGameAndDevButton);
-        muteTileButton = (Button) findViewById(R.id.tileMuteButton);
-        chooseButton = (Button) findViewById(R.id.chooseButton);
-        exitButton = (Button) findViewById(R.id.exitButton);
+        arcadeButton = (Button) findViewById(R.id.arcadeButton);
+        timeSprintButton = (Button) findViewById(R.id.timeSprintButton);
+        timeAttackButton = (Button) findViewById(R.id.timeAttackButton);
+        infoButton = (Button) findViewById(R.id.infoButton);
+        soundButton = (Button) findViewById(R.id.soundButton);
 
-        aboutGameAndDevButton.setOnClickListener(this);
-        muteTileButton.setOnClickListener(this);
-        chooseButton.setOnClickListener(this);
-        exitButton.setOnClickListener(this);
+        arcadeButton.setOnClickListener(this);
+        timeSprintButton.setOnClickListener(this);
+        timeAttackButton.setOnClickListener(this);
+        infoButton.setOnClickListener(this);
+        soundButton.setOnClickListener(this);
+
+
+        int background = boolSoundTileCheck ? R.drawable.button_voice : R.drawable.button_no_voice;
+        soundButton.setBackgroundResource(background);
     }
 
-    public void onShow() {
+    public void showInfo() {
         AlertDialog.Builder aboutGameAlert = new AlertDialog.Builder(MyActivity.this);
         aboutGameAlert.setTitle(helloUserAlertTitle)
                 .setMessage(aboutUsAlertTextForButton)
-                .setIcon(R.drawable.ic_launcher)
                 .setCancelable(true)
                 .setNegativeButton("Ok!",
                         new DialogInterface.OnClickListener() {
@@ -81,64 +83,45 @@ public class MyActivity extends Activity implements View.OnClickListener {
         aboutAlert.show();
     }
 
+    public void playSound() {
+        if (boolSoundTileCheck) {
+            sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+        }
+    }
+
     public void onClick(View first) {
-        AlertDialog.Builder alertExitDialog = new AlertDialog.Builder(MyActivity.this);
-            TextView myMessage = new TextView(this);
-            myMessage.setText("\nAre you sure?");
-            myMessage.setTextSize(16);
-            myMessage.setGravity(Gravity.CENTER_HORIZONTAL);
-
-            alertExitDialog.setTitle("Quit");
-            alertExitDialog.setView(myMessage);
-            alertExitDialog.setPositiveButton("Yea!", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(Intent.ACTION_MAIN);
-                    intent.addCategory(Intent.CATEGORY_HOME);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
-            });
-            alertExitDialog.setNegativeButton("No!", new DialogInterface.OnClickListener() {
-
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-        });
-
             switch (first.getId()) {
-                case R.id.tileMuteButton:
-                    if (this.boolSoundTileCheck == false) {
-                        this.boolSoundTileCheck = true;
-                    }
-                    else {
-                        this.boolSoundTileCheck = false;
-                    }
+                case R.id.soundButton:
+                    boolSoundTileCheck = !boolSoundTileCheck;
+                    playSound();
+                    int background = boolSoundTileCheck ? R.drawable.button_voice : R.drawable.button_no_voice;
+                    soundButton.setBackgroundResource(background);
                     break;
 
-                case R.id.chooseButton:
-                    if (this.boolSoundTileCheck == true) {
-                        sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                    }
-                        Intent goToChooseGameMenu = new Intent(MyActivity.this, ChooseGameMenu.class);
-                        startActivity(goToChooseGameMenu);
+                case R.id.arcadeButton:
+                    playSound();
+                    Intent beginFirstGame = new Intent(MyActivity.this, Firstgame.class);
+                    startActivity(beginFirstGame);
                     break;
 
-                case R.id.aboutGameAndDevButton:
-                    if (this.boolSoundTileCheck == true) {
-                        sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                    }
-                    onShow();
-
+                case R.id.timeSprintButton:
+                    playSound();
+                    Intent beginSecondGame = new Intent(MyActivity.this, SecondGame.class);
+                    startActivity(beginSecondGame);
                     break;
-                case R.id.exitButton:
-                    if (this.boolSoundTileCheck == true) {
-                        sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
-                    }
-                        alertExitDialog.show();
-                    return;
+
+                case R.id.timeAttackButton:
+                    playSound();
+                    Intent beginThirdGame = new Intent(MyActivity.this, ThirdGame.class);
+                    startActivity(beginThirdGame);
+                    break;
+
+                case R.id.infoButton:
+                    playSound();
+                    showInfo();
+                    break;
                 default:
-                    throw new RuntimeException("error: ");
-
+                    break;
             }
     }
 }

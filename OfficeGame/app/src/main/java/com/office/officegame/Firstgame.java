@@ -186,10 +186,11 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
     }
 
     public void onBackPressed() {
+        super.onBackPressed();
         score = 0;
         delay = 700;
         currentFoulsInGame = 20;
-        Intent goToChooseMenu = new Intent(this, ChooseGameMenu.class);
+        Intent goToChooseMenu = new Intent(this, MyActivity.class);
         startActivity(goToChooseMenu);
     }
 }

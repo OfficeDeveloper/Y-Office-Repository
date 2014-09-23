@@ -1,74 +1,90 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/gry"
-    tools:context=".MyActivity">
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="288dp"
+        android:layout_height="162dp"
+        android:id="@+id/logo"
+        android:background="@drawable/button7_pic"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/gamelogo" />
 
     <Button
         android:layout_width="250dp"
         android:layout_height="70dp"
-        android:background="@drawable/button4_pic"
-        android:id="@+id/chooseButton"
+        android:id="@+id/arcadeButton"
+        android:background="@drawable/button1_pic"
+        android:layout_alignLeft="@+id/goToSecondGame"
+        android:layout_alignStart="@+id/goToSecondGame"
+        android:layout_gravity="center_horizontal" />
 
-
-        android:layout_above="@+id/aboutGameAndDevButton"
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:id="@+id/timeSprintButton"
+        android:background="@drawable/button2_pic"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="250dp"
         android:layout_height="70dp"
-        android:background="@drawable/button6_pic"
-        android:id="@+id/exitButton"
-        android:layout_above="@+id/view"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/timeAttackButton"
+        android:singleLine="false"
+        android:background="@drawable/button3_pic"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/goToSecondGame"
+        android:layout_alignLeft="@+id/goToSecondGame"
+        android:layout_alignStart="@+id/goToSecondGame" />
 
-    <Button
-
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_voice"
-        android:id="@+id/tileMuteButton"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/miniHolder"
+        android:layout_marginTop="10dp">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_info"
+            android:id="@+id/infoButton"
+            android:layout_toEndOf="@+id/exitButton"
+            android:layout_above="@+id/view"
+            android:layout_gravity="right" />
 
-        android:layout_toEndOf="@+id/exitButton"
-        android:layout_above="@+id/view" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_voice"
+            android:id="@+id/soundButton"
+            android:layout_toEndOf="@+id/exitButton"
+            android:layout_above="@+id/view"
+            android:layout_gravity="right" />
+    </LinearLayout>
 
-    <Button
-        android:layout_width="250dp"
-        android:layout_height="70dp"
-        android:background="@drawable/button5_pic"
-        android:id="@+id/aboutGameAndDevButton"
-
-
-        android:layout_above="@+id/exitButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="80dp" />
-
-    <Button
-        android:layout_width="280dp"
-        android:layout_height="180dp"
-        android:id="@+id/button"
-        android:background="@drawable/button7_pic"
-
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-         />
-
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/nullSpace" />
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/view"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomPic"
         android:background="@drawable/lk"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/tileMuteButton"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-</RelativeLayout>
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_horizontal|bottom" />
+</LinearLayout>

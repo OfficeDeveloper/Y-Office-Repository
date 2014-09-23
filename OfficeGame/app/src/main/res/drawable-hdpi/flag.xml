@@ -4,14 +4,20 @@
     android:id="@+id/flaganim"
     android:oneshot="false"
     >
-    <item android:drawable="@drawable/xhdpi" android:duration="200"
-          android:layout_width="320dp"
-          android:layout_height="480dp" />
-    <item android:drawable="@drawable/xhdpi2" android:duration="200"
-          android:layout_width="320dp"
-          android:layout_height="480dp" />
-    <item android:drawable="@drawable/xhdpi3" android:duration="200"
-          android:layout_width="320dp"
-          android:layout_height="480dp" />
+
+    <item
+        android:drawable="@drawable/xhdpi"
+        android:duration="200"
+    />
+
+    <item
+        android:drawable="@drawable/xhdpi2"
+        android:duration="200"
+        />
+
+    <item
+        android:drawable="@drawable/xhdpi3"
+        android:duration="200"
+        />
 
 </animation-list>

@@ -2,8 +2,11 @@
   <dictionary name="Максим">
     <words>
       <w>firstgame</w>
+      <w>flaganim</w>
+      <w>gamelogo</w>
       <w>highscore</w>
       <w>iamready</w>
+      <w>xhdpi</w>
     </words>
   </dictionary>
 </component>

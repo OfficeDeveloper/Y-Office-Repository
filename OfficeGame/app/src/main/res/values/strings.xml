@@ -6,5 +6,6 @@
     <string name="action_settings">Settings</string>
     <string name="misses">MISSES</string>
     <string name="LoadAnimation">LoadAnimation</string>
+    <string name="gamelogo">Game logo</string>
 
 </resources>

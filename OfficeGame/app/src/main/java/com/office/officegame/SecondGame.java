@@ -196,12 +196,12 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     }
 
     public void onBackPressed() {
+        super.onBackPressed();
         score = 0;
         delay = 500;
         currentFoulsInGame = 20;
         time = 30;
-        Intent goToChooseMenu = new Intent(this, ChooseGameMenu.class);
+        Intent goToChooseMenu = new Intent(this, MyActivity.class);
         startActivity(goToChooseMenu);
-        super.finishActivity(0);
     }
 }
