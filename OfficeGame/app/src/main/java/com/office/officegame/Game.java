@@ -81,7 +81,7 @@ public class Game extends Activity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
-                                startButton.setBackgroundResource(R.drawable.start_button);
+                                startButton.setText("START");
                                 startButton.setVisibility(View.VISIBLE);
                             }
                         }

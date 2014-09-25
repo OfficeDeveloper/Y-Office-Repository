@@ -62,7 +62,7 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
             if (time == 0) {
                 timer.setText(String.valueOf(time));
                 handler1.removeCallbacks(task1);
-                startButton.setBackgroundResource(R.drawable.start_button);
+                startButton.setText("START");
                 bool = false;
                 thirdGame.whiteArray(tileArray);
                 thirdGame.showScore(score, highScoreInGame);
@@ -93,7 +93,7 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
             tile.setBackgroundColor(Color.RED);
             if (time == 0) {
                 handler1.removeCallbacks(task1);
-                startButton.setBackgroundResource(R.drawable.start_button);
+                startButton.setText("START");
                 bool = false;
                 thirdGame.whiteArray(tileArray);
                 thirdGame.showScore(score, highScoreInGame);
@@ -108,7 +108,7 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         super.onPause();
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
-        b.setBackgroundResource(R.drawable.start_button);
+        b.setText("START");
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,14 +181,14 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         if (MyActivity.soundOn) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
         if (bool) {
             handler1.removeCallbacks(task1);
-            startButton.setBackgroundResource(R.drawable.start_button);
+            startButton.setText("START");
             bool = false;
             thirdGame.whiteArray(tileArray);
             thirdGame.showScore(score, highScoreInGame);
             onEnd();
         } else {
             handler1.postDelayed(task1, 0);
-            startButton.setBackgroundResource(R.drawable.stop_button);
+            startButton.setText("STOP");
             score = 0;
             bool = true;
             delay = 500;

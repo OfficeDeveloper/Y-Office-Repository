@@ -90,7 +90,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         misses.setText(String.valueOf(currentFoulsInGame + "/" + time));
         if ((currentFoulsInGame < 1) || (time == 0)) {
             handler1.removeCallbacks(task1);
-            startButton.setBackgroundResource(R.drawable.start_button);
+            startButton.setText("START");
             bool = false;
             secondGame.whiteArray(tileArray);
             secondGame.showScore(score, highScoreInGame);
@@ -104,7 +104,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         super.onPause();
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
-        b.setBackgroundResource(R.drawable.start_button);
+        b.setText("START");
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,14 +176,14 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
             sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
         if (bool) {
             handler1.removeCallbacks(task1);
-            startButton.setBackgroundResource(R.drawable.start_button);
+            startButton.setText("START");
             bool = false;
             secondGame.whiteArray(tileArray);
             secondGame.showScore(score, highScoreInGame);
             onEnd();
         } else {
             handler1.postDelayed(task1, 0);
-            startButton.setBackgroundResource(R.drawable.stop_button);
+            startButton.setText("STOP");
             score = 0;
             bool = true;
             delay = 500;

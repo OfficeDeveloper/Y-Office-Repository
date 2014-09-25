@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="gry">#e4f5fe</color>
+    <color name="light_start">#0a000000</color>
+    <color name="dark_start">#19000000</color>
     <color name="transparent">#9000</color>
 </resources>

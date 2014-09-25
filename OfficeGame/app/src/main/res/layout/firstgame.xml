@@ -22,7 +22,6 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:padding="3dp"
-            android:background="@drawable/top_back"
             android:layout_margin="3dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1">
@@ -36,7 +35,8 @@
                 android:layout_gravity="center_horizontal"
                 android:textSize="16sp"
                 android:textIsSelectable="false"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#ffffffff" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -46,7 +46,8 @@
                 android:text="20"
                 android:layout_gravity="center_horizontal"
                 android:textSize="16sp"
-                android:textIsSelectable="false" />
+                android:textIsSelectable="false"
+                android:textColor="#ffffffff" />
         </LinearLayout>
 
         <LinearLayout
@@ -54,7 +55,6 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:padding="3dp"
-            android:background="@drawable/top_back"
             android:layout_margin="3dp"
             android:layout_gravity="center_vertical|left"
             android:layout_weight="1">
@@ -68,7 +68,8 @@
                 android:layout_gravity="center_horizontal"
                 android:textSize="16sp"
                 android:textIsSelectable="false"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#ffffffff" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,7 +79,8 @@
                 android:layout_weight="1"
                 android:layout_gravity="center_horizontal"
                 android:textSize="16sp"
-                android:textIsSelectable="false" />
+                android:textIsSelectable="false"
+                android:textColor="#ffffffff" />
         </LinearLayout>
 
         <LinearLayout
@@ -86,7 +88,6 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:padding="3dp"
-            android:background="@drawable/top_back"
             android:layout_margin="3dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1">
@@ -100,7 +101,8 @@
                 android:layout_gravity="center_horizontal"
                 android:textSize="16sp"
                 android:textIsSelectable="false"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#ffffffff" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -110,7 +112,8 @@
                 android:layout_weight="1"
                 android:layout_gravity="center_horizontal"
                 android:textSize="16sp"
-                android:textIsSelectable="false" />
+                android:textIsSelectable="false"
+                android:textColor="#ffffffff" />
         </LinearLayout>
 
     </LinearLayout>
@@ -352,19 +355,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/bottom"
         android:background="#2196f3"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
         android:paddingRight="90dp"
         android:paddingLeft="90dp"
         android:baselineAligned="false">
 
         <Button          
-            android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/startButton"
-            android:background="@drawable/start_button"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="#ffffffff"
+            android:text="START"
+            android:background="@drawable/start_button"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

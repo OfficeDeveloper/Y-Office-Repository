@@ -79,7 +79,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
             tile.setBackgroundColor(Color.RED);
             if (currentFoulsInGame == 0) {
                 handler1.removeCallbacks(task1);
-                startButton.setBackgroundResource(R.drawable.start_button);
+                startButton.setText("START");
                 boolKey = false;
                 firstGame.whiteArray(tileArray);
                 firstGame.showScore(score, highScoreInGame);
@@ -96,7 +96,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         super.onPause();
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
-        b.setBackgroundResource(R.drawable.start_button);
+        b.setText("START");
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,14 +168,14 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
             sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
         if (boolKey) {
             handler1.removeCallbacks(task1);
-            startButton.setBackgroundResource(R.drawable.start_button);
+            startButton.setText("START");
             boolKey = false;
             firstGame.whiteArray(tileArray);
             firstGame.showScore(score, highScoreInGame);
             onEnd();
         } else {
             handler1.postDelayed(task1, 0);
-            startButton.setBackgroundResource(R.drawable.stop_button);
+            startButton.setText("STOP");
             score = 0;
             boolKey = true;
             delay = 700;
