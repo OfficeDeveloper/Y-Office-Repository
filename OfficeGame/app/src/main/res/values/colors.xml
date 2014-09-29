@@ -2,5 +2,6 @@
 <resources>
     <color name="light_start">#0a000000</color>
     <color name="dark_start">#19000000</color>
-    <color name="transparent">#9000</color>
+    <color name="main_back">#e4f5fd</color>
+    <color name="dark_blue">#ff2d6184</color>
 </resources>

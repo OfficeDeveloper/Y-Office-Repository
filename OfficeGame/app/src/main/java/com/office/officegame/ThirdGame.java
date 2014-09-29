@@ -75,7 +75,7 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
 
         ColorDrawable drawable = (ColorDrawable) tile.getBackground();
         if ((drawable.getColor() == Color.BLACK) && (bool)) {
-            if (MyActivity.soundOn) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+            if (Main.soundOn) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
             score++;
             time++;
             timer.setText(String.valueOf(time));
@@ -87,7 +87,7 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
             }
         }
         if ((drawable.getColor() == Color.WHITE) && (bool)) {
-            if (MyActivity.soundOn) sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
+            if (Main.soundOn) sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
             time--;
             timer.setText(String.valueOf(time));
             tile.setBackgroundColor(Color.RED);
@@ -109,6 +109,14 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setText("START");
+    }
+
+    public void onResume() {
+        super.onResume();
+    }
+
+    public void onStop() {
+        super.onStop();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,10 +171,10 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
 
     public void onEnd() {
         if (score == highScoreInGame) {
-            if (MyActivity.soundOn) sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
+            if (Main.soundOn) sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
             thirdGame.updateHighScore(highScoreInGame);
         }
-        else if (MyActivity.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
+        else if (Main.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
     }
 
     @Override
@@ -178,7 +186,7 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
 
     @Override
     public void onClick(View v) {
-        if (MyActivity.soundOn) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+        if (Main.soundOn) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
         if (bool) {
             handler1.removeCallbacks(task1);
             startButton.setText("START");
@@ -201,7 +209,7 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         score = 0;
         delay = 500;
         time = 5;
-        Intent goToChooseMenu = new Intent(this, MyActivity.class);
+        Intent goToChooseMenu = new Intent(this, Main.class);
         startActivity(goToChooseMenu);
     }
 }

@@ -5,7 +5,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context=".FirstGame">
+    tools:context=".FirstGame"
+    android:background="@color/dark_blue">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/top"
         android:minHeight="20dp"
-        android:background="#2196f3"
+        android:background="@color/dark_blue"
         android:baselineAligned="false"
         android:padding="5dp">
 
@@ -126,7 +127,7 @@
         android:layout_weight="1"
         android:baselineAligned="false"
         android:divider="#ff000000"
-        android:background="#ff2188e6">
+        android:background="@color/dark_blue">
 
         <TextView
             android:layout_width="match_parent"
@@ -193,7 +194,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/line2"
         android:layout_weight="1"
-        android:background="#ff2188e6"
+        android:background="@color/dark_blue"
         android:baselineAligned="false">
 
         <TextView
@@ -250,7 +251,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/line3"
         android:layout_weight="1"
-        android:background="#ff2188e6"
+        android:background="@color/dark_blue"
         android:baselineAligned="false">
 
         <TextView
@@ -306,7 +307,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/line4"
         android:layout_weight="1"
-        android:background="#ff2188e6"
+        android:background="@color/dark_blue"
         android:baselineAligned="false">
 
         <TextView
@@ -370,13 +371,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottom"
-        android:background="#2196f3"
+        android:background="@color/dark_blue"
         android:paddingRight="90dp"
         android:paddingLeft="90dp"
         android:baselineAligned="false">
 
         <Button          
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/startButton"
             android:layout_gravity="center_horizontal"

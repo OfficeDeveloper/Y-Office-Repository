@@ -67,7 +67,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
     public void upScore(TextView tile) {
         ColorDrawable drawable = (ColorDrawable) tile.getBackground();
         if ((drawable.getColor() == Color.BLACK) && (bool)) {
-            if (MyActivity.soundOn) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+            if (Main.soundOn) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
             score++;
             point.setText(String.valueOf(score));
             tile.setBackgroundColor(Color.DKGRAY);
@@ -77,7 +77,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
             }
         }
         if ((drawable.getColor() == Color.WHITE) && (bool)) {
-            if (MyActivity.soundOn) sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
+            if (Main.soundOn) sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
             currentFoulsInGame--;
             misses.setText(String.valueOf(currentFoulsInGame + "/" + time));
             tile.setBackgroundColor(Color.RED);
@@ -105,6 +105,14 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setText("START");
+    }
+
+    public void onResume() {
+        super.onResume();
+    }
+
+    public void onStop() {
+        super.onStop();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,10 +165,10 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
 
     public void onEnd() {
             if (score == highScoreInGame) {
-                if (MyActivity.soundOn) sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
+                if (Main.soundOn) sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
                 secondGame.updateHighScore(highScoreInGame);
             }
-            else if (MyActivity.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
+            else if (Main.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
     }
 
     @Override
@@ -172,7 +180,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
 
     @Override
     public void onClick(View v) {
-        if (MyActivity.soundOn)
+        if (Main.soundOn)
             sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
         if (bool) {
             handler1.removeCallbacks(task1);
@@ -199,7 +207,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         delay = 500;
         currentFoulsInGame = 20;
         time = 30;
-        Intent goToChooseMenu = new Intent(this, MyActivity.class);
+        Intent goToChooseMenu = new Intent(this, Main.class);
         startActivity(goToChooseMenu);
     }
 }

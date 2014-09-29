@@ -28,7 +28,7 @@ public class SplashScreen extends Activity {
         setContentView(R.layout.splash);
 
         ImageView splashImageView = (ImageView) findViewById(R.id.SplashImageView);
-        splashImageView.setBackgroundResource(R.drawable.flag);
+        splashImageView.setBackgroundResource(R.drawable.load_animation);
         final AnimationDrawable frameAnimation = (AnimationDrawable) splashImageView.getBackground();
         splashImageView.post(new Runnable() {
             @Override
@@ -54,7 +54,7 @@ public class SplashScreen extends Activity {
 
                 // Run next activity
                 Intent intent = new Intent();
-                intent.setClass(SplashScreen.this, MyActivity.class);
+                intent.setClass(SplashScreen.this, Main.class);
                 startActivity(intent);
                 onStop();
             }

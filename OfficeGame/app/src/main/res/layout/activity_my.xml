@@ -2,28 +2,31 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/main_back">
 
     <ImageView
-        android:layout_width="288dp"
-        android:layout_height="162dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/logo"
-        android:background="@drawable/button7_pic"
         android:layout_gravity="center_horizontal"
-        android:contentDescription="@string/gamelogo" />
+        android:contentDescription="@string/gamelogo"
+        android:src="@drawable/logo"
+        android:layout_marginTop="10dp" />
 
     <Button
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:id="@+id/arcadeButton"
-        android:background="@drawable/button1_pic"
-        android:layout_gravity="center_horizontal" />
+        android:background="@drawable/button1_arcade"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp" />
 
     <Button
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:id="@+id/timeSprintButton"
-        android:background="@drawable/button2_pic"
+        android:background="@drawable/button2_timesprint"
         android:layout_gravity="center_horizontal" />
 
     <Button
@@ -31,9 +34,15 @@
         android:layout_height="70dp"
         android:id="@+id/timeAttackButton"
         android:singleLine="false"
-        android:background="@drawable/button3_pic"
+        android:background="@drawable/button3_timeattack"
         android:padding="5dp"
         android:layout_gravity="center_horizontal" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/emptySpace" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -48,27 +57,22 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_info"
             android:id="@+id/infoButton"
-            android:layout_gravity="right" />
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_voice"
             android:id="@+id/soundButton"
-            android:layout_gravity="right" />
+            android:layout_marginLeft="30dp" />
     </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/nullSpace" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottomPic"
-        android:background="@drawable/lk"
         android:layout_gravity="center_horizontal|bottom"
-        android:contentDescription="@string/bottomPic" />
+        android:contentDescription="@string/bottomPic"
+        android:background="@drawable/mountains" />
 </LinearLayout>

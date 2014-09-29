@@ -1,6 +1,7 @@
 package com.office.officegame;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -62,7 +63,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
 
         ColorDrawable drawable = (ColorDrawable) tile.getBackground();
         if ((drawable.getColor() == Color.BLACK) && (boolKey)) {
-            if (MyActivity.soundOn) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
+            if (Main.soundOn) sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
             score++;
             gamePoint.setText(String.valueOf(score));
             tile.setBackgroundColor(Color.DKGRAY);
@@ -73,7 +74,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         }
 
         if ((drawable.getColor() == Color.WHITE) && (boolKey)) {
-            if (MyActivity.soundOn) sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
+            if (Main.soundOn) sPool.play(wrongTileTouchSound, 1, 1, 1, 0, 1f);
             currentFoulsInGame--;
             gameMisses.setText(String.valueOf(currentFoulsInGame));
             tile.setBackgroundColor(Color.RED);
@@ -97,6 +98,14 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setText("START");
+    }
+
+    public void onResume() {
+        super.onResume();
+    }
+
+    public void onStop() {
+        super.onStop();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,10 +158,10 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
 
     public void onEnd() {
         if (score == highScoreInGame) {
-            if (MyActivity.soundOn) sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
+            if (Main.soundOn) sPool.play(congratulationEndGameSound, 1, 1, 1, 0, 1f);
             firstGame.updateHighScore(highScoreInGame);
         }
-        else if (MyActivity.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
+        else if (Main.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
     }
 
     @Override
@@ -164,7 +173,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
 
     @Override
     public void onClick(View v) {
-        if (MyActivity.soundOn)
+        if (Main.soundOn)
             sPool.play(popTileTouchSound, 1, 1, 1, 0, 1f);
         if (boolKey) {
             handler1.removeCallbacks(task1);
@@ -188,7 +197,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         score = 0;
         delay = 700;
         currentFoulsInGame = 20;
-        Intent goToChooseMenu = new Intent(this, MyActivity.class);
+        Intent goToChooseMenu = new Intent(this, Main.class);
         startActivity(goToChooseMenu);
     }
 }
