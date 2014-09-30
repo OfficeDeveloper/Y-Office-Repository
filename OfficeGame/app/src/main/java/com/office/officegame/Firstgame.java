@@ -99,6 +99,14 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         b.setText("START");
     }
 
+    public void onResume() {
+        super.onResume();
+    }
+
+    public void onStop() {
+        super.onStop();
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.firstgame);
