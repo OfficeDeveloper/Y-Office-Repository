@@ -97,14 +97,17 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setText("START");
+        firstGame.pauseMusic();
     }
 
     public void onResume() {
         super.onResume();
+        firstGame.startMusic();
     }
 
     public void onStop() {
         super.onStop();
+        firstGame.stopMusic();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +153,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
         }
 
         firstGame.connectDb();
+        firstGame.createPlayer();
         highScoreInGame = firstGame.getHighScore();
         highScore.setText(String.valueOf(highScoreInGame));
         firstGame.onShow(startButton);

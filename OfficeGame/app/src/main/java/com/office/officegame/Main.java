@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,8 @@ import android.widget.Toast;
  */
 
 public class Main extends Activity implements View.OnClickListener {
+
+    private MediaPlayer player;
 
     private String helloUserAlertTitle = "Hello friend!"; //title
     private String aboutUsAlertTextForButton = "This game is created by three students from Ukraine. Compete with your friends in the reaction and do not be bored :)";
@@ -62,6 +65,28 @@ public class Main extends Activity implements View.OnClickListener {
 
         int background = soundOn ? R.drawable.button_voice : R.drawable.button_no_voice;
         soundButton.setBackgroundResource(background);
+
+        player = MediaPlayer.create(this, R.raw.main_back);
+        player.setLooping(true);
+        if(soundOn) player.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(player.isPlaying()) player.pause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(player.isPlaying()) player.stop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(soundOn) player.start();
     }
 
     public void showInfo() {
@@ -94,6 +119,11 @@ public class Main extends Activity implements View.OnClickListener {
                     playSound();
                     int background = soundOn ? R.drawable.button_voice : R.drawable.button_no_voice;
                     soundButton.setBackgroundResource(background);
+                    if(soundOn) {
+                        player.start();
+                    } else {
+                        player.pause();
+                    }
                     break;
 
                 case R.id.arcadeButton:

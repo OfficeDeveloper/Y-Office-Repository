@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -70,6 +71,26 @@ public class Game extends Activity {
         this.gameId = gameId;
         this.gameMode = gameMode;
         this.context = context;
+    }
+
+    public MediaPlayer player;
+
+    public void createPlayer() {
+        player = MediaPlayer.create(context, R.raw.game_back);
+        player.setLooping(true);
+        if(Main.soundOn) player.start();
+    }
+
+    public void startMusic() {
+        if(Main.soundOn) player.start();
+    }
+
+    public void pauseMusic() {
+        if(player.isPlaying()) player.pause();
+    }
+
+    public void stopMusic() {
+        if(player.isPlaying()) player.stop();
     }
 
     public void onShow(final Button startButton) {

@@ -105,14 +105,17 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setText("START");
+        secondGame.pauseMusic();
     }
 
     public void onResume() {
         super.onResume();
+        secondGame.startMusic();
     }
 
     public void onStop() {
         super.onStop();
+        secondGame.stopMusic();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +161,7 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         }
 
         secondGame.connectDb();
+        secondGame.createPlayer();
         highScoreInGame = secondGame.getHighScore();
         highScore.setText(String.valueOf(highScoreInGame));
         secondGame.onShow(startButton);

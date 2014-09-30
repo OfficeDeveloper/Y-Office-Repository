@@ -109,14 +109,17 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         handler1.removeCallbacks(task1);
         Button b = (Button) findViewById(R.id.startButton);
         b.setText("START");
+        thirdGame.pauseMusic();
     }
 
     public void onResume() {
         super.onResume();
+        thirdGame.startMusic();
     }
 
     public void onStop() {
         super.onStop();
+        thirdGame.stopMusic();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,6 +167,7 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         }
 
         thirdGame.connectDb();
+        thirdGame.createPlayer();
         highScoreInGame = thirdGame.getHighScore();
         highScore.setText(String.valueOf(highScoreInGame));
         thirdGame.onShow(startButton);
