@@ -78,6 +78,7 @@ public class Game extends Activity {
     public void createPlayer() {
         player = MediaPlayer.create(context, R.raw.game_back);
         player.setLooping(true);
+        player.setVolume(0.5f ,0.5f);
         if(Main.soundOn) player.start();
     }
 
