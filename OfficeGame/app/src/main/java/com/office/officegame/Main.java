@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 /**
  * @author Gavlovich Maksim (reverff@gmail.com)
  * @author Yakubenko Andrii (ayakubenko92@gmail.com)
@@ -20,6 +23,8 @@ import android.widget.Toast;
 public class Main extends Activity implements View.OnClickListener {
 
     private MediaPlayer player;
+
+    private AdView mAdView;
 
     private String helloUserAlertTitle = "Hello friend!"; //title
     private String aboutUsAlertTextForButton = "This game is created by three students from Ukraine. Compete with your friends in the reaction and do not be bored :)";
@@ -47,6 +52,10 @@ public class Main extends Activity implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        mAdView.setAdListener(new ToastAdListener(this));
+        mAdView.loadAd(new AdRequest.Builder().build());
 
         sPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         popTileTouchSound = sPool.load(this, R.raw.poptile, 1);

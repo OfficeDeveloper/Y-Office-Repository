@@ -3,7 +3,15 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:background="@color/main_back">
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/ad_unit_id"/>
 
     <ImageView
         android:layout_width="fill_parent"
@@ -53,16 +61,16 @@
         android:layout_marginTop="10dp">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:layout_height="48dp"
             android:background="@drawable/button_info"
             android:id="@+id/infoButton"
             android:layout_gravity="right"
             android:layout_marginRight="30dp" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:layout_height="48dp"
             android:background="@drawable/button_voice"
             android:id="@+id/soundButton"
             android:layout_marginLeft="30dp" />
@@ -75,4 +83,5 @@
         android:layout_gravity="center_horizontal|bottom"
         android:contentDescription="@string/bottomPic"
         android:background="@drawable/mountains" />
+
 </LinearLayout>

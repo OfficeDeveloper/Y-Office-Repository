@@ -119,6 +119,13 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:id="@+id/imageView"
+        android:background="@drawable/shadow"
+        android:contentDescription="" />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -140,10 +147,10 @@
             android:singleLine="false"
             android:enabled="true"
             android:focusable="true"
-            android:layout_margin="0.5dp"
             android:paddingTop="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginLeft="1dp" />
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="0.5dp"
+            android:layout_marginBottom="0.5dp" />
 
 
 
@@ -156,9 +163,10 @@
             android:clickable="true"
             android:enabled="true"
             android:focusable="true"
-            android:layout_margin="0.5dp"
             android:paddingTop="1dp"
-            android:layout_marginTop="1dp" />
+            android:layout_marginLeft="0.5dp"
+            android:layout_marginRight="0.5dp"
+            android:layout_marginBottom="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -169,9 +177,10 @@
             android:clickable="true"
             android:enabled="true"
             android:focusable="true"
-            android:layout_margin="0.5dp"
             android:paddingTop="1dp"
-            android:layout_marginTop="1dp" />
+            android:layout_marginLeft="0.5dp"
+            android:layout_marginRight="0.5dp"
+            android:layout_marginBottom="0.5dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -182,10 +191,10 @@
             android:clickable="true"
             android:enabled="true"
             android:focusable="true"
-            android:layout_margin="0.5dp"
             android:paddingTop="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="1dp" />
+            android:layout_marginRight="1dp"
+            android:layout_marginLeft="0.5dp"
+            android:layout_marginBottom="0.5dp" />
     </LinearLayout>
 
     <LinearLayout
