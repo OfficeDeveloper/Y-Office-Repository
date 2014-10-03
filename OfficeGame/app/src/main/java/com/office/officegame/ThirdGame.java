@@ -179,6 +179,8 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
             thirdGame.updateHighScore(highScoreInGame);
         }
         else if (Main.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
+
+        if (score > 0) thirdGame.updateGamesAndSummary(score);
     }
 
     @Override

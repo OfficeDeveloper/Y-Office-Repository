@@ -9,5 +9,6 @@
     <string name="gamelogo">Game logo</string>
     <string name="bottomPic">bottom picture</string>
     <string name="ad_unit_id">ca-app-pub-3847499701322844/4968107815</string>
+    <string name="title_activity_info">Info</string>
 
 </resources>

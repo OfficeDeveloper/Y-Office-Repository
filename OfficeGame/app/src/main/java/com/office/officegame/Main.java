@@ -51,7 +51,7 @@ public class Main extends Activity implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
+        setContentView(R.layout.main);
 
         mAdView = (AdView) findViewById(R.id.adView);
         mAdView.setAdListener(new ToastAdListener(this));
@@ -155,7 +155,8 @@ public class Main extends Activity implements View.OnClickListener {
 
                 case R.id.infoButton:
                     playSound();
-                    showInfo();
+                    Intent showInfo = new Intent(Main.this, Info.class);
+                    startActivity(showInfo);
                     break;
                 default:
                     break;

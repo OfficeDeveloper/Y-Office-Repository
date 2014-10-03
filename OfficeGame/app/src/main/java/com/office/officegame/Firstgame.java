@@ -165,6 +165,7 @@ public class Firstgame extends Activity implements View.OnClickListener, OnTouch
             firstGame.updateHighScore(highScoreInGame);
         }
         else if (Main.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
+        if (score > 0) firstGame.updateGamesAndSummary(score);
     }
 
     @Override

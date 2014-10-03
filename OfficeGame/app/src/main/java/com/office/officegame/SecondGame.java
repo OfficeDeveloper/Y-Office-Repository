@@ -173,6 +173,8 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
                 secondGame.updateHighScore(highScoreInGame);
             }
             else if (Main.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
+
+        if (score > 0) secondGame.updateGamesAndSummary(score);
     }
 
     @Override

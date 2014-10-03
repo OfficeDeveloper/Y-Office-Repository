@@ -18,12 +18,12 @@ public class ToastAdListener extends AdListener {
 
     @Override
     public void onAdLoaded() {
-        Toast.makeText(mContext, "onAdLoaded()", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "onAdLoaded()", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onAdFailedToLoad(int errorCode) {
-        String errorReason = "";
+        /*String errorReason = "";
         switch(errorCode) {
             case AdRequest.ERROR_CODE_INTERNAL_ERROR:
                 errorReason = "Internal error";
@@ -39,22 +39,23 @@ public class ToastAdListener extends AdListener {
                 break;
         }
         Toast.makeText(mContext, String.format("onAdFailedToLoad(%s)", errorReason),
-                Toast.LENGTH_SHORT).show();
+                Toast.LENGTH_SHORT).show();*/
     }
 
     @Override
     public void onAdOpened() {
-        Toast.makeText(mContext, "onAdOpened()", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "Thank you!", Toast.LENGTH_SHORT).show();
+        // TODO Achievement "Sponsor"
     }
 
     @Override
     public void onAdClosed() {
-        Toast.makeText(mContext, "onAdClosed()", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "onAdClosed()", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onAdLeftApplication() {
-        Toast.makeText(mContext, "onAdLeftApplication()", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "onAdLeftApplication()", Toast.LENGTH_SHORT).show();
     }
 }
 

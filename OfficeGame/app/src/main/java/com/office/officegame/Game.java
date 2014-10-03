@@ -36,10 +36,12 @@ public class Game extends Activity {
             db.execSQL("create table highScore ("
                     + "id integer primary key autoincrement,"
                     + "game_id integer,"
-                    + "score integer);");
-            db.execSQL("insert into highScore ('game_id','score') values (1,0);");
-            db.execSQL("insert into highScore ('game_id','score') values (2,0);");
-            db.execSQL("insert into highScore ('game_id','score') values (3,0);");
+                    + "score integer,"
+                    + "games integer,"
+                    + "summary integer);");
+            db.execSQL("insert into highScore ('game_id','score','games','summary') values (1,0,0,0);");
+            db.execSQL("insert into highScore ('game_id','score','games','summary') values (2,0,0,0);");
+            db.execSQL("insert into highScore ('game_id','score','games','summary') values (3,0,0,0);");
 
             // Creating the modeDescription table:
             db.execSQL("create table modeDescription ("
@@ -63,13 +65,19 @@ public class Game extends Activity {
     private Context context;                //the class context
     private int highScore;                  //the game high score
 
-    private DBHelper dbHelper;
-    private SQLiteDatabase db;
-    private Cursor DatabaseCursor;
+    private static DBHelper dbHelper;
+    private static SQLiteDatabase db;
+    private static Cursor DatabaseCursor;
 
     public Game(int gameId, String gameMode, Context context) {
         this.gameId = gameId;
         this.gameMode = gameMode;
+        this.context = context;
+    }
+
+    public Game(Context context) {
+        this.gameId = 0;
+        this.gameMode = "";
         this.context = context;
     }
 
@@ -152,6 +160,11 @@ public class Game extends Activity {
         db.execSQL("Update highScore set score=" + highScoreInGame + " where game_id=" + gameId + ";");
     }
 
+    public void updateGamesAndSummary(int score) {
+        db.execSQL("Update highScore set games = (games+1) where game_id=" + gameId + ";");
+        db.execSQL("Update highScore set summary = (summary+" + score + ") where game_id=" + gameId + ";");
+    }
+
     public void showScore(int score, int highScoreInGame) {
         AlertDialog.Builder looseAlert = new AlertDialog.Builder(context);
         looseAlert.setTitle("GAME OVER")
@@ -171,5 +184,23 @@ public class Game extends Activity {
         AlertDialog alert = looseAlert.create();
         alert.show();
 
+    }
+
+    public int getHighScore(int gameid) {
+        DatabaseCursor = db.rawQuery("Select score from highScore where game_id=" + gameid + ";", null);
+        DatabaseCursor.moveToFirst();
+        return DatabaseCursor.getInt(DatabaseCursor.getColumnIndexOrThrow("score"));
+    }
+
+    public int getSumScore(int gameid) {
+        DatabaseCursor = db.rawQuery("Select summary from highScore where game_id=" + gameid + ";", null);
+        DatabaseCursor.moveToFirst();
+        return DatabaseCursor.getInt(DatabaseCursor.getColumnIndexOrThrow("summary"));
+    }
+
+    public int getGamesCount(int gameid) {
+        DatabaseCursor = db.rawQuery("Select games from highScore where game_id=" + gameid + ";", null);
+        DatabaseCursor.moveToFirst();
+        return DatabaseCursor.getInt(DatabaseCursor.getColumnIndexOrThrow("games"));
     }
 }
