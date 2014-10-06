@@ -4,7 +4,8 @@
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:background="@color/main_back">
+    android:background="@color/main_back"
+    android:id="@+id/main_window">
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -14,8 +15,8 @@
         ads:adUnitId="@string/ad_unit_id"/>
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="270dp"
+        android:layout_height="153dp"
         android:id="@+id/logo"
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/gamelogo"
@@ -47,10 +48,9 @@
         android:layout_gravity="center_horizontal" />
 
     <Space
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/emptySpace" />
+        android:layout_weight="1" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -78,10 +78,11 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="148dp"
         android:id="@+id/bottomPic"
         android:layout_gravity="center_horizontal|bottom"
         android:contentDescription="@string/bottomPic"
-        android:background="@drawable/mountains" />
+        android:background="@drawable/mountains"
+        android:layout_marginTop="-35dp" />
 
 </LinearLayout>

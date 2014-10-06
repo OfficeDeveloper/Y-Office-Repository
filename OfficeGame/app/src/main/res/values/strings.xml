@@ -12,6 +12,7 @@
     <string name="title_activity_info">Info</string>
     <string name="lt"><![CDATA[<]]></string>
     <string name="rt"><![CDATA[>]]></string>
-    <string name="info">This game is created by three students from Ukraine. Compete with your friends in the reaction and do not be bored :)</string>
+    <string name="info">Compete with your friends in the reaction and do not be bored;) \n3 modes to check your reaction, attention, reflexes and agility.\nSet new records and share with your friends!\n contact us on email: \ndevteamoffice@gmail.com</string>
+    <string name="title_activity_mainscreen">mainscreen</string>
 
 </resources>

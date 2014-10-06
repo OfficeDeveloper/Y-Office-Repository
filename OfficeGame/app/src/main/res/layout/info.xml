@@ -3,7 +3,8 @@
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@color/main_back">
+    android:background="@color/main_back"
+    android:id="@+id/info_window">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -27,50 +28,69 @@
             android:id="@+id/officeDevTeam">
 
             <ImageView
-                android:layout_width="135dp"
-                android:layout_height="52dp"
+                android:layout_width="101dp"
+                android:layout_height="24dp"
                 android:id="@+id/officeImg"
-                android:background="@drawable/office" />
+                android:background="@drawable/office"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp" />
 
             <ImageView
-                android:layout_width="135dp"
-                android:layout_height="40dp"
+                android:layout_width="101dp"
+                android:layout_height="16dp"
                 android:id="@+id/devTeamImg"
-                android:background="@drawable/dev" />
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/dev" />
+
+            <ImageView
+                android:layout_width="101dp"
+                android:layout_height="57dp"
+                android:id="@+id/imageView9"
+                android:background="@drawable/logo_small"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp" />
 
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/infoImg"
         android:gravity="center"
-        android:background="@drawable/info_act" />
+        android:background="@drawable/back"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/info_act" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/info"
-        android:id="@+id/textView"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textSize="20sp" />
-
-    <Space
+    <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:id="@+id/scrollView"
+        android:layout_weight="1" >
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/info"
+            android:id="@+id/infoText"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="20sp"
+            android:gravity="center" />
+    </ScrollView>
+
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/statsImg"
         android:gravity="center"
-        android:background="@drawable/stats" />
+        android:background="@drawable/back"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/stats" />
 
     <ViewAnimator
         android:layout_width="fill_parent"

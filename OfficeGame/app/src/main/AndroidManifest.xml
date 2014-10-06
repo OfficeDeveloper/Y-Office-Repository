@@ -68,6 +68,10 @@
             android:name=".Info"
             android:label="@string/title_activity_info" >
         </activity>
+        <activity
+            android:name=".MainScreen"
+            android:label="@string/title_activity_mainscreen" >
+        </activity>
     </application>
 
 </manifest>
