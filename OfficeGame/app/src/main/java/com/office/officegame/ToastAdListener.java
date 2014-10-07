@@ -3,7 +3,6 @@ package com.office.officegame;
 import android.content.Context;
 import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 
 /**
  * @author Gavlovich Maksim (reverff@gmail.com)

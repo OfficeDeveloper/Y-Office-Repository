@@ -1,7 +1,4 @@
 package com.office.officegame;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -13,6 +10,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.games.Games;
+import com.google.android.gms.games.achievement.Achievement;
 
 /**
  * @author Gavlovich Maksim (reverff@gmail.com)
@@ -20,19 +19,18 @@ import com.google.android.gms.ads.AdView;
  * 2014(c)
  */
 
-public class Main extends Activity implements View.OnClickListener {
+public class Main extends BaseGameActivity implements View.OnClickListener {
 
     private MediaPlayer player;
 
     private AdView mAdView;
 
-    private String helloUserAlertTitle = "Hello friend!"; //title
-    private String aboutUsAlertTextForButton = "This game is created by three students from Ukraine. Compete with your friends in the reaction and do not be bored :)";
     public static boolean soundOn = true;
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
     private Button  arcadeButton, infoButton, soundButton, timeSprintButton, timeAttackButton;
     private static long back_pressed;
+    private Button playServicesButton;
 
     public void onBackPressed() {        //exit when pressed double 'back' in main menu
         if (back_pressed + 2000 > System.currentTimeMillis()) {
@@ -50,8 +48,11 @@ public class Main extends Activity implements View.OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setRequestedClients(BaseGameActivity.CLIENT_GAMES);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        beginUserInitiatedSignIn();
 
         mAdView = (AdView) findViewById(R.id.adView);
         mAdView.setAdListener(new ToastAdListener(this));
@@ -65,12 +66,14 @@ public class Main extends Activity implements View.OnClickListener {
         timeAttackButton = (Button) findViewById(R.id.timeAttackButton);
         infoButton = (Button) findViewById(R.id.infoButton);
         soundButton = (Button) findViewById(R.id.soundButton);
+        playServicesButton = (Button) findViewById(R.id.playServicesButton);
 
         arcadeButton.setOnClickListener(this);
         timeSprintButton.setOnClickListener(this);
         timeAttackButton.setOnClickListener(this);
         infoButton.setOnClickListener(this);
         soundButton.setOnClickListener(this);
+        playServicesButton.setOnClickListener(this);
 
         int background = soundOn ? R.drawable.button_voice : R.drawable.button_no_voice;
         soundButton.setBackgroundResource(background);
@@ -96,23 +99,6 @@ public class Main extends Activity implements View.OnClickListener {
     protected void onResume() {
         super.onResume();
         if(soundOn) player.start();
-    }
-
-    public void showInfo() {
-        AlertDialog.Builder aboutGameAlert = new AlertDialog.Builder(Main.this);
-        aboutGameAlert.setTitle(helloUserAlertTitle)
-                .setMessage(aboutUsAlertTextForButton)
-                .setCancelable(true)
-                .setNegativeButton("Ok!",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-
-                            }
-                        }
-                );
-        AlertDialog aboutAlert = aboutGameAlert.create();
-        aboutAlert.show();
     }
 
     public void playSound() {
@@ -158,9 +144,24 @@ public class Main extends Activity implements View.OnClickListener {
                     Intent showInfo = new Intent(Main.this, Info.class);
                     startActivity(showInfo);
                     break;
+
+                case R.id.playServicesButton:
+                    playSound();
+                    if (isSignedIn()) startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()), 0);
+                    break;
                 default:
                     break;
             }
+    }
+
+    @Override
+    public void onSignInFailed() {
+        Toast.makeText(this,"Failed signing to Google Play Games", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSignInSucceeded() {
+        //Toast.makeText(this,"Signed to Google Play Games", Toast.LENGTH_SHORT).show();
     }
 }
 

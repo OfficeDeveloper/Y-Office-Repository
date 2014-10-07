@@ -24,7 +24,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -46,7 +45,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -63,14 +61,12 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/playServicesId" />
 
         <activity
             android:name=".Info"
             android:label="@string/title_activity_info" >
-        </activity>
-        <activity
-            android:name=".MainScreen"
-            android:label="@string/title_activity_mainscreen" >
         </activity>
     </application>
 

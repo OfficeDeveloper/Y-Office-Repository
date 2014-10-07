@@ -12,7 +12,37 @@
     <string name="title_activity_info">Info</string>
     <string name="lt"><![CDATA[<]]></string>
     <string name="rt"><![CDATA[>]]></string>
-    <string name="info">Compete with your friends in the reaction and do not be bored;) \n3 modes to check your reaction, attention, reflexes and agility.\nSet new records and share with your friends!\n contact us on email: \ndevteamoffice@gmail.com</string>
-    <string name="title_activity_mainscreen">mainscreen</string>
+    <string name="info">
+        Compete with your friends in the reaction and do not be bored;)
+        \n3 modes to check your reaction, attention, reflexes and agility.
+        \nSet new records and share with your friends!\n contact us on email:
+        \ndevteamoffice@gmail.com
+    </string>
+
+
+    <string name="playServicesId">1067349697374</string>
+    <!-- ACHIEVMENTS /-->
+    <string name="sponsor">CgkI3sb_l4gfEAIQBw</string>
+    <string name="arcadeAmateur">CgkI3sb_l4gfEAIQCA</string>
+    <string name="timeSprintAmateur">CgkI3sb_l4gfEAIQCQ</string>
+    <string name="timeAttackAmateur">CgkI3sb_l4gfEAIQCg</string>
+    <string name="arcadeExpert">CgkI3sb_l4gfEAIQCw</string>
+    <string name="timeSprintExpert">CgkI3sb_l4gfEAIQDA</string>
+    <string name="timeAttackExpert">CgkI3sb_l4gfEAIQDQ</string>
+    <string name="master">CgkI3sb_l4gfEAIQDg</string>
+    <string name="sensei">CgkI3sb_l4gfEAIQDw</string>
+
+    <!-- RATING /-->
+    <string name="worldHighScoreRate">CgkI3sb_l4gfEAIQAQ</string>
+    <string name="arcadeManiacRate">CgkI3sb_l4gfEAIQAg</string>
+    <string name="TimeSprinterRate">CgkI3sb_l4gfEAIQAw</string>
+    <string name="TimeAttackerRate">CgkI3sb_l4gfEAIQBA</string>
+    <string name="bestShooter">CgkI3sb_l4gfEAIQBQ</string>
+    <string name="persistentRate">CgkI3sb_l4gfEAIQBg</string>
+
+    <string name="gamehelper_sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
+    <string name="gamehelper_app_misconfigured">The application is incorrectly configured. Check that the package name and signing certificate match the client ID created in Developer Console. Also, if the application is not yet published, check that the account you are trying to sign in with is listed as a tester account. See logs for more information.</string>
+    <string name="gamehelper_license_failed">License check failed.</string>
+    <string name="gamehelper_unknown_error">Unknown error.</string>
 
 </resources>
