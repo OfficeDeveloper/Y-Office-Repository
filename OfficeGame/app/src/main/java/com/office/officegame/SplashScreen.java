@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.widget.ImageView;
 
 /**
@@ -61,18 +60,5 @@ public class SplashScreen extends Activity {
         };
 
         mSplashThread.start();
-    }
-
-    /**
-     * Processes splash screen touch events
-     */
-    @Override
-    public boolean onTouchEvent(MotionEvent evt) {
-        if (evt.getAction() == MotionEvent.ACTION_DOWN)
-            //noinspection SynchronizeOnNonFinalField
-            synchronized (mSplashThread) {
-                mSplashThread.notifyAll();
-            }
-        return true;
     }
 }

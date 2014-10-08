@@ -1,14 +1,11 @@
 package com.office.officegame;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewAnimator;
-
-import com.google.android.gms.games.Games;
 
 public class Info extends BaseGameActivity implements View.OnClickListener, View.OnTouchListener {
     ViewAnimator views;
@@ -19,6 +16,9 @@ public class Info extends BaseGameActivity implements View.OnClickListener, View
     TextView taGames, taSh, taHs;
     TextView sumGames, sumSh, sumHs;
     TextView arcadeNext, arcadePrev, tsNext, tsPrev, taNext, taPrev, sumNext, sumPrev;
+
+    int shs=0;
+    String ssh;
 
     void swipeNext(){
         views.setInAnimation(this, R.anim.in_right);
@@ -104,23 +104,16 @@ public class Info extends BaseGameActivity implements View.OnClickListener, View
         String sg = String.valueOf(info.getGamesCount(1)+info.getGamesCount(2)+info.getGamesCount(3));
         sumGames.setText(sg);
 
-        int shs=0;
+
         if (hs1>=hs2 && hs1>=hs3) shs = hs1;
         if (hs2>=hs1 && hs2>=hs3) shs = hs2;
         if (hs3>=hs1 && hs3>=hs2) shs = hs3;
 
         sumHs.setText(String.valueOf(shs));
 
-        String ssh = String.valueOf(info.getSumScore(1)+info.getSumScore(2)+info.getSumScore(3));
+        ssh = String.valueOf(info.getSumScore(1)+info.getSumScore(2)+info.getSumScore(3));
         sumSh.setText(ssh);
-
-        //sumGames
-
-        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.bestShooter), Integer.valueOf(ssh));
-        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), shs);
-
         views.setOnTouchListener(this);
-
     }
 
     @Override

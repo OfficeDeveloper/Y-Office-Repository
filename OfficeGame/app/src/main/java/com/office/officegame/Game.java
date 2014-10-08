@@ -202,6 +202,12 @@ public class Game extends Activity {
         return DatabaseCursor.getInt(DatabaseCursor.getColumnIndexOrThrow("summary"));
     }
 
+    public int getHighestScore() {
+        DatabaseCursor = db.rawQuery("Select max(score) as high from highScore;", null);
+        DatabaseCursor.moveToFirst();
+        return DatabaseCursor.getInt(DatabaseCursor.getColumnIndexOrThrow("high"));
+    }
+
     public int getGamesCount(int gameid) {
         DatabaseCursor = db.rawQuery("Select games from highScore where game_id=" + gameid + ";", null);
         DatabaseCursor.moveToFirst();

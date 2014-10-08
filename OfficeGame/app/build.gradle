@@ -7,7 +7,7 @@ android {
         applicationId "com.office.officegame"
         minSdkVersion 14
         targetSdkVersion 20
-        versionCode 3
+        versionCode 4
         versionName "1.2"
     }
     buildTypes {

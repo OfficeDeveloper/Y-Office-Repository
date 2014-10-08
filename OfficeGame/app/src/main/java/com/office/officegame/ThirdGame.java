@@ -182,14 +182,23 @@ public class ThirdGame extends BaseGameActivity implements View.OnClickListener,
         }
         else if (Main.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
 
-        if (score > 0) thirdGame.updateGamesAndSummary(score);
-        //Play Services:
-        Games.Achievements.increment(getApiClient(), getString(R.string.timeAttackAmateur), 1);
-        Games.Achievements.increment(getApiClient(), getString(R.string.timeAttackExpert), 1);
-        if (score >= 300) Games.Achievements.unlock(getApiClient(), getString(R.string.master));
-        if (score >= 100) Games.Achievements.unlock(getApiClient(), getString(R.string.sensei));
-        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.timeAttackerRate), highScoreInGame);
-        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), highScoreInGame);
+        if (score > 0) {
+            thirdGame.updateGamesAndSummary(score);
+            //Play Services:
+            if (thirdGame.getSignStatus() == 1) {
+                getApiClient().connect();
+                Games.Achievements.increment(getApiClient(), getString(R.string.timeAttackAmateur), 1);
+                Games.Achievements.increment(getApiClient(), getString(R.string.timeAttackExpert), 1);
+                if (score >= 300)
+                    Games.Achievements.unlock(getApiClient(), getString(R.string.master));
+                if (score >= 100)
+                    Games.Achievements.unlock(getApiClient(), getString(R.string.sensei));
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.timeAttackerRate), highScoreInGame);
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), highScoreInGame);
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.bestShooter), thirdGame.getSumScore(1) + thirdGame.getSumScore(2) + thirdGame.getSumScore(3));
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), thirdGame.getHighestScore());
+            }
+        }
     }
 
     @Override

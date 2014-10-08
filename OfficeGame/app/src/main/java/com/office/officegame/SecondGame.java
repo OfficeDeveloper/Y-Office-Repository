@@ -176,14 +176,23 @@ public class SecondGame extends BaseGameActivity implements View.OnClickListener
             }
             else if (Main.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
 
-        if (score > 0) secondGame.updateGamesAndSummary(score);
-        //Play Services:
-        Games.Achievements.increment(getApiClient(), getString(R.string.timeSprintAmateur), 1);
-        Games.Achievements.increment(getApiClient(), getString(R.string.timeSprintExpert), 1);
-        if (score >= 300) Games.Achievements.unlock(getApiClient(), getString(R.string.master));
-        if (score >= 100) Games.Achievements.unlock(getApiClient(), getString(R.string.sensei));
-        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.timeSprinterRate), highScoreInGame);
-        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), highScoreInGame);
+        if (score > 0) {
+            secondGame.updateGamesAndSummary(score);
+            //Play Services:
+            if (secondGame.getSignStatus() == 1) {
+                getApiClient().connect();
+                Games.Achievements.increment(getApiClient(), getString(R.string.timeSprintAmateur), 1);
+                Games.Achievements.increment(getApiClient(), getString(R.string.timeSprintExpert), 1);
+                if (score >= 300)
+                    Games.Achievements.unlock(getApiClient(), getString(R.string.master));
+                if (score >= 100)
+                    Games.Achievements.unlock(getApiClient(), getString(R.string.sensei));
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.timeSprinterRate), highScoreInGame);
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), highScoreInGame);
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.bestShooter), secondGame.getSumScore(1) + secondGame.getSumScore(2) + secondGame.getSumScore(3));
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), secondGame.getHighestScore());
+            }
+        }
     }
 
     @Override

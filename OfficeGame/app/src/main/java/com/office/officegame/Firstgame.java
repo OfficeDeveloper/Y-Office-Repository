@@ -167,14 +167,23 @@ public class Firstgame extends BaseGameActivity implements View.OnClickListener,
             firstGame.updateHighScore(highScoreInGame);
         }
         else if (Main.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
-        if (score > 0) firstGame.updateGamesAndSummary(score);
-        //Play Services:
-        Games.Achievements.increment(getApiClient(), getString(R.string.arcadeAmateur), 1);
-        Games.Achievements.increment(getApiClient(), getString(R.string.arcadeExpert), 1);
-        if (score >= 300) Games.Achievements.unlock(getApiClient(), getString(R.string.master));
-        if (score >= 100) Games.Achievements.unlock(getApiClient(), getString(R.string.sensei));
-        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.arcadeManiacRate), highScoreInGame);
-        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), highScoreInGame);
+        if (score > 0) {
+            firstGame.updateGamesAndSummary(score);
+            //Play Services:
+            if (firstGame.getSignStatus() == 1) {
+                getApiClient().connect();
+                Games.Achievements.increment(getApiClient(), getString(R.string.arcadeAmateur), 1);
+                Games.Achievements.increment(getApiClient(), getString(R.string.arcadeExpert), 1);
+                if (score >= 300)
+                    Games.Achievements.unlock(getApiClient(), getString(R.string.master));
+                if (score >= 100)
+                    Games.Achievements.unlock(getApiClient(), getString(R.string.sensei));
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.arcadeManiacRate), highScoreInGame);
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), highScoreInGame);
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.bestShooter), firstGame.getSumScore(1) + firstGame.getSumScore(2) + firstGame.getSumScore(3));
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), firstGame.getHighestScore());
+            }
+        }
     }
 
     @Override
