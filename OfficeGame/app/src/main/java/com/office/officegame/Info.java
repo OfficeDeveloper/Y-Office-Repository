@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewAnimator;
 
-public class Info extends Activity implements View.OnClickListener, View.OnTouchListener {
+import com.google.android.gms.games.Games;
+
+public class Info extends BaseGameActivity implements View.OnClickListener, View.OnTouchListener {
     ViewAnimator views;
     Game info;
+    float startX;
     TextView arcadeGames, arcadeSh, arcadeHs;
     TextView tsGames, tsSh, tsHs;
     TextView taGames, taSh, taHs;
@@ -112,6 +116,9 @@ public class Info extends Activity implements View.OnClickListener, View.OnTouch
 
         //sumGames
 
+        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.bestShooter), Integer.valueOf(ssh));
+        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), shs);
+
         views.setOnTouchListener(this);
 
     }
@@ -145,7 +152,7 @@ public class Info extends Activity implements View.OnClickListener, View.OnTouch
                 break;
         }
     }
-    float startX;
+
     @Override
     public boolean onTouch(View v, MotionEvent e) {
         switch(e.getAction()) {
@@ -178,5 +185,16 @@ public class Info extends Activity implements View.OnClickListener, View.OnTouch
     public void onStop() {
         super.onStop();
         info.stopMusic();
+    }
+
+    @Override
+    public void onSignInFailed() {
+        Toast.makeText(this, "Failed signing to Google Play Games", Toast.LENGTH_SHORT).show();
+        info.setSignStatus(0);
+    }
+
+    @Override
+    public void onSignInSucceeded() {
+        info.setSignStatus(1);
     }
 }

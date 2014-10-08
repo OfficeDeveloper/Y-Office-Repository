@@ -17,7 +17,7 @@
             android:layout_width="120dp"
             android:layout_height="157dp"
             android:id="@+id/dogImg"
-            android:background="@drawable/dog" />
+            android:src="@drawable/dog" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -31,9 +31,9 @@
                 android:layout_width="101dp"
                 android:layout_height="24dp"
                 android:id="@+id/officeImg"
-                android:background="@drawable/office"
                 android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp" />
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/office" />
 
             <ImageView
                 android:layout_width="101dp"
@@ -47,9 +47,9 @@
                 android:layout_width="101dp"
                 android:layout_height="57dp"
                 android:id="@+id/imageView9"
-                android:background="@drawable/logo_small"
                 android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp" />
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/logo_small" />
 
         </LinearLayout>
     </LinearLayout>

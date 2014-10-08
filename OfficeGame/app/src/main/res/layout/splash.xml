@@ -24,7 +24,7 @@
         android:theme="@style/Theme.Transparent"
         android:padding="0dp"
         android:layout_margin="0dp"
-        android:background="@drawable/load_animation" />
+        android:src="@drawable/load_animation" />
 
     <Space
         android:layout_width="match_parent"

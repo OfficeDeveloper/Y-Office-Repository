@@ -123,8 +123,8 @@
         android:layout_width="fill_parent"
         android:layout_height="2dp"
         android:id="@+id/imageView"
-        android:background="@drawable/shadow"
-        android:contentDescription="" />
+        android:contentDescription=""
+        android:src="@drawable/shadow" />
 
     <LinearLayout
         android:orientation="horizontal"

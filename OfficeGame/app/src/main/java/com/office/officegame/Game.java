@@ -43,6 +43,10 @@ public class Game extends Activity {
             db.execSQL("insert into highScore ('game_id','score','games','summary') values (2,0,0,0);");
             db.execSQL("insert into highScore ('game_id','score','games','summary') values (3,0,0,0);");
 
+            db.execSQL("create table signing ("
+                    + "signed integer primary key autoincrement);");
+            db.execSQL("insert into signing ('signed') values (0);");
+
             // Creating the modeDescription table:
             db.execSQL("create table modeDescription ("
                     + "id integer primary key autoincrement,"
@@ -202,5 +206,15 @@ public class Game extends Activity {
         DatabaseCursor = db.rawQuery("Select games from highScore where game_id=" + gameid + ";", null);
         DatabaseCursor.moveToFirst();
         return DatabaseCursor.getInt(DatabaseCursor.getColumnIndexOrThrow("games"));
+    }
+
+    public int getSignStatus() {
+        DatabaseCursor = db.rawQuery("Select signed from signing;", null);
+        DatabaseCursor.moveToFirst();
+        return DatabaseCursor.getInt(DatabaseCursor.getColumnIndexOrThrow("signed"));
+    }
+
+    public void setSignStatus(int p) {
+        db.execSQL("update signing set 'signed' = " + p + ";");
     }
 }

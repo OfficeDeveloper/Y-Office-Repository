@@ -1,4 +1,6 @@
 package com.office.officegame;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -6,10 +8,12 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.achievement.Achievement;
 
@@ -24,13 +28,17 @@ public class Main extends BaseGameActivity implements View.OnClickListener {
     private MediaPlayer player;
 
     private AdView mAdView;
+    public static GoogleApiClient googleApiClient;
 
     public static boolean soundOn = true;
     private SoundPool sPool;
     private int popTileTouchSound;          //sound pop on touch tile
-    private Button  arcadeButton, infoButton, soundButton, timeSprintButton, timeAttackButton;
+    private ImageButton  arcadeButton, timeSprintButton, timeAttackButton;
     private static long back_pressed;
-    private Button playServicesButton;
+    private Button playServicesButton, infoButton, soundButton;
+
+    private Game main;
+    private int signed;
 
     public void onBackPressed() {        //exit when pressed double 'back' in main menu
         if (back_pressed + 2000 > System.currentTimeMillis()) {
@@ -52,18 +60,22 @@ public class Main extends BaseGameActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        beginUserInitiatedSignIn();
+        main = new Game(this);
+        main.connectDb();
+        signed = main.getSignStatus();
 
         mAdView = (AdView) findViewById(R.id.adView);
         mAdView.setAdListener(new ToastAdListener(this));
         mAdView.loadAd(new AdRequest.Builder().build());
 
+        googleApiClient = getApiClient();
+
         sPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         popTileTouchSound = sPool.load(this, R.raw.poptile, 1);
 
-        arcadeButton = (Button) findViewById(R.id.arcadeButton);
-        timeSprintButton = (Button) findViewById(R.id.timeSprintButton);
-        timeAttackButton = (Button) findViewById(R.id.timeAttackButton);
+        arcadeButton = (ImageButton) findViewById(R.id.arcadeButton);
+        timeSprintButton = (ImageButton) findViewById(R.id.timeSprintButton);
+        timeAttackButton = (ImageButton) findViewById(R.id.timeAttackButton);
         infoButton = (Button) findViewById(R.id.infoButton);
         soundButton = (Button) findViewById(R.id.soundButton);
         playServicesButton = (Button) findViewById(R.id.playServicesButton);
@@ -147,6 +159,10 @@ public class Main extends BaseGameActivity implements View.OnClickListener {
 
                 case R.id.playServicesButton:
                     playSound();
+                    if (signed == 0) {
+                        showPrompt();
+                        break;
+                    }
                     if (isSignedIn()) startActivityForResult(Games.Achievements.getAchievementsIntent(getApiClient()), 0);
                     break;
                 default:
@@ -157,11 +173,37 @@ public class Main extends BaseGameActivity implements View.OnClickListener {
     @Override
     public void onSignInFailed() {
         Toast.makeText(this,"Failed signing to Google Play Games", Toast.LENGTH_SHORT).show();
+        main.setSignStatus(0);
+        signed = 0;
     }
 
     @Override
     public void onSignInSucceeded() {
-        //Toast.makeText(this,"Signed to Google Play Games", Toast.LENGTH_SHORT).show();
+        main.setSignStatus(1);
+        signed = 1;
+    }
+
+    private void showPrompt() {
+        AlertDialog.Builder prompt = new AlertDialog.Builder(this);
+        prompt.setTitle("Google Play Services")
+                .setMessage("Sign In Google Play Services to see achievments?")
+                .setCancelable(false)
+                .setNegativeButton("No, thanks",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        }
+                )
+                .setPositiveButton("Sign In",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                beginUserInitiatedSignIn();
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = prompt.create();
+        alert.show();
     }
 }
 

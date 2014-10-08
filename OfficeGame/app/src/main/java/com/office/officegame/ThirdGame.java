@@ -1,6 +1,5 @@
 package com.office.officegame;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -13,13 +12,16 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.games.Games;
 
 /**
  * @author Gavlovich Maksim (reverff@gmail.com)
  * @author Yakubenko Andrii (ayakubenko92@gmail.com)
  *         2014(c)
  */
-public class ThirdGame extends Activity implements View.OnClickListener, OnTouchListener {
+public class ThirdGame extends BaseGameActivity implements View.OnClickListener, OnTouchListener {
 
     private Button startButton;
 
@@ -181,6 +183,13 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         else if (Main.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
 
         if (score > 0) thirdGame.updateGamesAndSummary(score);
+        //Play Services:
+        Games.Achievements.increment(getApiClient(), getString(R.string.timeAttackAmateur), 1);
+        Games.Achievements.increment(getApiClient(), getString(R.string.timeAttackExpert), 1);
+        if (score >= 300) Games.Achievements.unlock(getApiClient(), getString(R.string.master));
+        if (score >= 100) Games.Achievements.unlock(getApiClient(), getString(R.string.sensei));
+        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.timeAttackerRate), highScoreInGame);
+        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), highScoreInGame);
     }
 
     @Override
@@ -217,5 +226,16 @@ public class ThirdGame extends Activity implements View.OnClickListener, OnTouch
         time = 5;
         Intent goToChooseMenu = new Intent(this, Main.class);
         startActivity(goToChooseMenu);
+    }
+
+    @Override
+    public void onSignInFailed() {
+        Toast.makeText(this, "Failed signing to Google Play Games", Toast.LENGTH_SHORT).show();
+        thirdGame.setSignStatus(0);
+    }
+
+    @Override
+    public void onSignInSucceeded() {
+        thirdGame.setSignStatus(1);
     }
 }

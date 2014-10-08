@@ -1,6 +1,5 @@
 package com.office.officegame;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,6 +11,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.games.Games;
 
 /**
  * @author Gavlovych Maksym (reverff@gmail.com)
@@ -19,7 +21,7 @@ import android.widget.TextView;
  *         2014(c)
  */
 
-public class SecondGame extends Activity implements View.OnClickListener, View.OnTouchListener {
+public class SecondGame extends BaseGameActivity implements View.OnClickListener, View.OnTouchListener {
 
     private Button startButton;
 
@@ -175,6 +177,13 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
             else if (Main.soundOn) sPool.play(booEndGameSound, 1, 1, 1, 0, 1f);
 
         if (score > 0) secondGame.updateGamesAndSummary(score);
+        //Play Services:
+        Games.Achievements.increment(getApiClient(), getString(R.string.timeSprintAmateur), 1);
+        Games.Achievements.increment(getApiClient(), getString(R.string.timeSprintExpert), 1);
+        if (score >= 300) Games.Achievements.unlock(getApiClient(), getString(R.string.master));
+        if (score >= 100) Games.Achievements.unlock(getApiClient(), getString(R.string.sensei));
+        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.timeSprinterRate), highScoreInGame);
+        Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), highScoreInGame);
     }
 
     @Override
@@ -215,5 +224,16 @@ public class SecondGame extends Activity implements View.OnClickListener, View.O
         time = 30;
         Intent goToChooseMenu = new Intent(this, Main.class);
         startActivity(goToChooseMenu);
+    }
+
+    @Override
+    public void onSignInFailed() {
+        Toast.makeText(this, "Failed signing to Google Play Games", Toast.LENGTH_SHORT).show();
+        secondGame.setSignStatus(0);
+    }
+
+    @Override
+    public void onSignInSucceeded() {
+        secondGame.setSignStatus(1);
     }
 }

@@ -3,6 +3,7 @@ package com.office.officegame;
 import android.content.Context;
 import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.games.Games;
 
 /**
  * @author Gavlovich Maksim (reverff@gmail.com)
@@ -44,7 +45,7 @@ public class ToastAdListener extends AdListener {
     @Override
     public void onAdOpened() {
         Toast.makeText(mContext, "Thank you!", Toast.LENGTH_SHORT).show();
-        // TODO Achievement "Sponsor"
+        Games.Achievements.unlock(Main.googleApiClient, mContext.getString(R.string.sponsor));
     }
 
     @Override
