@@ -124,7 +124,7 @@
         android:layout_height="2dp"
         android:id="@+id/imageView"
         android:contentDescription=""
-        android:src="@drawable/shadow" />
+        android:background="@drawable/shadow" />
 
     <LinearLayout
         android:orientation="horizontal"
