@@ -191,7 +191,7 @@ public class ThirdGame extends BaseGameActivity implements View.OnClickListener,
                 Games.Achievements.increment(getApiClient(), getString(R.string.timeAttackExpert), 1);
                 if (score >= 300)
                     Games.Achievements.unlock(getApiClient(), getString(R.string.master));
-                if (score >= 100)
+                if (score >= 1000)
                     Games.Achievements.unlock(getApiClient(), getString(R.string.sensei));
                 Games.Leaderboards.submitScore(getApiClient(), getString(R.string.timeAttackerRate), highScoreInGame);
                 Games.Leaderboards.submitScore(getApiClient(), getString(R.string.worldHighScoreRate), highScoreInGame);
