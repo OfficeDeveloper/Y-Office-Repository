@@ -7,6 +7,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewAnimator;
 
+/**
+ * @author Gavlovych Maksym (reverff@gmail.com)
+ * @author Yakubenko Andrii (ayakubenko92@gmail.com)
+ *         2014(c)
+ */
+
 public class Info extends BaseGameActivity implements View.OnClickListener, View.OnTouchListener {
     ViewAnimator views;
     Game info;
