@@ -16,7 +16,8 @@ import android.widget.TextView;
 /**
  * Class that defines game as entity.
  *
- * @author Gavlovich Maksim (reverff@gmail.com)
+ * @author Gavlovych Maksym (reverff@gmail.com)
+ * @author Yakubenko Andrii (ayakubenko92@gmail.com)
  *         2014(c)
  */
 public class Game extends Activity {
